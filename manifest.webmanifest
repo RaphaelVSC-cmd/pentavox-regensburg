@@ -1,0 +1,16 @@
+{
+  "name": "Pentavox Regensburg - Das 5-Stimmen Vokalensemble",
+  "short_name": "Pentavox",
+  "description": "Ausgebildet bei den Regensburger Domspatzen. 5-stimmiger A-cappella-Klang für kirchliche und freie Trauungen in Bayern.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1420",
+  "theme_color": "#d8c292",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

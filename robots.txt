@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /bewertung.html
+
+Sitemap: https://pentavox-regensburg.vercel.app/sitemap.xml
