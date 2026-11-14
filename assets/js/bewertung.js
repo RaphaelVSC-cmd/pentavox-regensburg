@@ -7,7 +7,7 @@
  */
 
 const BEWERTUNG_CONFIG = {
-  firma: 'Pentavox Regensburg',
+  firma: 'FiveElements',
   googleLink: 'https://maps.google.com/?cid=pentavox-regensburg', // [MANUELL PRUEFEN: Exakte Google Maps Review Place-ID eintragen]
   nachrichtVorlage: (kundenname, firma, googleLink) =>
     `Liebe/r ${kundenname}, vielen herzlichen Dank, dass wir eure Feier mit ${firma} musikalisch begleiten durften! ` +

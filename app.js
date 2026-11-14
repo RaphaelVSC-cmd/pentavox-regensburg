@@ -766,7 +766,7 @@ function initTimeGreeting() {
   const h = new Date().getHours();
   let msg;
   if (h >= 6 && h < 12) {
-    msg = 'Guten Morgen — Willkommen bei Pentavox Regensburg';
+    msg = 'Guten Morgen — Willkommen bei FiveElements';
   } else if (h >= 12 && h < 19) {
     msg = 'Guten Tag — Wir schenken Ihrem Anlass einen unvergesslichen Domklang';
   } else {
@@ -873,7 +873,7 @@ function initModals() {
 
 // === 14. TWO-CLICK MAPS & DSGVO CONSENT ===
 function initConsent() {
-  const KEY = 'pentavox_consent_v1';
+  const KEY = 'fiveelements_consent_v1';
   const banner = document.getElementById('consentBanner');
   const stored = localStorage.getItem(KEY);
 
@@ -916,7 +916,7 @@ function initDemoTracker() {
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.search.includes('preview=true')) return;
 
   const startTime = Date.now();
-  const company = 'Pentavox Regensburg';
+  const company = 'FiveElements';
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const deviceType = isMobile ? 'Smartphone (Mobil)' : 'Desktop-Computer';
   const referrer = document.referrer ? (document.referrer.includes('whatsapp') ? 'WhatsApp Direktlink' : document.referrer) : 'Direktaufruf';
@@ -947,7 +947,7 @@ function initDemoTracker() {
     }
 
     const clickedList = clickedActions.size > 0 ? Array.from(clickedActions).join(', ') : 'Nur gescrollt';
-    const message = `🔔 [NEXBOT LIVE-ALARM] Brautpaar / Musiker prüft Pentavox!\n\n` +
+    const message = `🔔 [NEXBOT LIVE-ALARM] Brautpaar / Musiker prüft FiveElements!\n\n` +
       `🏢 Firma: ${company}\n` +
       `📱 Gerät: ${deviceType}\n` +
       `🔗 Quelle: ${referrer}\n` +
@@ -989,10 +989,38 @@ function initDemoTracker() {
   });
 }
 
-// === 16. INIT DOMContentLoaded ===
+// === 16. HINWEIS- & HAFTUNGSAUSSCHLUSS-MODAL (BEI JEDEM AUFRUF) ===
+function initWipWarningModal() {
+  const modal = document.getElementById('wipWarningModal');
+  const acceptBtn = document.getElementById('wipWarningAccept');
+  const closeBtn = document.getElementById('wipWarningClose');
+  if (!modal) return;
+
+  // Bei jedem Seitenaufruf aktiv anzeigen (keine Speicherung in localStorage)
+  modal.hidden = false;
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+
+  const closeWipModal = () => {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  acceptBtn?.addEventListener('click', closeWipModal);
+  closeBtn?.addEventListener('click', closeWipModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) {
+      closeWipModal();
+    }
+  });
+}
+
+// === 17. INIT DOMContentLoaded ===
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
+  initWipWarningModal();
   initDemoTracker();
   initTimeGreeting();
   initConsent();

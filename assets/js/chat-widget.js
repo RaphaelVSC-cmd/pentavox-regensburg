@@ -2,12 +2,12 @@
 
 /**
  * === BAUSTEIN A: SMART CHAT-ASSISTENT (v8.0) ===
- * Pentavox Vokal-Berater: Vollständig lokal – kein externer API-Call zur Laufzeit.
- * CHAT_KB befüllt aus der Signature-DNA von Pentavox Regensburg.
+ * FiveElements Vokal-Berater: Vollständig lokal – kein externer API-Call zur Laufzeit.
+ * CHAT_KB befüllt aus der Signature-DNA von FiveElements.
  */
 
 const CHAT_KB = {
-  firma: 'Pentavox Regensburg',
+  firma: 'FiveElements',
   tel: '+49 176 51270378',
   wa: '4917651270378',
   leistungen: [
@@ -24,19 +24,19 @@ const CHAT_KB = {
     {
       keywords: ['preis', 'kosten', 'kostet', 'angebot', 'gage', 'honorar', 'budget', 'paket'],
       antwort: 'Unsere Begleitung ist in drei transparente Meister-Pakete aufgeteilt: Paket S (Trauung Pur), Paket M (Trauung & Sektempfang) und Paket L (Der Exklusivtag). Jedes Paket beinhaltet 1 eigens für 5 Stimmen neu arrangiertes Wunschlied! Gerne erstellen wir Ihnen innerhalb von 24 Stunden eine verbindliche Vorab-Einschätzung für Ihren Wunschort.',
-      wa_text: 'Hallo Pentavox Regensburg, ich interessiere mich für eine Terminanfrage und hätte gerne ein unverbindliches Angebot für unsere Hochzeit.',
+      wa_text: 'Hallo FiveElements, ich interessiere mich für eine Terminanfrage und hätte gerne ein unverbindliches Angebot für unsere Hochzeit.',
       wa_label: 'Paket-Preise via WhatsApp anfragen'
     },
     {
       keywords: ['lied', 'lieder', 'repertoire', 'song', 'wunschlied', 'hallelujah', 'mendelssohn', 'ed sheeran', 'elvis', 'programm'],
       antwort: 'Unser Repertoire reicht von sakraler Polyphonie (Mendelssohn, Bach, Rheinberger) über Pop-Balladen (Ed Sheeran, Elvis Presley) bis hin zu modernen Chorsätzen (Cohens Hallelujah im Pentatonix-Arrangement). Das Besondere: Wir studieren für jedes Brautpaar 1 persönlichen Wunschsong 5-stimmig ein!',
-      wa_text: 'Hallo Pentavox, wir haben ein bestimmtes Wunschlied für unsere Trauung und möchten fragen, ob ihr dieses 5-stimmig für uns singen könnt.',
+      wa_text: 'Hallo FiveElements, wir haben ein bestimmtes Wunschlied für unsere Trauung und möchten fragen, ob ihr dieses 5-stimmig für uns singen könnt.',
       wa_label: 'Wunschlied per WhatsApp anfragen'
     },
     {
       keywords: ['besetzung', 'stimmen', 'domspatzen', 'sanger', 'sänger', 'a cappella', 'begleitung', 'wer seid ihr'],
-      antwort: 'Pentavox besteht aus 5 ausgebildeten Stimmen: Sopran, Alt, Tenor, Bariton und Bass. Wir alle wurden bei den weltberühmten Regensburger Domspatzen ausgebildet. Wir singen überwiegend reines A-cappella (Naturklang), auf Wunsch auch mit feiner Klavier- oder Orgelbegleitung.',
-      wa_text: 'Hallo Pentavox, ich möchte gerne mehr über eure Besetzung und Hörproben erfahren.',
+      antwort: 'FiveElements besteht aus 5 ausgebildeten Stimmen: Sopran, Alt, Tenor, Bariton und Bass. Wir alle wurden bei den weltberühmten Regensburger Domspatzen ausgebildet. Wir singen überwiegend reines A-cappella (Naturklang), auf Wunsch auch mit feiner Klavier- oder Orgelbegleitung.',
+      wa_text: 'Hallo FiveElements, ich möchte gerne mehr über eure Besetzung und Hörproben erfahren.',
       wa_label: 'Frage zur Besetzung'
     },
     {
@@ -47,13 +47,13 @@ const CHAT_KB = {
     {
       keywords: ['einsatzgebiet', 'gebiet', 'wo', 'fahrt ihr', 'region', 'munchen', 'münchen', 'nurnberg', 'nürnberg', 'bayern', 'oberpfalz', 'kelheim', 'straubing', 'landshut'],
       antwort: 'Unser Heimatort ist Regensburg (Domplatz 1), wir begleiten Brautpaare aber in ganz Bayern – von Regensburg und der Oberpfalz über München und Nürnberg bis ins Voralpenland.',
-      wa_text: 'Hallo Pentavox, wir heiraten in [Ort eintragen] und möchten fragen, ob ihr dort noch verfügbar seid.',
+      wa_text: 'Hallo FiveElements, wir heiraten in [Ort eintragen] und möchten fragen, ob ihr dort noch verfügbar seid.',
       wa_label: 'Einsatzgebiet & Termin prüfen'
     },
     {
       keywords: ['rückruf', 'anrufen', 'ruckruf', 'telefonieren', 'termin', 'sprechen'],
       antwort: 'Sehr gerne vereinbaren wir ein persönliches Telefongespräch, um den musikalischen Ablauf Ihrer Trauung in Ruhe zu besprechen. Senden Sie uns einfach kurz Ihren Namen und Ihre Rufnummer.',
-      wa_text: 'Hallo Pentavox, ich hätte gerne einen kurzen Rückruf bezüglich unserer Hochzeit. Meine Nummer: ',
+      wa_text: 'Hallo FiveElements, ich hätte gerne einen kurzen Rückruf bezüglich unserer Hochzeit. Meine Nummer: ',
       wa_label: 'Rückruf anfordern'
     },
     {
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     addBubble(
       messagesEl,
-      'Grüß Gott! Ich bin der digitale Assistent von Pentavox Regensburg. Haben Sie Fragen zu unseren 5 Gesangsstimmen, Preisen oder Wunschliedern?',
+      'Grüß Gott! Ich bin der digitale Assistent von FiveElements. Haben Sie Fragen zu unseren 5 Gesangsstimmen, Preisen oder Wunschliedern?',
       'bot'
     );
   }, 600);
