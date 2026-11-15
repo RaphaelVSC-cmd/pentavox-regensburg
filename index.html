@@ -1,94 +1,59 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FiveElements – Das 5-Stimmen Vokalensemble | Domspatzen-Klang</title>
-  <meta name="description" content="Ausgebildet bei den Regensburger Domspatzen. 5-stimmiger A-cappella-Klang für Ihre Trauung in Bayern. Jetzt Wunschtermin anfragen!">
-  <link rel="canonical" href="https://fiveelements.vercel.app/">
-  <meta name="robots" content="index, follow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>five elements – Fünf Stimmen. Ein Klang. | A-cappella-Ensemble</title>
+  <meta name="description" content="Wir sind five elements: fünf junge A-cappella-Stimmen aus Regensburg für Trauungen (150 €), Sektempfänge (100 €), eigene Vokalkonzerte & besondere Orte. Jetzt anfragen!" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fiveelements.vercel.app/" />
 
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fiveelements.vercel.app/">
-  <meta property="og:title" content="FiveElements – Das 5-Stimmen Vokalensemble">
-  <meta property="og:description" content="Ausgebildet bei den Regensburger Domspatzen. 5-stimmiger A-cappella-Klang für kirchliche und freie Trauungen in Bayern.">
-  <meta property="og:image" content="https://fiveelements.vercel.app/assets/images/hero.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FiveElements – 5-Stimmen Vokalensemble">
-  <meta name="twitter:description" content="Fünf Stimmen. Ein reiner Domklang. Ausgebildet bei den weltberühmten Regensburger Domspatzen.">
-  <meta name="twitter:image" content="https://fiveelements.vercel.app/assets/images/hero.jpg">
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="five elements – Fünf Stimmen. Ein Klang. Unvergessliche Momente" />
+  <meta property="og:description" content="Junges 5-Stimmen A-cappella-Ensemble: stromlos, ehrlich, transparent bepreist & offen für jeden besonderen Ort." />
+  <meta property="og:url" content="https://fiveelements.vercel.app/" />
+  <meta property="og:image" content="https://fiveelements.vercel.app/assets/images/ensemble-hero.jpg" />
 
-  <!-- PWA Manifest & Colors -->
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#d8c292">
+  <!-- Favicon & PWA -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#162438" />
 
-  <!-- Favicon Vector Signet (physische Datei) -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="favicon.svg">
+  <!-- Preload Hero LCP Asset & Fonts -->
+  <link rel="preload" as="image" href="/assets/images/ensemble-hero.jpg" fetchpriority="high" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,wght@0,9..144,100,500..700;1,9..144,100,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Performance: Preconnect & LCP Image Preload -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preload" as="image" href="assets/images/hero.jpg" fetchpriority="high">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/style.css" />
 
-  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Analytics Platzhalter (nach Kauf aktivieren) -->
-  <!-- SETUP Plausible: data-domain eintragen und Kommentarzeichen entfernen -->
+  <!-- Analytics Platzhalter (DSGVO-konform erst nach Einwilligung / Aktivierung) -->
   <!-- <script defer data-domain="fiveelements.vercel.app" src="https://plausible.io/js/script.js"></script> -->
-  <!-- SETUP Clarity: Project-ID eintragen und aktivieren -->
-  <!--
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window,document,"clarity","script","PROJECT_ID");
-  </script>
-  -->
+  <!-- <script type="text/javascript">(function(c,l,a,r,i,t,y){...})(window,document,"clarity","script","CLARITY_ID");</script> -->
 
-  <!-- Schema.org JSON-LD (PerformingGroup / EntertainmentBusiness + FAQPage) -->
+  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "PerformingGroup",
-        "@id": "https://fiveelements.vercel.app/#ensemble",
-        "name": "FiveElements - Das 5-Stimmen Vokalensemble",
-        "alternateName": "FiveElements Vokalensemble",
-        "description": "5-stimmiges A-cappella-Vokalensemble für Hochzeiten, Zeremonien und Konzerte in Bayern. Ausgebildet bei den Regensburger Domspatzen.",
+        "@type": "MusicGroup",
+        "name": "five elements",
         "url": "https://fiveelements.vercel.app/",
-        "telephone": "+4917651270378",
-        "email": "kontakt@nexbot.info",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Domplatz 1",
-          "addressLocality": "Regensburg",
-          "postalCode": "93047",
-          "addressRegion": "Bayern",
-          "addressCountry": "DE"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 49.0195,
-          "longitude": 12.0975
-        },
-        "openingHoursSpecification": [{
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "09:00",
-          "closes": "19:00"
-        }],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "48",
-          "bestRating": "5",
-          "worstRating": "1"
+        "description": "Junges 5-Stimmen A-cappella-Vokalensemble für Hochzeiten, Sektempfänge, Taufen, Richtfeste, eigene Vokalkonzerte und ungewöhnliche Locations.",
+        "genre": ["A-cappella", "Vokalkammermusik", "Renaissance", "Romantik", "Pop", "Volksmusik"],
+        "foundingLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Westheim 1",
+            "postalCode": "93049",
+            "addressLocality": "Regensburg",
+            "addressCountry": "DE"
+          }
         }
       },
       {
@@ -96,34 +61,26 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Was zeichnet den Klang von FiveElements aus?",
+            "name": "Was kostet ein Auftritt von five elements?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Alle fünf Sängerinnen und Sänger von FiveElements wurden bei den weltberühmten Regensburger Domspatzen ausgebildet. Wir singen in reiner 5-stimmiger Polyphonie (Sopran, Alt, Tenor, Bariton, Bass) – 100 % A-cappella Naturklang mit unvergleichlicher Raumakustik und emotionaler Gänsehaut-Tiefe."
+              "text": "Unsere Richtpakete liegen bei 100 € (+ Fahrtkosten) für einen Sektempfang (30 Min. Daseinszeit, 3 Stücke), 150 € (+ Fahrtkosten) für eine Trauung (1 Std. Daseinszeit, 5 Lieder) und 375 € oder Spendenbasis für ein eigenes Vokalkonzert (~12 Stücke / 1 Std. reine Singzeit). Über unseren Maximalbudget-Rechner finden wir auf Verhandlungsbasis auch individuelle Lösungen."
             }
           },
           {
             "@type": "Question",
-            "name": "Können wir eigene Wunschlieder für unsere Hochzeit wählen?",
+            "name": "Tretet ihr im Namen der Regensburger Domspatzen auf?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Ja, absolut. In jedem unserer drei Meister-Pakete ist ein individuell für Sie auf 5 Stimmen arrangiertes Wunschlied bereits ohne Aufpreis enthalten – egal ob moderne Pop-Ballade, sakrales Chorwerk oder Gospel."
+              "text": "Nein. Wir sind zwar Schüler der Regensburger Domspatzen bis Ende 2027 und erhalten dort unsere vokale Ausbildung, aber five elements ist ein vollständig eigenständiges, unabhängiges Vokalensemble."
             }
           },
           {
             "@type": "Question",
-            "name": "In welchen Regionen Bayerns kann FiveElements gebucht werden?",
+            "name": "Was müssen Veranstalter vor Ort bereitstellen?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Wir begleiten Feierlichkeiten in ganz Bayern: Schwerpunktmäßig im Großraum Regensburg, der Oberpfalz und Niederbayern sowie in München, Augsburg, Ingolstadt und Nürnberg."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wie läuft die Buchung und die musikalische Abstimmung ab?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Über unseren 3-Schritte Trauungs-Assistenten wählen Sie Ihren Anlass, Wunschort und Ihr Datum aus. Wir prüfen die Verfügbarkeit und melden uns binnen 24 Stunden mit einem detaillierten Ablauf- und Repertoirevorschlag."
+              "text": "GEMA-Anmeldung (entweder selbst oder durch uns mitkalkuliert), unterschriebener Auftrittsvertrag inkl. Fahrtkostenpauschale, ein separater Raum zum Umziehen/Herrichten, Verpflegung (mindestens Getränke/Wasser für jede Person) und Bar- oder Überweisungszahlung."
             }
           }
         ]
@@ -131,1022 +88,1131 @@
     ]
   }
   </script>
-
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ================================================================
-       WICHTIGER HINWEIS & HAFTUNGSAUSSCHLUSS (BEI JEDEM AUFRUF)
-       ================================================================ -->
-  <div id="wipWarningModal" class="wip-modal" role="alertdialog" aria-modal="true" aria-labelledby="wipWarningTitle" aria-describedby="wipWarningDesc" aria-hidden="false">
-    <div class="wip-modal-backdrop" aria-hidden="true"></div>
-    <div class="wip-modal-card">
-      <button type="button" class="wip-modal-close" id="wipWarningClose" aria-label="Hinweis schließen">&#x2715;</button>
-      <div class="wip-badge">
-        <span aria-hidden="true">&#9888;&#65039;</span>
-        <span>Hinweis &middot; Website in Bearbeitung</span>
+  <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+  <!-- === NAVIGATION === -->
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar-pill" aria-label="Hauptnavigation">
+      <a href="#top" class="brand-link" aria-label="five elements Startseite">
+        <img src="/favicon.svg" alt="five elements Signet" class="brand-mark" width="40" height="40" />
+        <span class="brand-text-wrap">
+          <span class="brand-name">five elements</span>
+          <span class="brand-sub">5 Stimmen · A-cappella</span>
+        </span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#schnellsuche">Schnellfinder</a></li>
+        <li><a href="#klangpult">Klangpult</a></li>
+        <li><a href="#ensemble">Wir 5</a></li>
+        <li><a href="#pakete">Preise &amp; Budget</a></li>
+        <li><a href="#pflichten">Pflichten &amp; GEMA</a></li>
+        <li><a href="#spenden">Spenden</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#kontakt" class="btn btn-primary nav-cta-btn nav-cta-desktop">Jetzt anfragen</a>
+        <button type="button" class="hamburger-btn" id="mobileMenuOpen" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
-      <h2 id="wipWarningTitle" class="wip-title">Diese Website befindet sich aktuell im Aufbau</h2>
-      <p id="wipWarningDesc" class="wip-lead">
-        Einige Angaben, Daten, Preise, Namen und Inhalte auf dieser Website stimmen noch nicht und werden laufend aktualisiert. Diese Seite dient derzeit ausschließlich zu Vorschau- und Anhaltszwecken.
-      </p>
-      <div class="wip-legal-box">
-        <p class="wip-slogan">&bdquo;Alle Angaben ohne Gewähr &ndash; keine rechtliche Gültigkeit &amp; keinerlei Haftung.&ldquo;</p>
-        <p class="wip-legal-text">
-          Sämtliche Informationen, Texte, Preisangaben und Kontaktdaten auf dieser Website sind unverbindlich, teilweise noch fehlerhaft und rechtlich nicht gültig. Es entstehen keinerlei Ansprüche oder Verpflichtungen; für die Richtigkeit, Vollständigkeit oder Aktualität der Inhalte übernimmt niemand eine Haftung.
-        </p>
-      </div>
-      <div class="wip-actions">
-        <button type="button" id="wipWarningAccept" class="wip-accept-btn">Verstanden &ndash; Vorschau ansehen</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Skip-Link für Barrierefreiheit (WCAG 2.4.1) -->
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
-
-  <!-- Header & Hauptnavigation -->
-  <header role="banner" class="site-header" id="siteHeader">
-    <div class="container">
-      <nav class="header-nav" aria-label="Hauptnavigation">
-        <a href="#hero" class="brand-link" aria-label="FiveElements Startseite">
-          <img src="favicon.svg" alt="FiveElements Vektor Signet" class="brand-logo-img" width="38" height="38">
-          <span class="brand-name">
-            FiveElements
-          </span>
-        </a>
-
-        <ul class="nav-links">
-          <li><a href="#stimmen">Das 5-Stimmen-Feld</a></li>
-          <li><a href="#klangpassage">Klangphilosophie</a></li>
-          <li><a href="#pakete">Meister-Pakete</a></li>
-          <li><a href="#repertoire">Repertoire</a></li>
-          <li><a href="#kontakt">Trauungs-Assistent</a></li>
-        </ul>
-
-        <div class="header-actions">
-          <a href="#kontakt" class="btn-cta header-cta" data-track="angebot">Termin anfragen</a>
-          <button type="button" class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menü öffnen">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-          </button>
-        </div>
-      </nav>
-    </div>
+    </nav>
   </header>
 
-  <!-- Mobile Navigation Dialog -->
-  <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Navigation" hidden aria-hidden="true">
-    <div class="mobile-menu-header">
-      <div class="brand-link">
-        <img src="favicon.svg" alt="" width="34" height="34" class="brand-logo-img">
-        <span class="brand-name">FiveElements</span>
-      </div>
-      <button type="button" class="modal-close" id="mobileMenuClose" aria-label="Menü schließen">&#x2715;</button>
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-drawer-head">
+      <span class="brand-name">five elements</span>
+      <button type="button" class="drawer-close-btn" id="mobileMenuClose" aria-label="Menü schließen">&times;</button>
     </div>
-    <ul class="mobile-menu-links">
-      <li><a href="#hero">Startseite</a></li>
-      <li><a href="#stimmen">Das 5-Stimmen-Feld</a></li>
-      <li><a href="#klangpassage">Klangphilosophie</a></li>
-      <li><a href="#pakete">Meister-Pakete &amp; Preise</a></li>
-      <li><a href="#repertoire">Hörproben &amp; Repertoire</a></li>
-      <li><a href="#kontakt">Trauungs-Assistent</a></li>
-      <li><a href="#standort">Standort &amp; Anreise</a></li>
+    <ul class="mobile-nav-list">
+      <li><a href="#schnellsuche" class="mobile-nav-link">Schnellfinder &amp; Suche <span>→</span></a></li>
+      <li><a href="#klangpult" class="mobile-nav-link">Klangpult &amp; Wunschsongs <span>→</span></a></li>
+      <li><a href="#ensemble" class="mobile-nav-link">Wer wir 5 sind &amp; Kompass <span>→</span></a></li>
+      <li><a href="#anlaesse" class="mobile-nav-link">Anlässe &amp; Konzerte <span>→</span></a></li>
+      <li><a href="#pakete" class="mobile-nav-link">Preise &amp; Maximalbudget <span>→</span></a></li>
+      <li><a href="#pflichten" class="mobile-nav-link">Checkliste &amp; GEMA <span>→</span></a></li>
+      <li><a href="#spenden" class="mobile-nav-link">Spenden &amp; IBAN <span>→</span></a></li>
+      <li><a href="#kontakt" class="mobile-nav-link">3-Schritte Anfrage <span>→</span></a></li>
     </ul>
-    <div class="mobile-menu-footer">
-      <a href="#kontakt" class="btn-cta" style="width:100%; justify-content:center;">Trauungstermin anfragen</a>
-      <a href="https://wa.me/4917651270378?text=Hallo%20FiveElements%2C%20ich%20m%C3%B6chte%20einen%20Trauungstermin%20anfragen"
-         class="btn-secondary" style="width:100%; justify-content:center;" target="_blank" rel="noopener noreferrer">
-        WhatsApp Direktchat
-      </a>
+    <div>
+      <a href="#kontakt" class="btn btn-pastel mobile-nav-link" style="width:100%;">Unverbindlich anfragen</a>
     </div>
   </div>
 
+  <!-- Toast Benachrichtigung -->
+  <div id="toastNotice" class="toast-notice" role="status" aria-live="polite" hidden></div>
+
   <main id="main-content">
-
-    <!-- ================================================================
-         SEKTION 1: HERO & HERITAGE (Dark Canvas #0a1420)
-         Variante e) Redaktionell mit schwebenden Badge-Karten
-         ================================================================ -->
-    <section id="hero" class="hero-section" aria-labelledby="heroHeading">
-      <div class="hero-bg-media">
-        <img src="assets/images/hero.jpg" alt="FiveElements Vokalensemble in historischer Kathedral-Architektur" width="1920" height="1080">
-      </div>
-      <div class="hero-gradient-overlay" aria-hidden="true"></div>
-
-      <div class="container hero-container">
-        <!-- Text-Spalte (Exakt 4 Elemente innerhalb 100dvh) -->
-        <div class="hero-text-col">
-          <!-- Element 1: Eyebrow-Badge -->
-          <div>
-            <span class="eyebrow" aria-label="Güte-Siegel">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-              </svg>
-              1.050 Jahre Chortradition &middot; Regensburg
+    <!-- === SECTION 1: HERO === -->
+    <section class="hero-section" id="top">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-badges">
+            <span class="eyebrow">A-cappella Quintett · Stromlos &amp; Überall</span>
+            <span class="greeting-pill" id="timeGreeting">
+              <span class="greeting-dot" aria-hidden="true"></span>
+              <span>Hallo! Schön, dass ihr da seid</span>
             </span>
-            <p class="hero-greeting" data-time-greeting aria-live="polite">Willkommen bei FiveElements</p>
           </div>
 
-          <!-- Element 2: Hero-Claim (präzise 39 Zeichen inkl. Leerzeichen) -->
-          <h1 class="hero-title" id="heroHeading">
-            Fünf Stimmen. <span class="title-accent">Ein reiner Domklang.</span>
+          <h1 class="display-title hero-h1 hero-title">
+            Fünf Stimmen.<br />
+            <span class="silver-pill-accent">Ein Klang.</span><br />
+            Unvergessliche Momente.
           </h1>
 
-          <!-- Element 3: Unterstützungstext (exakt 138 Zeichen) -->
-          <p class="hero-lead-text">
-            Ausgebildet bei den Regensburger Domspatzen. Wir schenken Ihrer Trauung in Bayern einen 5-stimmigen A-cappella-Klang, der tief berührt.
+          <p class="hero-sub">
+            Wir sind <strong>five elements</strong> – kein großer Chor, sondern fünf junge, eingespielte Stimmen ohne Verstärker und ohne Playback. Wir singen auf Hochzeiten, Sektempfängen, Taufen, unseren eigenen Vokalkonzerten oder mitten auf eurem verrücktesten Event.
           </p>
 
-          <!-- Element 4: CTA-Reihe -->
-          <div class="hero-cta-group">
-            <a href="#kontakt" class="btn-cta" data-magnetic data-track="angebot">
-              <span>Trauungstermin anfragen</span>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-              </svg>
+          <div class="hero-cta-row">
+            <a href="#klangpult" class="btn btn-primary" data-magnetic>
+              Unseren Klang testen
             </a>
-            <button type="button" class="btn-play-trigger" id="heroPlayTrigger" data-magnetic data-track="hoerprobe" aria-label="Hörprobe im 5-Stimmen-Feld anspielen">
-              <span class="play-pulse-icon" aria-hidden="true">
-                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </span>
-              <span>Hörprobe anspielen</span>
-            </button>
+            <a href="#pakete" class="btn btn-pastel">
+              Preise &amp; Budget prüfen
+            </a>
+            <a href="#schnellsuche" class="btn btn-pastel">
+              Schnellsuche
+            </a>
           </div>
-        </div>
 
-        <!-- Rechte Spalte: Domspatzen-Akkreditierung & Klangmetriken -->
-        <div class="hero-visual-col">
-          <div class="hero-heritage-card card-3d" data-tilt-3d>
-            <!-- Rotierendes Gütesiegel -->
-            <div class="rotating-seal-wrap" aria-hidden="true">
-              <svg class="rotating-seal-svg" viewBox="0 0 100 100" data-rotating-seal>
-                <path id="sealPath" fill="none" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
-                <text font-size="8.5" letter-spacing="2" fill="var(--sc-accent)" font-weight="600">
-                  <textPath href="#sealPath">REGENSBURGER DOMSPATZEN &bull; 1.050 JAHRE TRADITION &bull; </textPath>
-                </text>
-              </svg>
+          <div class="hero-trust-strip" aria-label="Ensemble Kennzahlen">
+            <div class="trust-metric">
+              <span class="trust-val"><span class="counter" data-target="5">5</span> Stimmen</span>
+              <span class="trust-lbl">100&nbsp;% rein a-cappella</span>
             </div>
-
-            <div class="heritage-card-header">
-              <span class="domspatzen-seal-badge">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                Ausbildungs-Güte-Siegel
-              </span>
-              <span style="font-size:0.75rem; color:var(--sc-accent); font-weight:700;">Bayern &bull; Dom St. Peter</span>
+            <div class="trust-metric">
+              <span class="trust-val">Ab <span class="counter" data-target="100">100</span>&nbsp;€</span>
+              <span class="trust-lbl">Transparent &amp; verhandelbar</span>
             </div>
-
-            <p style="font-size:0.9375rem; color:var(--sc-ink); margin:0 0 0.5rem; font-weight:600;">
-              Exklusiver Vokalsatz für die Hochzeitssaison 2026 / 2027
-            </p>
-            <p style="font-size:0.8125rem; color:var(--sc-ink-muted); margin:0; line-height:1.5;">
-              Reiner Naturgesang ohne elektronische Verzerrung. Jede Gesangsstimme präzise ausgebildet an der geschichtsträchtigsten Chorschule Europas.
-            </p>
-
-            <div class="card-stats-grid">
-              <div class="stat-pill">
-                <span class="stat-value stat-counter" data-target="5" data-duration="1.8">0</span>
-                <span class="stat-label">Gesangsstimmen</span>
-              </div>
-              <div class="stat-pill">
-                <span class="stat-value stat-counter" data-target="1050" data-prefix="" data-suffix=" J." data-duration="2.4">0</span>
-                <span class="stat-label">Chortradition</span>
-              </div>
-              <div class="stat-pill">
-                <span class="stat-value stat-counter" data-target="100" data-suffix=" %" data-duration="1.6">0</span>
-                <span class="stat-label">A-cappella Naturklang</span>
-              </div>
-              <div class="stat-pill">
-                <span class="stat-value stat-counter" data-target="5.0" data-suffix=" &starf;" data-duration="1.4">0.0</span>
-                <span class="stat-label">Brautpaar-Bewertungen</span>
-              </div>
+            <div class="trust-metric">
+              <span class="trust-val">Überall</span>
+              <span class="trust-lbl">Komplett ohne Technik</span>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- ================================================================
-         SEKTION 2: SIGNATURE SHOWCASE - "DAS 5-STIMMEN-FELD"
-         "Das FiveElements Polyphonie-Pult" (5-Kanal-Vokal-Mixer)
-         ================================================================ -->
-    <section id="stimmen" class="section-signature" aria-labelledby="stimmenHeading">
-      <div class="container">
-        <div style="text-align:center; max-width:760px; margin:0 auto;">
-          <p class="eyebrow">Signature Feature &middot; Interaktive Polyphonie</p>
-          <h2 class="section-title" id="stimmenHeading">Das FiveElements Polyphonie-Pult</h2>
-          <p class="section-subtitle">
-            Erleben Sie die Transparenz unseres Satzgesangs: Isolieren Sie einzelne Gesangsstimmen (Solo) oder schalten Sie Stimmlagen stumm (Mute), um das harmonische Zusammenspiel der Regensburger Domspatzen-Schule hautnah zu hören.
+          <p class="domspatzen-clarification">
+            <strong>Transparenz-Hinweis:</strong> Wir sind Schüler der Regensburger Domspatzen bis Ende 2027 und werden dort vokalisch ausgebildet – treten mit <em>five elements</em> aber zu 100&nbsp;% eigenständig und unabhängig auf. Alle Angaben auf dieser Seite sind unverbindlich und ohne Gewähr.
           </p>
         </div>
 
-        <!-- Interaktives Mischpult -->
-        <div class="polyphony-mixer-wrapper" data-track="hoerprobe">
-          <!-- Obere Steuerungs-Leiste -->
-          <div class="mixer-header-bar">
-            <div class="song-selector-wrap">
-              <span class="song-selector-label">Chorsatz wählen:</span>
-              <button type="button" class="song-chip active" data-song="mendelssohn">Mendelssohn: Denn er hat seinen Engeln</button>
-              <button type="button" class="song-chip" data-song="hallelujah">Cohen: Hallelujah (Pentatonix)</button>
-              <button type="button" class="song-chip" data-song="perfect">Ed Sheeran: Perfect</button>
-              <button type="button" class="song-chip" data-song="canthelp">Elvis: Can&rsquo;t Help Falling in Love</button>
-            </div>
-            <div class="mixer-global-actions">
-              <button type="button" class="btn-mixer-reset" id="btnMixerReset" aria-label="Alle Stummschaltungen zurücksetzen">
-                Alle Stimmen aktiv
-              </button>
-              <button type="button" class="btn-mixer-play" id="btnMixerPlay" aria-label="5-stimmigen Satzgesang abspielen">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>5 Stimmen abspielen</span>
+        <div class="hero-visual-card card-3d">
+          <div class="hero-media-wrap">
+            <img
+              src="/assets/images/ensemble-hero.jpg"
+              alt="Symbolbild eines jungen fünfköpfigen A-cappella-Vokalensembles in moderner Pastell-Blau- und Anthrazit-Konzertkleidung"
+              width="1264"
+              height="848"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <div class="hero-media-overlay">
+              <div class="hero-wave-chip">
+                <div class="eq-bars" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span>Symbolbild · Echte Ensemble-Fotos folgen</span>
+              </div>
+              <button type="button" class="btn btn-pastel btn-sm" id="heroQuickChordBtn">
+                Kurz anhören
               </button>
             </div>
           </div>
 
-          <!-- 60fps HTML5 Canvas Resonance Visualizer -->
-          <div class="mixer-canvas-stage">
-            <canvas id="resonanceCanvas" width="1200" height="240"></canvas>
-            <div class="canvas-live-badge">
-              <span class="live-dot" aria-hidden="true"></span>
-              <span>Reiner Naturklang &middot; 100 % A-cappella</span>
+          <div class="hero-float-badges">
+            <div class="hero-mini-box">
+              <strong>Von früher Notenschrift bis heute</strong>
+              <span>Renaissance, Romantik, Pop &amp; Volksmusik</span>
             </div>
-          </div>
-
-          <!-- Die 5 Klangstelen -->
-          <div class="voice-stelae-grid">
-            <!-- 1. Sopran -->
-            <div class="voice-stele card-3d" data-voice="sopran">
-              <span class="voice-tag">Stimme I</span>
-              <h3 class="voice-name">Sopran</h3>
-              <span class="voice-range">Tonumfang: C4 &ndash; A5</span>
-              <p class="voice-char">Strahlende, glockenreine Melodieführung, die den Kirchenraum mit lichter Klarheit erfüllt.</p>
-              <div class="voice-eq-meter" aria-hidden="true">
-                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-              </div>
-              <div class="voice-controls">
-                <button type="button" class="btn-voice-ctrl btn-solo" aria-label="Sopran solo hören">Solo</button>
-                <button type="button" class="btn-voice-ctrl btn-mute" aria-label="Sopran stummschalten">Mute</button>
-              </div>
-            </div>
-
-            <!-- 2. Alt -->
-            <div class="voice-stele card-3d" data-voice="alt">
-              <span class="voice-tag">Stimme II</span>
-              <h3 class="voice-name">Alt</h3>
-              <span class="voice-range">Tonumfang: G3 &ndash; E5</span>
-              <p class="voice-char">Samtig-warme Mittelstimme, die dem Satz seine intime Tiefe und emotionale Wärme verleiht.</p>
-              <div class="voice-eq-meter" aria-hidden="true">
-                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-              </div>
-              <div class="voice-controls">
-                <button type="button" class="btn-voice-ctrl btn-solo" aria-label="Alt solo hören">Solo</button>
-                <button type="button" class="btn-voice-ctrl btn-mute" aria-label="Alt stummschalten">Mute</button>
-              </div>
-            </div>
-
-            <!-- 3. Tenor -->
-            <div class="voice-stele card-3d" data-voice="tenor">
-              <span class="voice-tag">Stimme III</span>
-              <h3 class="voice-name">Tenor</h3>
-              <span class="voice-range">Tonumfang: C3 &ndash; A4</span>
-              <p class="voice-char">Geschmeidige Höhenresonanz mit meisterlicher Linienführung nach klassischer Domchortradition.</p>
-              <div class="voice-eq-meter" aria-hidden="true">
-                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-              </div>
-              <div class="voice-controls">
-                <button type="button" class="btn-voice-ctrl btn-solo" aria-label="Tenor solo hören">Solo</button>
-                <button type="button" class="btn-voice-ctrl btn-mute" aria-label="Tenor stummschalten">Mute</button>
-              </div>
-            </div>
-
-            <!-- 4. Bariton -->
-            <div class="voice-stele card-3d" data-voice="bariton">
-              <span class="voice-tag">Stimme IV</span>
-              <h3 class="voice-name">Bariton</h3>
-              <span class="voice-range">Tonumfang: G2 &ndash; E4</span>
-              <p class="voice-char">Kerniges harmonisches Fundament; verbindet die Oberstimmen organisch mit dem Bass.</p>
-              <div class="voice-eq-meter" aria-hidden="true">
-                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-              </div>
-              <div class="voice-controls">
-                <button type="button" class="btn-voice-ctrl btn-solo" aria-label="Bariton solo hören">Solo</button>
-                <button type="button" class="btn-voice-ctrl btn-mute" aria-label="Bariton stummschalten">Mute</button>
-              </div>
-            </div>
-
-            <!-- 5. Bass -->
-            <div class="voice-stele card-3d" data-voice="bass">
-              <span class="voice-tag">Stimme V</span>
-              <h3 class="voice-name">Bass</h3>
-              <span class="voice-range">Tonumfang: E2 &ndash; C4</span>
-              <p class="voice-char">Tiefes, sonores Kathedral-Fundament, das jede Phrase trägt und den Raum physisch vibrieren lässt.</p>
-              <div class="voice-eq-meter" aria-hidden="true">
-                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-              </div>
-              <div class="voice-controls">
-                <button type="button" class="btn-voice-ctrl btn-solo" aria-label="Bass solo hören">Solo</button>
-                <button type="button" class="btn-voice-ctrl btn-mute" aria-label="Bass stummschalten">Mute</button>
-              </div>
+            <div class="hero-mini-box">
+              <strong>Ihr gebt das Budget vor</strong>
+              <span>Eure Maximalbudget-Lösung auf Verhandlungsbasis</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================
-         SEKTION 3: VOLLFLÄCHIG-VISUELLE KATHEDRAL-KLANGPASSAGE
-         Textarmer Atmosphären-Bruch mit Dim-to-Reveal Zitat
-         ================================================================ -->
-    <section id="klangpassage" class="section-cinematic-pause" aria-label="Kathedral-Klangpassage">
-      <img src="assets/images/cathedral.jpg" alt="Regensburger Dom St. Peter Innenraum mit einfallendem Sonnenlicht" class="cinematic-bg-img" width="1920" height="1080">
-      <div class="cinematic-scrim" aria-hidden="true"></div>
-
-      <div class="container cinematic-content">
-        <p class="eyebrow" style="color:var(--sc-accent);">Original-Wortlaut &middot; Trauung im Dom zu Regensburg</p>
-        <blockquote class="cinematic-quote" data-text-scrub>
-          &bdquo;Gänsehaut, als alle 5 Stimmen einstimmten. Unsere Gäste sprechen heute noch vom Einzug zur Trauung!&ldquo;
-        </blockquote>
-        <div class="quote-source">
-          Sophie &amp; Michael &middot; Hochzeit im Regensburger Dom
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================
-         SEKTION 4: DIE 3 MEISTER-PAKETE & ANLÄSSE
-         Heller Kontrast-Block auf Elfenbein-Sandstein (#f6f3ee) mit dunklem Ink
-         ================================================================ -->
-    <section id="pakete" class="section-packages-light" aria-labelledby="paketeHeading">
+    <!-- === SECTION 2: IDIOTENSICHERE SCHNELLSUCHE === -->
+    <section class="quick-finder-section" id="schnellsuche" aria-labelledby="finderTitle">
       <div class="container">
-        <div style="text-align:center; max-width:740px; margin:0 auto;">
-          <p class="eyebrow">Transparente Meister-Begleitung</p>
-          <h2 class="section-title" id="paketeHeading">Die 3 FiveElements Klang-Pakete</h2>
-          <p class="section-subtitle">
-            Jedes unserer drei Pakete beinhaltet die vollzählige 5-Stimmen-Besetzung und die persönliche Einstudierung Ihres individuellen Wunschsongs &ndash; meisterlich arrangiert ohne Aufpreis.
-          </p>
-        </div>
-
-        <div class="packages-bento-grid">
-          <!-- Paket S -->
-          <div class="package-card">
-            <div class="package-header">
-              <span class="package-code">Paket S</span>
-              <h3 class="package-name">Trauung Pur</h3>
-              <p class="package-summary">Fokussierter Gänsehaut-Klang während der feierlichen kirchlichen, standesamtlichen oder freien Trauzeremonie.</p>
+        <div class="finder-card">
+          <div class="finder-top-row">
+            <div>
+              <h2 class="display-title" id="finderTitle" style="font-size:clamp(1.25rem, 2.2vw, 1.75rem); color:var(--fe-midnight);">
+                Direkt finden, was ihr sucht
+              </h2>
+              <p style="margin:0.2rem 0 0; font-size:0.9rem; color:var(--fe-ink-muted);">
+                Kein langes Suchen: Tippt ein Stichwort ein oder klickt direkt aufs Thema.
+              </p>
             </div>
-            <div class="package-highlight-box">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            <div class="finder-search-wrap">
+              <svg class="finder-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <span>Inklusive 1 Wunschlied für 5 Stimmen</span>
-            </div>
-            <ul class="package-features">
-              <li><span class="feature-check">&check;</span> 3&ndash;4 ausgewählte Lieder während der Zeremonie (Einzug, Ringwechsel, Trausegen, Auszug)</li>
-              <li><span class="feature-check">&check;</span> Vollständiges 5-stimmiges Vokalensemble (Sopran, Alt, Tenor, Bariton, Bass)</li>
-              <li><span class="feature-check">&check;</span> 1 maßgeschneidert 5-stimmig einstudiertes Wunschlied</li>
-              <li><span class="feature-check">&check;</span> Musikalische Feinabstimmung mit Pfarrer, Standesbeamtem oder freiem Trauredner</li>
-              <li><span class="feature-check">&check;</span> Eintreffen &amp; Einpegeln 60 Minuten vor Zeremoniebeginn</li>
-            </ul>
-            <div class="package-footer">
-              <a href="#kontakt" class="btn-secondary" style="border-color:#c7a768; color:#121e2a;" data-track="angebot">
-                Paket S anfragen
-              </a>
+              <label for="siteFinderInput" class="sr-only">Website durchsuchen</label>
+              <input
+                type="search"
+                id="siteFinderInput"
+                class="finder-input"
+                placeholder="Suchen: z. B. Trauung, 150 €, GEMA, IBAN, Earth Song, Maria…"
+                autocomplete="off"
+              />
             </div>
           </div>
 
-          <!-- Paket M (Hervorgehoben / Bestseller) -->
-          <div class="package-card highlighted">
-            <div class="package-badge-tag">Publikumsmagnet &middot; Bestseller</div>
-            <div class="package-header">
-              <span class="package-code">Paket M</span>
-              <h3 class="package-name">Trauung &amp; Empfang</h3>
-              <p class="package-summary">Die ideale Symbiose: Sakrale Erhabenheit in der Kirche und beschwingte, mitreißende A-cappella-Unterhaltung beim Sektempfang.</p>
-            </div>
-            <div class="package-highlight-box">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <span>Der Publikumsmagnet für bleibende Erinnerungen</span>
-            </div>
-            <ul class="package-features">
-              <li><span class="feature-check">&check;</span> <strong>Vollständige Zeremonie</strong> (3&ndash;4 Wunschlieder)</li>
-              <li><span class="feature-check">&check;</span> <strong>1,5 Stunden Live-Set beim Sektempfang</strong> (Pop-Klassiker, Swing &amp; A-cappella Hits)</li>
-              <li><span class="feature-check">&check;</span> Inklusive 1 maßgeschneidertem 5-Stimmen-Wunscharrangement</li>
-              <li><span class="feature-check">&check;</span> Fließender Übergang von feierlicher Andacht zu fröhlicher Feststimmung</li>
-              <li><span class="feature-check">&check;</span> 100 % autark ohne Stromkabel &ndash; überall im Schlossgarten oder Innenhof spielbar</li>
-            </ul>
-            <div class="package-footer">
-              <a href="#kontakt" class="btn-cta" data-track="angebot">
-                Paket M jetzt reservieren
-              </a>
-            </div>
+          <div class="finder-chips" role="group" aria-label="Themenfilter">
+            <button type="button" class="finder-chip is-active" data-filter="all">Alles anzeigen</button>
+            <button type="button" class="finder-chip" data-filter="preise">Preise &amp; Budget</button>
+            <button type="button" class="finder-chip" data-filter="musik">Klang &amp; Stücke</button>
+            <button type="button" class="finder-chip" data-filter="menschen">Wir 5 &amp; Profile</button>
+            <button type="button" class="finder-chip" data-filter="orga">GEMA &amp; Checkliste</button>
+            <button type="button" class="finder-chip" data-filter="spenden">Spenden / IBAN</button>
           </div>
 
-          <!-- Paket L -->
-          <div class="package-card">
-            <div class="package-header">
-              <span class="package-code">Paket L</span>
-              <h3 class="package-name">Der Exklusivtag</h3>
-              <p class="package-summary">Die vollendete Ganztagsbegleitung: Von der ersten Träne beim Ja-Wort bis zum edlen Akustik-Klangteppich beim Festdinner.</p>
-            </div>
-            <div class="package-highlight-box">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <span>Rundum-Sorglos-Begleitung für höchste Ansprüche</span>
-            </div>
-            <ul class="package-features">
-              <li><span class="feature-check">&check;</span> <strong>Feierliche Trauzeremonie</strong> mit individuellem Wunschsong</li>
-              <li><span class="feature-check">&check;</span> <strong>Sektempfang</strong> (1,5 Stunden beschwingtes Open-Air-Set)</li>
-              <li><span class="feature-check">&check;</span> <strong>Stilvoller Klangteppich beim Festdinner</strong> (dezente Jazz-, Pop- &amp; Madrigal-Sets zwischen den Gängen)</li>
-              <li><span class="feature-check">&check;</span> Bis zu 2 eigens einstudierte Wunschlieder</li>
-              <li><span class="feature-check">&check;</span> Persönliche musikalische Gesamtleitung vor Ort</li>
-            </ul>
-            <div class="package-footer">
-              <a href="#kontakt" class="btn-secondary" style="border-color:#c7a768; color:#121e2a;" data-track="angebot">
-                Paket L anfragen
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4 Anlässe Bento -->
-        <div class="occasions-grid">
-          <div class="occasion-card">
-            <div class="occasion-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </div>
-            <h3>Kirchliche &amp; Freie Trauung</h3>
-            <p>Gänsehaut-Satzgesang beim Einzug, Ringwechsel und Segen &ndash; sakral, erhaben und zutiefst bewegend.</p>
-          </div>
-
-          <div class="occasion-card">
-            <div class="occasion-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            </div>
-            <h3>Standesamtliche Trauung</h3>
-            <p>Verleiht dem behördlichen Rahmen eine unverwechselbare Festlichkeit in 20&ndash;30 intimen Minuten.</p>
-          </div>
-
-          <div class="occasion-card">
-            <div class="occasion-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M8 21h8M12 17v4M5 3h14v5a7 7 0 0 1-14 0V3z"/>
-              </svg>
-            </div>
-            <h3>Sektempfang &amp; Festessen</h3>
-            <p>Unbeschwerter A-cappella-Swing und Pop-Harmonien, die Ihre Hochzeitsgesellschaft sofort verzaubern.</p>
-          </div>
-
-          <div class="occasion-card">
-            <div class="occasion-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-            </div>
-            <h3>Galas &amp; Weihnachtskonzerte</h3>
-            <p>Konzertante Festprogramme auf allerhöchstem Niveau für Firmenjubiläen, Kulturtage und Adventskonzerte.</p>
+          <div class="finder-results" id="finderResults">
+            <a href="#pakete" class="finder-result-item" data-tags="preise trauung sektempfang konzert 150 100 375 daseinszeit">
+              <strong>Unsere 3 Pakete &amp; Preise</strong>
+              <span>Trauung 150 €, Sektempfang 100 €, Vokalkonzert 375 € / Spende</span>
+            </a>
+            <a href="#budgetRechnerBox" class="finder-result-item" data-tags="preise budget maximalpreis verhandlung geld angebot">
+              <strong>Maximalbudget angeben</strong>
+              <span>Ihr nennt euer Budget – wir schlagen eine Lösung vor</span>
+            </a>
+            <a href="#klangpult" class="finder-result-item" data-tags="musik earth song becker hassler holst wunschsong hörprobe">
+              <strong>Klangpult &amp; Wunschsongs</strong>
+              <span>5 Stimmen testen + Lieblingsstücke &amp; Songwunsch eintragen</span>
+            </a>
+            <a href="#ensemble" class="finder-result-item" data-tags="menschen maria profil domspatzen kennenlernen persönlichkeit">
+              <strong>Wer wir 5 sind &amp; Kompass</strong>
+              <span>Profile von Maria &amp; Team + Persönlichkeitstool</span>
+            </a>
+            <a href="#pflichten" class="finder-result-item" data-tags="orga gema vertrag verpflegung wasser umziehen zahlung fahrtkosten">
+              <strong>Checkliste &amp; GEMA-Schalter</strong>
+              <span>Die 5 Punkte für vor Ort – klar &amp; unkompliziert</span>
+            </a>
+            <a href="#spenden" class="finder-result-item" data-tags="spenden iban bank konzert unterstützen">
+              <strong>Spenden &amp; IBAN kopieren</strong>
+              <span>Unterstützt unsere eigenen Vokalkonzerte &amp; Proben</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================
-         SEKTION 5: REPERTOIRE & AUDIO-LOUNGE (Dark Canvas #0a1420)
-         ================================================================ -->
-    <section id="repertoire" class="section-repertoire" aria-labelledby="repertoireHeading">
+    <!-- === SECTION 3: KLANGPULT & WUNSCHSONGS (MIDNIGHT + SILVER STAGE) === -->
+    <section class="section-block section-midnight" id="klangpult" aria-labelledby="klangpultHeading">
       <div class="container">
-        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:var(--sp-4);">
+        <div class="section-head">
           <div>
-            <p class="eyebrow">Musikalischer Schatz</p>
-            <h2 class="section-title" id="repertoireHeading">Repertoire &amp; Hörproben</h2>
-            <p class="section-subtitle">
-              Von sakraler Polyphonie bis zu modernen Liebesballaden. Klicken Sie auf ein Werk, um es direkt im Polyphonie-Pult abzuspielen.
+            <span class="eyebrow">Interaktive Harmonie-Vorschau</span>
+            <h2 class="display-title section-title" id="klangpultHeading">
+              Hört rein, wie <span class="silver-sheen">fünf Stimmen</span> verschmelzen
+            </h2>
+            <p class="section-lead">
+              Unsere echten Studio-Aufnahmen folgen in Kürze. Bis dahin könnt ihr hier über unsere Web-Audio-Klangsynthese direkt spüren, wie unsere vier Favoriten mehrstimmig funktionieren – und jede Stimme einzeln isolieren.
             </p>
           </div>
-          <span style="font-size:0.875rem; color:var(--sc-accent); font-weight:600;">
-            100 % A-cappella &middot; Live eingespielt
-          </span>
+          <button type="button" class="btn btn-primary" id="playAllBtn" aria-pressed="false">
+            <span id="playBtnText">Klangpult starten</span>
+          </button>
         </div>
 
-        <div class="repertoire-bento">
-          <!-- Track 1: Hallelujah -->
-          <div class="repertoire-track-card">
-            <div class="track-info">
-              <span class="track-genre">Emotionaler Chorsatz</span>
-              <h3 class="track-title">Hallelujah</h3>
-              <span class="track-artist">Leonard Cohen &middot; Arr. Pentatonix &amp; FiveElements</span>
+        <div class="klangpult-panel">
+          <div class="track-selector-row">
+            <div class="track-pills" role="group" aria-label="Repertoire-Titel auswählen">
+              <button type="button" class="track-btn is-active" data-track="earth">
+                Earth Song · Frank Ticheli
+              </button>
+              <button type="button" class="track-btn" data-track="becker">
+                Ich gedenke der alten Zeit · Becker
+              </button>
+              <button type="button" class="track-btn" data-track="hassler">
+                Nun fanget an · Hassler
+              </button>
+              <button type="button" class="track-btn" data-track="holst">
+                In the Bleak Midwinter · Holst
+              </button>
             </div>
-            <button type="button" class="btn-play-track" data-song-key="hallelujah" aria-label="Hallelujah im Polyphonie-Pult abspielen">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
+            <span id="currentTrackInfo" style="font-size:0.84rem; color:var(--fe-silver-mid); font-weight:600;">
+              Zeitgenössisch · A-cappella Klangfarben-Studie
+            </span>
           </div>
 
-          <!-- Track 2: Perfect -->
-          <div class="repertoire-track-card">
-            <div class="track-info">
-              <span class="track-genre">Pop-Ballade</span>
-              <h3 class="track-title">Perfect</h3>
-              <span class="track-artist">Ed Sheeran &middot; 5-stimmiger Satzgesang</span>
+          <div class="canvas-stage">
+            <canvas id="resonanceCanvas" width="1200" height="240" aria-label="Animierte Klangwellen der fünf Singstimmen"></canvas>
+            <div class="canvas-meta">
+              <span id="canvasStatusLabel">Bereit: Klickt auf „Klangpult starten“ oder nutzt Solo/Mute</span>
+              <span>Rein a-cappella · 0&nbsp;% Verstärker</span>
             </div>
-            <button type="button" class="btn-play-track" data-song-key="perfect" aria-label="Perfect im Polyphonie-Pult abspielen">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
           </div>
 
-          <!-- Track 3: Mendelssohn -->
-          <div class="repertoire-track-card">
-            <div class="track-info">
-              <span class="track-genre">Sakrale Polyphonie</span>
-              <h3 class="track-title">Denn er hat seinen Engeln befohlen</h3>
-              <span class="track-artist">Felix Mendelssohn Bartholdy &middot; Psalm 91</span>
+          <div class="steles-grid" aria-label="Einzelstimmen steuern">
+            <div class="voice-stele" data-voice="0">
+              <div class="voice-stele-head">
+                <strong>Stimme 1 · Maria</strong>
+                <span>Oberstimme / Führung</span>
+              </div>
+              <div class="stele-actions">
+                <button type="button" class="stele-toggle" data-action="solo" data-voice="0" aria-pressed="false">Solo</button>
+                <button type="button" class="stele-toggle" data-action="mute" data-voice="0" aria-pressed="false">Mute</button>
+              </div>
             </div>
-            <button type="button" class="btn-play-track" data-song-key="mendelssohn" aria-label="Mendelssohn Chorsatz im Polyphonie-Pult abspielen">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
+
+            <div class="voice-stele" data-voice="1">
+              <div class="voice-stele-head">
+                <strong>Stimme 2</strong>
+                <span>Harmonie &amp; Farbe</span>
+              </div>
+              <div class="stele-actions">
+                <button type="button" class="stele-toggle" data-action="solo" data-voice="1" aria-pressed="false">Solo</button>
+                <button type="button" class="stele-toggle" data-action="mute" data-voice="1" aria-pressed="false">Mute</button>
+              </div>
+            </div>
+
+            <div class="voice-stele" data-voice="2">
+              <div class="voice-stele-head">
+                <strong>Stimme 3</strong>
+                <span>Strahlende Mitte</span>
+              </div>
+              <div class="stele-actions">
+                <button type="button" class="stele-toggle" data-action="solo" data-voice="2" aria-pressed="false">Solo</button>
+                <button type="button" class="stele-toggle" data-action="mute" data-voice="2" aria-pressed="false">Mute</button>
+              </div>
+            </div>
+
+            <div class="voice-stele" data-voice="3">
+              <div class="voice-stele-head">
+                <strong>Stimme 4</strong>
+                <span>Wärme &amp; Bindung</span>
+              </div>
+              <div class="stele-actions">
+                <button type="button" class="stele-toggle" data-action="solo" data-voice="3" aria-pressed="false">Solo</button>
+                <button type="button" class="stele-toggle" data-action="mute" data-voice="3" aria-pressed="false">Mute</button>
+              </div>
+            </div>
+
+            <div class="voice-stele" data-voice="4">
+              <div class="voice-stele-head">
+                <strong>Stimme 5</strong>
+                <span>Fundament &amp; Tiefe</span>
+              </div>
+              <div class="stele-actions">
+                <button type="button" class="stele-toggle" data-action="solo" data-voice="4" aria-pressed="false">Solo</button>
+                <button type="button" class="stele-toggle" data-action="mute" data-voice="4" aria-pressed="false">Mute</button>
+              </div>
+            </div>
           </div>
 
-          <!-- Track 4: Elvis -->
-          <div class="repertoire-track-card">
-            <div class="track-info">
-              <span class="track-genre">A-cappella Romantik</span>
-              <h3 class="track-title">Can&rsquo;t Help Falling in Love</h3>
-              <span class="track-artist">Elvis Presley &middot; Feierlicher Trausatz</span>
+          <div class="repertoire-wishlist-bar">
+            <div>
+              <strong style="color:#ffffff;">Von Anfang der Notenschrift bis heute</strong>
+              <p style="margin:0.25rem 0 0; font-size:0.86rem; color:var(--fe-ink-muted-dark);">
+                Wir singen alles, was zu euch passt – quer durch die Jahrhunderte und inklusive Volksmusik.
+              </p>
+              <div class="genre-badges">
+                <span class="genre-badge">Frühe Notenschrift</span>
+                <span class="genre-badge">Renaissance</span>
+                <span class="genre-badge">Romantik</span>
+                <span class="genre-badge">Zeitgenössisch</span>
+                <span class="genre-badge">Volksmusik</span>
+                <span class="genre-badge">Euer Wunschtitel</span>
+              </div>
             </div>
-            <button type="button" class="btn-play-track" data-song-key="canthelp" aria-label="Can't Help Falling in Love im Polyphonie-Pult abspielen">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
-          </div>
-        </div>
 
-        <!-- Meister-Garantie Banner -->
-        <div class="custom-song-banner">
-          <div class="custom-song-text">
-            <p class="eyebrow" style="color:var(--sc-accent); margin-bottom:0.25rem;">FiveElements Meister-Garantie</p>
-            <h3>Ihr persönlicher Wunschsong &ndash; eigens 5-stimmig arrangiert</h3>
-            <p>
-              Haben Sie ein Lied, das Ihre Geschichte verbindet? Ob Coldplay, Queen, John Legend, Hubert von Goisern oder ein Kirchenlied: Wir schreiben für Ihre Trauung ein exklusives Vokalarrangement &ndash; kostenlos in jedem Paket enthalten.
-            </p>
+            <div>
+              <label for="quickWishSongInput" style="display:block; font-size:0.84rem; font-weight:700; margin-bottom:0.45rem; color:var(--fe-silver-solid);">
+                Euer Wunschsong? Direkt vormerken:
+              </label>
+              <div class="wishlist-input-group">
+                <input
+                  type="text"
+                  id="quickWishSongInput"
+                  placeholder="z. B. Hallelujah, Volkslied oder eigener Wunsch…"
+                  autocomplete="off"
+                />
+                <button type="button" class="btn btn-primary btn-sm" id="applyWishSongBtn">
+                  Für Anfrage merken
+                </button>
+              </div>
+            </div>
           </div>
-          <a href="#kontakt" class="btn-cta" data-magnetic data-track="angebot">Wunschsong anfragen</a>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================
-         SEKTION 6: INTERAKTIVER TRAUUNGS-ASSISTENT (Erlebnis-Kontaktpunkt)
-         Geführte 3-Schritte Triage (Anlass -> Ort/Datum -> Besetzung & Kontakt)
-         ================================================================ -->
-    <section id="kontakt" class="section-contact" aria-labelledby="kontaktHeading" data-track="anfrage">
+    <!-- === SECTION 4: WIR 5, PROFILE & PERSÖNLICHKEITSTOOL === -->
+    <section class="section-block section-pastel" id="ensemble" aria-labelledby="ensembleHeading">
       <div class="container">
-        <div style="text-align:center; max-width:760px; margin:0 auto;">
-          <p class="eyebrow">Unverbindliche Vorab-Einschätzung</p>
-          <h2 class="section-title" id="kontaktHeading">Welchen Moment dürfen wir für Sie unvergänglich machen?</h2>
-          <p class="section-subtitle">
-            Für die Hochzeitssaison 2026/2027: Samstage im Dom &amp; Raum Bayern nur noch begrenzt verfügbar. In 3 einfachen Schritten Termin anfragen &ndash; wir antworten binnen 24 Stunden.
-          </p>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Persönlich &amp; Auf Augenhöhe</span>
+            <h2 class="display-title section-title" id="ensembleHeading">
+              Wer wir 5 sind – <span class="silver-pill-accent">keine anonyme Agentur</span>
+            </h2>
+            <p class="section-lead">
+              Durch eine gemeinsame Bekanntschaft bei den Regensburger Domspatzen sind wir für ein Projektsingen zusammengekommen. Einmal gemeinsam gesungen – sofort gemerkt, was in unseren fünf Stimmen steckt.
+            </p>
+          </div>
         </div>
 
-        <div class="experience-contact-card" data-experience-contact>
-          <!-- Schritt-Indikator -->
-          <div class="contact-step-indicator" role="tablist" aria-label="Schritte der Terminanfrage">
-            <button type="button" class="step-badge active" data-step="1" role="tab" aria-selected="true" aria-controls="stepPanel1">
-              <span class="step-num">1</span> <span>Anlass &amp; Konzept</span>
-            </button>
-            <div class="step-line" aria-hidden="true"></div>
-            <button type="button" class="step-badge" data-step="2" role="tab" aria-selected="false" aria-controls="stepPanel2">
-              <span class="step-num">2</span> <span>Ort, Datum &amp; Song</span>
-            </button>
-            <div class="step-line" aria-hidden="true"></div>
-            <button type="button" class="step-badge" data-step="3" role="tab" aria-selected="false" aria-controls="stepPanel3">
-              <span class="step-num">3</span> <span>Kontaktdaten</span>
-            </button>
+        <div class="ensemble-story-grid">
+          <div class="story-card">
+            <h3 class="display-title" style="font-size:1.35rem; color:var(--fe-midnight); margin-bottom:0.65rem;">
+              Warum wir kein Chor sind, sondern ein junges Quintett
+            </h3>
+            <p style="margin:0 0 0.85rem; color:var(--fe-ink-muted);">
+              Wir sind eine junge, motivierte Gruppe mit jahrelanger musikalischer Erfahrung. Jeder von uns trägt allein Verantwortung für seine Stimme – genau dadurch entsteht ein beweglicher, direkter A-cappella-Klang, der überall ohne Boxen und Kabel funktioniert.
+            </p>
+            <p style="margin:0; font-size:0.9rem; padding:0.85rem 1rem; border-radius:var(--radius-md); background:var(--fe-canvas); border:1px solid var(--fe-border-pastel);">
+              <strong>Ganz klar vorab:</strong> Unsere vokale Ausbildung genießen wir noch bis Ende 2027 als Schüler der Regensburger Domspatzen. <em>five elements</em> ist jedoch unser eigenes Projekt – wir treten nicht im Namen der Domspatzen auf.
+            </p>
           </div>
 
-          <!-- Formular Engine mit Formspree & Fallback -->
-          <form id="contactForm" class="contact-form-engine" action="https://formspree.io/f/xbjnqkyv" method="POST">
-            <!-- Schritt 1: Anlass & Paket -->
-            <div class="step-panel active" id="stepPanel1" role="tabpanel">
-              <h3 class="step-panel-title">1. Für welchen festlichen Anlass planen Sie die Musik?</h3>
-              <div class="option-pill-grid">
-                <label class="craft-option-card">
-                  <input type="radio" name="anlass" value="Kirchliche Trauung" checked>
-                  <span class="option-content">
-                    <strong class="option-title">Kirchliche Trauung</strong>
-                    <small class="option-desc">Mächtiger, sakraler Kathedralsound beim Einzug, Segen &amp; Auszug</small>
-                  </span>
-                </label>
-                <label class="craft-option-card">
-                  <input type="radio" name="anlass" value="Freie Trauung">
-                  <span class="option-content">
-                    <strong class="option-title">Freie Trauung</strong>
-                    <small class="option-desc">Romantische A-cappella-Klangwelt unter freiem Himmel oder im Festsaal</small>
-                  </span>
-                </label>
-                <label class="craft-option-card">
-                  <input type="radio" name="anlass" value="Trauung & Sektempfang (Paket M)">
-                  <span class="option-content">
-                    <strong class="option-title">Trauung &amp; Empfang (Paket M)</strong>
-                    <small class="option-desc">Unser Bestseller: Feierliche Zeremonie + 1,5 Stunden beschwingtes Set</small>
-                  </span>
-                </label>
-                <label class="craft-option-card">
-                  <input type="radio" name="anlass" value="Ganztagsbegleitung / Gala">
-                  <span class="option-content">
-                    <strong class="option-title">Ganztag / Gala / Konzert</strong>
-                    <small class="option-desc">Rundum-Sorglos-Begleitung inkl. Dinner-Klangteppich oder Jubiläum</small>
-                  </span>
-                </label>
+          <!-- Interaktives Persönlichkeitstool -->
+          <div class="personality-card">
+            <span class="eyebrow" style="margin-bottom:0.65rem;">Persönlichkeits- &amp; Stimmungs-Kompass</span>
+            <h3 class="display-title" style="font-size:1.35rem; margin-bottom:0.35rem;">
+              Wie ticken wir zusammen? Wählt euren Moment:
+            </h3>
+            <div class="vibe-picker" role="group" aria-label="Persönlichkeit und Event-Vibe wählen">
+              <button type="button" class="vibe-btn is-active" data-vibe="deep">Gänsehaut &amp; Tiefe</button>
+              <button type="button" class="vibe-btn" data-vibe="joy">Locker &amp; zum Mitwippen</button>
+              <button type="button" class="vibe-btn" data-vibe="classic">Feierlich &amp; zeitlos</button>
+              <button type="button" class="vibe-btn" data-vibe="wild">Verrückt &amp; ungewohnt</button>
+            </div>
+            <div class="vibe-output" id="vibeOutput">
+              <strong>Unser Tipp bei Gänsehaut &amp; Tiefe:</strong> Wir starten am liebsten mit <em>„Earth Song“</em> (Frank Ticheli) oder <em>„In the Bleak Midwinter“</em>. In der Probe arbeiten wir da minutenlang an einem einzigen Schlussakkord, bis der ganze Raum schwingt. Passt perfekt zur <strong>Trauung (150&nbsp;€)</strong> oder zum <strong>Vokalkonzert</strong>.
+            </div>
+          </div>
+        </div>
+
+        <h3 class="display-title" style="font-size:1.3rem; color:var(--fe-midnight); margin-bottom:0.95rem;">
+          Unsere 5 Plätze im Ensemble (Steckbriefe im Aufbau)
+        </h3>
+        <div class="members-grid">
+          <article class="member-card is-featured card-3d">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div class="member-avatar-ring" aria-hidden="true">M1</div>
+                <span class="member-role-badge">Bestätigt</span>
               </div>
-              <div class="step-nav-actions">
-                <button type="button" class="btn-cta btn-next-step" data-goto-step="2">
-                  <span>Weiter zu Schritt 2</span>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              <h4 class="display-title" style="font-size:1.15rem; margin:0 0 0.2rem; color:var(--fe-midnight);">
+                Maria
+              </h4>
+              <p style="margin:0 0 0.7rem; font-size:0.8rem; color:var(--fe-ink-muted);">
+                Stimme 1 &amp; Mitgründerin
+              </p>
+            </div>
+            <ul class="member-meta-list">
+              <li><strong>Stimmlage:</strong> [MANUELL PRUEFEN: Stimmlage]</li>
+              <li><strong>Warum dabei:</strong> [MANUELL PRUEFEN: Persönliches Statement]</li>
+              <li><strong>Instrument &amp; Song:</strong> [MANUELL PRUEFEN: Zusatz-Instrument &amp; Lieblingssong]</li>
+            </ul>
+          </article>
+
+          <article class="member-card card-3d">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div class="member-avatar-ring" aria-hidden="true">S2</div>
+                <span class="member-role-badge">Ensemble</span>
+              </div>
+              <h4 class="display-title" style="font-size:1.05rem; margin:0 0 0.2rem; color:var(--fe-midnight);">
+                [MANUELL PRUEFEN: Name 2]
+              </h4>
+              <p style="margin:0 0 0.7rem; font-size:0.8rem; color:var(--fe-ink-muted);">Stimme 2</p>
+            </div>
+            <ul class="member-meta-list">
+              <li><strong>Stimmlage:</strong> [MANUELL PRUEFEN]</li>
+              <li><strong>Warum dabei:</strong> [MANUELL PRUEFEN: Beschreibung]</li>
+              <li><strong>Instrument &amp; Song:</strong> [MANUELL PRUEFEN]</li>
+            </ul>
+          </article>
+
+          <article class="member-card card-3d">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div class="member-avatar-ring" aria-hidden="true">S3</div>
+                <span class="member-role-badge">Ensemble</span>
+              </div>
+              <h4 class="display-title" style="font-size:1.05rem; margin:0 0 0.2rem; color:var(--fe-midnight);">
+                [MANUELL PRUEFEN: Name 3]
+              </h4>
+              <p style="margin:0 0 0.7rem; font-size:0.8rem; color:var(--fe-ink-muted);">Stimme 3</p>
+            </div>
+            <ul class="member-meta-list">
+              <li><strong>Stimmlage:</strong> [MANUELL PRUEFEN]</li>
+              <li><strong>Warum dabei:</strong> [MANUELL PRUEFEN: Beschreibung]</li>
+              <li><strong>Instrument &amp; Song:</strong> [MANUELL PRUEFEN]</li>
+            </ul>
+          </article>
+
+          <article class="member-card card-3d">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div class="member-avatar-ring" aria-hidden="true">S4</div>
+                <span class="member-role-badge">Ensemble</span>
+              </div>
+              <h4 class="display-title" style="font-size:1.05rem; margin:0 0 0.2rem; color:var(--fe-midnight);">
+                [MANUELL PRUEFEN: Name 4]
+              </h4>
+              <p style="margin:0 0 0.7rem; font-size:0.8rem; color:var(--fe-ink-muted);">Stimme 4</p>
+            </div>
+            <ul class="member-meta-list">
+              <li><strong>Stimmlage:</strong> [MANUELL PRUEFEN]</li>
+              <li><strong>Warum dabei:</strong> [MANUELL PRUEFEN: Beschreibung]</li>
+              <li><strong>Instrument &amp; Song:</strong> [MANUELL PRUEFEN]</li>
+            </ul>
+          </article>
+
+          <article class="member-card card-3d">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div class="member-avatar-ring" aria-hidden="true">S5</div>
+                <span class="member-role-badge">Ensemble</span>
+              </div>
+              <h4 class="display-title" style="font-size:1.05rem; margin:0 0 0.2rem; color:var(--fe-midnight);">
+                [MANUELL PRUEFEN: Name 5]
+              </h4>
+              <p style="margin:0 0 0.7rem; font-size:0.8rem; color:var(--fe-ink-muted);">Stimme 5</p>
+            </div>
+            <ul class="member-meta-list">
+              <li><strong>Stimmlage:</strong> [MANUELL PRUEFEN]</li>
+              <li><strong>Warum dabei:</strong> [MANUELL PRUEFEN: Beschreibung]</li>
+              <li><strong>Instrument &amp; Song:</strong> [MANUELL PRUEFEN]</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 5: ANLÄSSE & BESONDERE LOCATIONS === -->
+    <section class="section-block section-frosted" id="anlaesse" aria-labelledby="anlaesseHeading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Wo wir singen</span>
+            <h2 class="display-title section-title" id="anlaesseHeading">
+              Von eurer Traumtrauung bis zum <span class="silver-pill-accent">verrücktesten Ort</span>
+            </h2>
+            <p class="section-lead">
+              Da wir komplett stromlos singen, brauchen wir weder Steckdose noch Bühne. Wir kommen überall hin – zzgl. fairer Kilometerpauschale.
+            </p>
+          </div>
+          <a href="#kontakt" class="btn btn-primary">Termin anfragen</a>
+        </div>
+
+        <div class="occasions-grid">
+          <article class="occasion-card is-highlight card-3d">
+            <div>
+              <span class="eyebrow" style="margin-bottom:0.6rem;">Unser Herzstück</span>
+              <h3 class="display-title" style="font-size:1.45rem; margin-bottom:0.45rem;">!Eigene Vokalkonzerte!</h3>
+              <p style="margin:0;">
+                Unser eigenes abendfüllendes oder einstündiges Konzertprogramm mit ca. 12 ausgewählten Werken – von den Anfängen der Notenschrift bis zu moderner Chormusik. Auf Spendenbasis oder für pauschal 375&nbsp;€.
+              </p>
+            </div>
+            <div style="margin-top:0.5rem;">
+              <a href="#spenden" class="btn btn-outline-light btn-sm">Konzerte per Spende fördern</a>
+            </div>
+          </article>
+
+          <article class="occasion-card card-3d">
+            <h3 class="display-title" style="font-size:1.2rem; color:var(--fe-midnight);">Hochzeitsveranstaltungen</h3>
+            <p style="margin:0; font-size:0.9rem; color:var(--fe-ink-muted);">
+              Kirchlich, frei oder standesamtlich: Bis zu 5 Lieder nach euren Wünschen in 1 Stunde Daseinszeit für pauschal 150&nbsp;€ (+ Fahrtkosten).
+            </p>
+          </article>
+
+          <article class="occasion-card card-3d">
+            <h3 class="display-title" style="font-size:1.2rem; color:var(--fe-midnight);">Sektempfang &amp; Get-together</h3>
+            <p style="margin:0; font-size:0.9rem; color:var(--fe-ink-muted);">
+              Charmante A-cappella-Untermalung mitten unter euren Gästen: 30 Min. Daseinszeit, 3 Stücke für 100&nbsp;€ (+ Fahrtkosten).
+            </p>
+          </article>
+
+          <article class="occasion-card card-3d">
+            <h3 class="display-title" style="font-size:1.2rem; color:var(--fe-midnight);">Taufe &amp; Namensfeiern</h3>
+            <p style="margin:0; font-size:0.9rem; color:var(--fe-ink-muted);">
+              Persönliche, ruhige Stimmen für große kleine Momente – genau abgestimmt auf Familie und Atmosphäre.
+            </p>
+          </article>
+
+          <article class="occasion-card card-3d">
+            <h3 class="display-title" style="font-size:1.2rem; color:var(--fe-midnight);">Richtfest &amp; kuriose Locations</h3>
+            <p style="margin:0; font-size:0.9rem; color:var(--fe-ink-muted);">
+              Rohbau, Dachterrasse, Bergwiese oder ungewöhnlicher Anlass? Je ausgefallener die Idee, desto mehr Bock haben wir!
+            </p>
+          </article>
+        </div>
+
+        <div class="hall-banner">
+          <div class="hall-banner-media">
+            <img
+              src="/assets/images/concert-hall.jpg"
+              alt="Moderner Akustiksaal mit warmen Holzwänden und mattem Pastellblau-Licht"
+              width="1376"
+              height="768"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="hall-banner-copy">
+            <span class="eyebrow">Einsatzradius</span>
+            <h3 class="display-title" style="font-size:1.45rem; color:var(--fe-midnight);">
+              Wir singen überall – einfach anfragen
+            </h3>
+            <p style="margin:0; color:var(--fe-ink-muted);">
+              Regensburg, Oberpfalz, ganz Bayern oder weiter weg: Wir richten uns flexibel nach eurem Wunschort. Zur transparenten Kalkulation kommt lediglich unsere faire Kilometerpauschale hinzu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 6: PAKETE, DASEINSZEIT & MAXIMALBUDGET === -->
+    <section class="section-block section-periwinkle" id="pakete" aria-labelledby="paketeHeading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Ehrlich &amp; Klar Kalkuliert</span>
+            <h2 class="display-title section-title" id="paketeHeading">
+              Unsere 3 Pakete – und was hinter den Preisen steckt
+            </h2>
+            <p class="section-lead">
+              Keine versteckten Gagen: Alle Preisbeispiele sind transparente Richtwerte (ggf. zzgl. Kilometerpauschale &amp; GEMA). Rechtsbindung entsteht erst mit unterschriebenem Vertrag.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card card-3d">
+            <div>
+              <span class="eyebrow">Paket 3 · Kompakt</span>
+              <h3 class="display-title" style="font-size:1.35rem; margin:0.7rem 0 0.25rem; color:var(--fe-midnight);">Sektempfang</h3>
+              <div class="price-amount">100&nbsp;€ <small style="font-size:0.45em; font-weight:600;">(+ Fahrtkosten)</small></div>
+              <p class="price-note" style="font-size:0.86rem; color:var(--fe-ink-muted); margin:0.5rem 0 1rem;">
+                Ideal als akustischer Hingucker zur Begrüßung oder beim Get-together.
+              </p>
+              <ul class="price-list">
+                <li><strong>30 Minuten Daseinszeit</strong> vor Ort</li>
+                <li><strong>3 ausgewählte Stücke</strong> rein a-cappella</li>
+                <li>Komplett flexibel im Garten, Foyer oder Hof</li>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-primary select-package-btn" data-package="Sektempfang (100 € + Fahrtkosten)">
+              Paket wählen
+            </button>
+          </article>
+
+          <article class="price-card is-featured card-3d">
+            <div>
+              <span class="eyebrow">Paket 1 · Meistgebucht</span>
+              <h3 class="display-title" style="font-size:1.35rem; margin:0.7rem 0 0.25rem;">Trauung / Zeremonie</h3>
+              <div class="price-amount silver-sheen">150&nbsp;€ <small style="font-size:0.45em; -webkit-text-fill-color:var(--fe-silver-mid);">pauschal (+ Fahrtkosten)</small></div>
+              <p class="price-note" style="font-size:0.86rem; margin:0.5rem 0 1rem;">
+                Der musikalische Bogen durch eure kirchliche, freie oder standesamtliche Zeremonie.
+              </p>
+              <ul class="price-list">
+                <li><strong>1 Stunde Daseinszeit</strong> (inkl. Aufbau &amp; Ablauf)</li>
+                <li><strong>Bis zu 5 Lieder</strong> inklusive Wunschliedern</li>
+                <li>5 junge Stimmen – null Technik nötig</li>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-primary select-package-btn" data-package="Trauung / Zeremonie (150 € + Fahrtkosten)">
+              Trauungs-Paket wählen
+            </button>
+          </article>
+
+          <article class="price-card card-3d">
+            <div>
+              <span class="eyebrow">Paket 2 · Eigenkonzept</span>
+              <h3 class="display-title" style="font-size:1.35rem; margin:0.7rem 0 0.25rem; color:var(--fe-midnight);">Eigenes Vokalkonzert</h3>
+              <div class="price-amount">375&nbsp;€ <small style="font-size:0.45em; font-weight:600;">oder Spendenbasis</small></div>
+              <p class="price-note" style="font-size:0.86rem; color:var(--fe-ink-muted); margin:0.5rem 0 1rem;">
+                Für echte Konzertabende, Kulturreihen oder besondere Kulturorte.
+              </p>
+              <ul class="price-list">
+                <li><strong>Ca. 1 Stunde reine Singzeit</strong></li>
+                <li><strong>Rund 12 Stücke</strong> aus allen Epochen</li>
+                <li>Daseinszeit flexibel nach Konzert-Ablauf</li>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-primary select-package-btn" data-package="Eigenkonzept / Vokalkonzert (375 € oder Spendenbasis)">
+              Konzert anfragen
+            </button>
+          </article>
+        </div>
+
+        <div class="transparency-budget-grid">
+          <div class="explainer-card">
+            <span class="eyebrow">Gut zu wissen</span>
+            <h3 class="display-title" style="font-size:1.3rem; margin:0.7rem 0 0.6rem; color:var(--fe-midnight);">
+              Daseinszeit ≠ Singzeit – und warum wir so kalkulieren
+            </h3>
+            <p style="margin:0 0 0.7rem; font-size:0.93rem; color:var(--fe-ink-muted);">
+              Bei Trauungen (1&nbsp;Std.) und Sektempfängen (30&nbsp;Min.) zählt die <strong>Daseinszeit vor Ort</strong> – also die gesamte Zeit, die wir für euch da sind, auch zwischen Programmpunkten. Nur beim eigenen Vokalkonzert rechnen wir rund 1&nbsp;Stunde <strong>reine Singzeit</strong>.
+            </p>
+            <p style="margin:0; font-size:0.93rem; color:var(--fe-ink-muted);">
+              <strong>Warum diese Preise?</strong> Hinter 5 Liedern stecken Wochen gemeinsame Probenarbeit, die individuelle Übungszeit jedes Sängers, Notenvorbereitung für eure Wunschsongs sowie An- und Abfahrt zu fünft.
+            </p>
+          </div>
+
+          <div class="budget-card" id="budgetRechnerBox">
+            <span class="eyebrow">Maximalpreis-Lösungsfinder</span>
+            <h3 class="display-title" style="font-size:1.3rem; margin:0.7rem 0 0.35rem; color:var(--fe-midnight);">
+              Euer Budget ist fester gesetzt? Lasst uns verhandeln!
+            </h3>
+            <p style="margin:0; font-size:0.9rem; color:var(--fe-ink-muted);">
+              Stellt euer Maximalbudget ein – wir zeigen euch direkt eine ehrliche Einschätzung auf Verhandlungsbasis (zzgl. Fahrtkosten &amp; GEMA).
+            </p>
+
+            <div class="budget-range-row">
+              <label for="maxBudgetRange" class="sr-only">Maximalbudget wählen</label>
+              <input type="range" id="maxBudgetRange" class="budget-slider" min="60" max="450" step="10" value="150" />
+              <div class="budget-readout"><span id="budgetDisplayValue">150</span>&nbsp;€ max.</div>
+            </div>
+
+            <div class="budget-proposal" id="budgetProposalText">
+              <strong>Passend zu 150&nbsp;€ (Verhandlungsbasis):</strong> Unser komplettes <strong>Trauungs-Paket</strong> (1&nbsp;Std. Daseinszeit, 5 Lieder) oder ein individuell zusammengestelltes 4–5-Stücke-Programm.
+            </div>
+
+            <button type="button" class="btn btn-primary" id="applyBudgetBtn">
+              Dieses Maximalbudget in meine Anfrage übernehmen
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 7: CHECKLISTE & GEMA-SCHALTER === -->
+    <section class="section-block section-frosted" id="pflichten" aria-labelledby="pflichtenHeading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Klartext vor der Buchung</span>
+            <h2 class="display-title section-title" id="pflichtenHeading">
+              Die 5 Dinge, die wir vor Ort brauchen
+            </h2>
+            <p class="section-lead">
+              Kein Kleingedrucktes, keine Überraschungen am Veranstaltungstag. Damit bei euch alles glatt läuft:
+            </p>
+          </div>
+        </div>
+
+        <div class="checklist-grid">
+          <div class="duty-card">
+            <div>
+              <div class="duty-num">1</div>
+              <h3 class="display-title" style="font-size:1.05rem; margin:0.7rem 0 0.35rem; color:var(--fe-midnight);">GEMA-Klärung (Pflicht)</h3>
+              <p style="margin:0; font-size:0.84rem; color:var(--fe-ink-muted);">
+                GEMA fällt grundsätzlich immer an. Wählt direkt aus, wie wir es regeln:
+              </p>
+            </div>
+            <div class="gema-switch" role="group" aria-label="GEMA-Abwicklung wählen">
+              <button type="button" class="gema-opt is-active" data-gema="Veranstalter meldet & zahlt GEMA selbst">
+                Wir kümmern uns selbst um GEMA
+              </button>
+              <button type="button" class="gema-opt" data-gema="five elements soll GEMA im Angebot mit einkalkulieren">
+                five elements soll GEMA einkalkulieren
+              </button>
+            </div>
+          </div>
+
+          <div class="duty-card">
+            <div>
+              <div class="duty-num">2</div>
+              <h3 class="display-title" style="font-size:1.05rem; margin:0.7rem 0 0.35rem; color:var(--fe-midnight);">Vertrag &amp; Fahrtkosten</h3>
+              <p style="margin:0; font-size:0.84rem; color:var(--fe-ink-muted);">
+                Ein unterschriebener Auftrittsvertrag fixiert den Termin verbindlich. Die Kilometerpauschale richtet sich fair nach eurem Ort.
+              </p>
+            </div>
+          </div>
+
+          <div class="duty-card">
+            <div>
+              <div class="duty-num">3</div>
+              <h3 class="display-title" style="font-size:1.05rem; margin:0.7rem 0 0.35rem; color:var(--fe-midnight);">Raum zum Herrichten</h3>
+              <p style="margin:0; font-size:0.84rem; color:var(--fe-ink-muted);">
+                Wir bringen null Technik mit – nur uns. Ein separater Raum vor Ort zum Umziehen und Einsingen genügt komplett.
+              </p>
+            </div>
+          </div>
+
+          <div class="duty-card">
+            <div>
+              <div class="duty-num">4</div>
+              <h3 class="display-title" style="font-size:1.05rem; margin:0.7rem 0 0.35rem; color:var(--fe-midnight);">Verpflegung für 5</h3>
+              <p style="margin:0; font-size:0.84rem; color:var(--fe-ink-muted);">
+                Mindestens Getränke (Wasser) für jede Stimme vor Ort – und bei längeren Auftritten freuen wir uns über eine Kleinigkeit zu essen.
+              </p>
+            </div>
+          </div>
+
+          <div class="duty-card">
+            <div>
+              <div class="duty-num">5</div>
+              <h3 class="display-title" style="font-size:1.05rem; margin:0.7rem 0 0.35rem; color:var(--fe-midnight);">Einfache Bezahlung</h3>
+              <p style="margin:0; font-size:0.84rem; color:var(--fe-ink-muted);">
+                Ganz flexibel nach eurem Wunsch: am Auftrittstag bar vor Ort oder bequem vorab bzw. am gleichen Tag per Überweisung.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 8: SPENDEN & IBAN === -->
+    <section class="section-block section-midnight" id="spenden" aria-labelledby="spendenHeading">
+      <div class="container donation-grid">
+        <div>
+          <span class="eyebrow">Fördern &amp; Unterstützen</span>
+          <h2 class="display-title section-title" id="spendenHeading">
+            Unsere Konzerte per <span class="silver-sheen">Spende</span> ermöglichen
+          </h2>
+          <p class="section-lead" style="margin-bottom:1.1rem;">
+            Viele unserer eigenen Vokalkonzerte spielen wir bewusst auf Spendenbasis. Jeder Beitrag hilft uns direkt bei neuen Notensätzen, Probenräumen und Fahrtkosten zu unseren Konzertorten. Danke für euren Rückhalt!
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.55rem;">
+            <span class="genre-badge">Notensätze &amp; Arrangements</span>
+            <span class="genre-badge">Eigene Vokalkonzerte</span>
+            <span class="genre-badge">Junge A-cappella-Kultur</span>
+          </div>
+        </div>
+
+        <div class="iban-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+            <strong style="color:#ffffff; font-size:1.05rem;">Spendenkonto · five elements</strong>
+            <span class="eyebrow">Bankverbindung</span>
+          </div>
+
+          <p style="margin:0.85rem 0 0.2rem; font-size:0.82rem; color:var(--fe-ink-muted-dark);">Kontoinhaber:</p>
+          <p style="margin:0; font-weight:700; color:var(--fe-silver-solid);">Jakob Kessel / [MANUELL PRUEFEN: Kontoinhaber bestätigen]</p>
+
+          <div class="iban-row">
+            <div>
+              <span style="display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--fe-ink-muted-dark);">IBAN</span>
+              <span class="iban-code" id="ibanValue">[MANUELL PRUEFEN: DE00 0000 0000 0000 0000 00]</span>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" id="copyIbanBtn">IBAN kopieren</button>
+          </div>
+
+          <p style="margin:0; font-size:0.82rem; color:var(--fe-ink-muted-dark);">
+            <strong>Verwendungszweck:</strong> „Spende five elements“ · Hinweis: Privatspende / Konzertunterstützung, derzeit ohne Spendenquittung ([MANUELL PRUEFEN: e.V./GbR Status]).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 9: 3-SCHRITTE ANFRAGE-ASSISTENT & KARTE === -->
+    <section class="section-block section-pastel" id="kontakt" aria-labelledby="kontaktHeading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">3-Schritte Anfrage-Assistent</span>
+            <h2 class="display-title section-title" id="kontaktHeading">
+              Kurz ausfüllen – wir melden uns persönlich
+            </h2>
+            <p class="section-lead">
+              Keine Verpflichtung durch dieses Formular: Wir prüfen euren Wunschtermin und schicken euch einen passenden Vorschlag.
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-layout">
+          <form class="wizard-card" id="bookingWizardForm" action="https://formspree.io/f/xbjnqkyv" method="POST" novalidate>
+            <div class="wizard-progress" role="tablist" aria-label="Anfrageschritte">
+              <button type="button" class="wizard-step-tab is-active" data-step="1">1. Anlass &amp; Budget</button>
+              <button type="button" class="wizard-step-tab" data-step="2">2. Ort, Datum &amp; GEMA</button>
+              <button type="button" class="wizard-step-tab" data-step="3">3. Wunschsongs &amp; Kontakt</button>
+            </div>
+
+            <!-- Schritt 1 -->
+            <div class="wizard-panel is-active" data-panel="1">
+              <h3 class="display-title" style="font-size:1.25rem; margin-bottom:0.75rem; color:var(--fe-midnight);">Was plant ihr?</h3>
+              <div class="option-grid" id="packageChoices">
+                <button type="button" class="option-choice is-selected" data-value="Trauung / Zeremonie (150 € + Fahrtkosten)">
+                  Trauung / Zeremonie (150&nbsp;€)
                 </button>
+                <button type="button" class="option-choice" data-value="Eigenkonzept / Vokalkonzert (375 € oder Spendenbasis)">
+                  Eigenes Vokalkonzert (375&nbsp;€ / Spende)
+                </button>
+                <button type="button" class="option-choice" data-value="Sektempfang (100 € + Fahrtkosten)">
+                  Sektempfang / Get-together (100&nbsp;€)
+                </button>
+                <button type="button" class="option-choice" data-value="Taufe, Richtfest oder ungewöhnlicher Ort">
+                  Taufe / Richtfest / verrückter Ort
+                </button>
+              </div>
+
+              <input type="hidden" id="selectedPackageInput" name="Paket_Anlass" value="Trauung / Zeremonie (150 € + Fahrtkosten)" />
+
+              <div class="form-field">
+                <label for="wizardBudgetInput">Euer Maximalbudget in € (optional – auf Verhandlungsbasis)</label>
+                <input type="number" id="wizardBudgetInput" name="Maximalbudget_EUR" inputmode="numeric" placeholder="z. B. 150" min="0" step="10" />
+              </div>
+
+              <div class="wizard-nav-row">
+                <span></span>
+                <button type="button" class="btn btn-primary" data-next-step="2">Weiter zu Schritt 2 →</button>
               </div>
             </div>
 
-            <!-- Schritt 2: Ort, Datum & Wunschsong -->
-            <div class="step-panel" id="stepPanel2" role="tabpanel" hidden>
-              <h3 class="step-panel-title">2. Wann &amp; wo findet Ihre Feierlichkeit statt?</h3>
-              <div class="form-grid-inputs">
+            <!-- Schritt 2 -->
+            <div class="wizard-panel" data-panel="2">
+              <h3 class="display-title" style="font-size:1.25rem; margin-bottom:0.75rem; color:var(--fe-midnight);">Wann, wo &amp; wie läuft die GEMA?</h3>
+              <div class="form-grid">
                 <div class="form-field">
-                  <label for="eventDate">Wunschdatum der Feier *</label>
-                  <input type="date" id="eventDate" name="datum" class="form-input" required>
+                  <label for="eventDateInput">Wunschdatum *</label>
+                  <input type="date" id="eventDateInput" name="Datum" required />
                 </div>
                 <div class="form-field">
-                  <label for="eventLocation">Veranstaltungsort / Kirche &amp; Ort *</label>
-                  <input type="text" id="eventLocation" name="ort" class="form-input" placeholder="z.B. Dom St. Peter, Regensburg oder Schloss Dachau" required autocomplete="off">
+                  <label for="eventPlaceInput">Ort / PLZ (wg. Fahrtkosten) *</label>
+                  <input type="text" id="eventPlaceInput" name="Veranstaltungsort" placeholder="z. B. Regensburg oder München" autocomplete="address-level2" required />
                 </div>
-                <div class="form-field full-width">
-                  <label for="customSong">Ihr persönliches Wunschlied (optional)</label>
-                  <input type="text" id="customSong" name="wunschlied" class="form-input" placeholder="z.B. Ed Sheeran - Perfect oder Cohen - Hallelujah">
-                  <small style="color:var(--sc-accent); font-size:0.8125rem; margin-top:0.25rem;">
-                    &starf; 1 individuelles 5-Stimmen-Wunscharrangement ist in jedem Paket inklusive!
-                  </small>
+                <div class="form-field is-full">
+                  <label for="gemaSelectInput">GEMA-Auswahl (Pflicht bei Auftritten)</label>
+                  <select id="gemaSelectInput" name="GEMA_Regelung">
+                    <option value="Veranstalter meldet & zahlt GEMA selbst">Wir (Veranstalter) kümmern uns selbst um die GEMA</option>
+                    <option value="five elements soll GEMA im Angebot mit einkalkulieren">five elements soll die GEMA im Preis einkalkulieren</option>
+                  </select>
                 </div>
               </div>
-              <div class="step-nav-actions flex-between">
-                <button type="button" class="btn-secondary btn-prev-step" data-goto-step="1">&larr; Zurück</button>
-                <button type="button" class="btn-cta btn-next-step" data-goto-step="3">
-                  <span>Weiter zu Schritt 3</span>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
+              <div class="wizard-nav-row">
+                <button type="button" class="btn btn-pastel" data-prev-step="1">← Zurück</button>
+                <button type="button" class="btn btn-primary" data-next-step="3">Weiter zu Schritt 3 →</button>
               </div>
             </div>
 
-            <!-- Schritt 3: Kontaktdaten & DSGVO -->
-            <div class="step-panel" id="stepPanel3" role="tabpanel" hidden>
-              <h3 class="step-panel-title">3. Wohin dürfen wir das unverbindliche Angebot senden?</h3>
-              <div class="form-grid-inputs">
-                <div class="form-field">
-                  <label for="contactName">Ihr vollständiger Name / Brautpaar *</label>
-                  <input type="text" id="contactName" name="name" class="form-input" placeholder="Sophie &amp; Michael Huber" required autocomplete="name">
+            <!-- Schritt 3 -->
+            <div class="wizard-panel" data-panel="3">
+              <h3 class="display-title" style="font-size:1.25rem; margin-bottom:0.75rem; color:var(--fe-midnight);">Eure Wunschsongs &amp; Kontaktdaten</h3>
+              <div class="form-grid">
+                <div class="form-field is-full">
+                  <label for="wishSongsInput">Welche Wunschsongs oder Stilrichtungen wollt ihr? *</label>
+                  <textarea id="wishSongsInput" name="Wunschsongs" rows="2" placeholder="z. B. Earth Song (Ticheli), ein Pop-Song oder Volksmusik…" required></textarea>
                 </div>
                 <div class="form-field">
-                  <label for="contactPhone">Telefon- / WhatsApp-Nummer *</label>
-                  <input type="tel" id="contactPhone" name="telefon" class="form-input" placeholder="+49 176 12345678" required autocomplete="tel" inputmode="tel">
+                  <label for="contactNameInput">Euer Name *</label>
+                  <input type="text" id="contactNameInput" name="Name" placeholder="Vor- und Nachname" autocomplete="name" required />
                 </div>
-                <div class="form-field full-width">
-                  <label for="contactEmail">E-Mail-Adresse *</label>
-                  <input type="email" id="contactEmail" name="email" class="form-input" placeholder="sophie.huber@beispiel.de" required autocomplete="email" inputmode="email">
+                <div class="form-field">
+                  <label for="contactEmailInput">E-Mail-Adresse *</label>
+                  <input type="email" id="contactEmailInput" name="email" inputmode="email" placeholder="eure@mail.de" autocomplete="email" required />
                 </div>
-                <div class="form-field full-width">
-                  <label for="contactMessage">Zusätzliche Wünsche oder Fragen (optional)</label>
-                  <textarea id="contactMessage" name="nachricht" class="form-input" rows="3" placeholder="Gibt es Besonderheiten in der Kirche, Beginnzeit der Trauung oder bestimmte Lieblingslieder?"></textarea>
+                <div class="form-field is-full">
+                  <label for="contactPhoneInput">Telefon / WhatsApp (für schnelle Rückfragen)</label>
+                  <input type="tel" id="contactPhoneInput" name="Telefon" inputmode="tel" placeholder="+49 …" autocomplete="tel" />
+                </div>
+                <div class="form-field is-full">
+                  <label style="display:flex; gap:0.55rem; align-items:flex-start; font-weight:500;">
+                    <input type="checkbox" id="privacyAcceptCheckbox" required style="width:auto; margin-top:0.2rem;" />
+                    <span>
+                      Ich stimme der Verarbeitung meiner Angaben gemäß <button type="button" class="footer-link-btn open-modal-btn" data-modal="privacyModal" style="color:var(--fe-midnight); text-decoration:underline;">Datenschutzerklärung</button> zur Bearbeitung dieser unverbindlichen Anfrage zu. *
+                    </span>
+                  </label>
                 </div>
               </div>
 
-              <!-- DSGVO Consent Checkbox -->
-              <div class="form-consent-check">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="datenschutz_zustimmung" required>
-                  <span>Ich stimme der Verarbeitung meiner Angaben gemäß der <a href="#" data-modal-open="datenschutzModal">Datenschutzerklärung</a> zu. Die Daten werden ausschließlich zur Bearbeitung meiner musikalischen Anfrage genutzt. *</span>
-                </label>
+              <div class="wizard-nav-row">
+                <button type="button" class="btn btn-pastel" data-prev-step="2">← Zurück</button>
+                <div style="display:flex; flex-wrap:wrap; gap:0.55rem;">
+                  <button type="submit" class="btn btn-primary" id="submitBookingBtn">Anfrage unverbindlich senden</button>
+                  <button type="button" class="btn btn-pastel" id="whatsappSendBtn">Per WhatsApp übergeben</button>
+                </div>
               </div>
+            </div>
 
-              <div class="step-nav-actions flex-between">
-                <button type="button" class="btn-secondary btn-prev-step" data-goto-step="2">&larr; Zurück</button>
-                <button type="submit" class="btn-cta" id="btnSubmitContact">
-                  Ihr Wunschlied 5-stimmig anfragen
-                </button>
-              </div>
+            <div class="form-feedback" id="formFeedback" hidden></div>
+
+            <!-- Offline / API-Fallback -->
+            <div class="form-feedback" id="formFallback" hidden>
+              <strong>Hinweis zur Direkt-Übergabe:</strong> Falls der automatische Formularversand gerade klemmt, nutzt einfach direkt unseren WhatsApp-Entwurf-Button oder schreibt uns mit euren Angaben an <strong>[MANUELL PRUEFEN: Ensemble-E-Mail]</strong>.
             </div>
           </form>
 
-          <div id="formStatus" role="status" aria-live="polite" style="margin-top:var(--sp-4); text-align:center; font-weight:600;"></div>
-
-          <!-- Fallback bei Formspree-Netzwerkfehlern -->
-          <div id="formFallback" class="contact-fallback-card" style="display:none;" role="alert" aria-live="assertive">
-            <p style="margin:0 0 0.5rem; font-weight:600; color:var(--sc-accent);">
-              Kurzer Hinweis: Unser Online-Assistent hat gerade Pause. Bitte schreiben Sie uns direkt per WhatsApp:
+          <aside class="contact-info-card">
+            <span class="eyebrow">Direktkontakt &amp; Standort</span>
+            <h3 class="display-title" style="font-size:1.35rem; margin:0.75rem 0 0.5rem; color:var(--fe-midnight);">
+              Regensburg &amp; überall unterwegs
+            </h3>
+            <p style="margin:0 0 0.85rem; font-size:0.92rem; color:var(--fe-ink-muted);">
+              Schreibt uns gerne direkt mit eurer Idee – auch wenn Ort oder Budget erst noch eine Skizze sind.
             </p>
-            <div class="fallback-actions">
-              <a href="https://wa.me/4917651270378?text=Hallo%20FiveElements%2C%20wir%20m%C3%B6chten%20gerne%20einen%20Trauungstermin%20anfragen"
-                 class="btn-cta" data-track="whatsapp" target="_blank" rel="noopener noreferrer">
-                WhatsApp Direktchat öffnen
-              </a>
-              <a href="tel:+4917651270378" class="btn-secondary" data-track="telefon">
-                Telefonisch anrufen: +49 176 51270378
-              </a>
+            <ul class="member-meta-list" style="font-size:0.9rem; margin-bottom:1rem;">
+              <li><strong>Anschrift:</strong> Jakob Kessel, Westheim 1, 93049 Regensburg</li>
+              <li><strong>E-Mail:</strong> [MANUELL PRUEFEN: Ensemble-E-Mail]</li>
+              <li><strong>Telefon / WhatsApp:</strong> [MANUELL PRUEFEN: +49 Ensemble-Nummer]</li>
+              <li><strong>Socials:</strong> [MANUELL PRUEFEN: Instagram / Facebook Links]</li>
+            </ul>
+
+            <p style="margin:0; font-size:0.8rem; color:var(--fe-ink-muted);">
+              <strong>Rechtlicher Hinweis:</strong> Alle Preise, Terminbeispiele und Antworten sind unverbindlich und stellen kein rechtlich bindendes Angebot dar.
+            </p>
+
+            <!-- Two-Click Google Maps -->
+            <div class="two-click-map" id="twoClickMapContainer">
+              <div class="map-placeholder" id="mapPlaceholder">
+                <p style="margin:0 0 0.7rem; font-size:0.86rem; color:var(--fe-ink-muted);">
+                  <strong>Standort-Karte (Datenschutz Two-Click):</strong> Erst mit Klick wird eine Verbindung zu Google Maps aufgebaut.
+                </p>
+                <button type="button" class="btn btn-primary btn-sm" id="loadMapBtn">
+                  Regensburg-Karte laden
+                </button>
+              </div>
+              <iframe
+                id="googleMapIframe"
+                class="map-iframe"
+                title="Standort five elements Regensburg"
+                data-src="https://www.google.com/maps?q=Westheim+1,+93049+Regensburg&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                hidden
+              ></iframe>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================
-         SEKTION 7: STANDORT, TWO-CLICK MAPS & FOOTER
-         ================================================================ -->
-    <section id="standort" class="section-standort" aria-labelledby="standortHeading">
-      <div class="container">
-        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:var(--sp-4);">
-          <div>
-            <p class="eyebrow">Domstadt Regensburg</p>
-            <h2 class="section-title" id="standortHeading">Standort &middot; Domplatz 1</h2>
-            <p class="section-subtitle">
-              Heimat des Regensburger Doms St. Peter und Probenort unseres Quintetts. Von hier aus reisen wir zu Trauungen in ganz Bayern.
-            </p>
-          </div>
-          <div style="font-size:0.875rem; color:var(--sc-ink-muted);">
-            <strong style="color:var(--sc-ink); display:block;">FiveElements Vokalensemble</strong>
-            Domplatz 1 &middot; 93047 Regensburg
-          </div>
-        </div>
-
-        <!-- Two-Click DSGVO Google Maps -->
-        <div class="two-click-map-container">
-          <div class="map-consent-placeholder" id="mapPlaceholder">
-            <svg width="40" height="40" fill="none" stroke="var(--sc-accent)" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom:0.75rem;">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-            </svg>
-            <h3>Google Maps Karte aktivieren</h3>
-            <p>
-              Zum Schutz Ihrer Privatsphäre wird die interaktive Karte erst geladen, wenn Sie zustimmen. Dabei werden Daten an Google Ireland übertragen.
-            </p>
-            <button type="button" class="btn-cta" id="btnLoadMapDirect">Karte einmalig laden</button>
-          </div>
-          <iframe
-            class="map-iframe"
-            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2613.6877965038377!2d12.095368315858025!3d49.01948897930353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479fc19f074d4203%3A0x6b0953c899c36294!2sDomplatz%201%2C%2093047%20Regensburg!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde"
-            width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            title="Standort FiveElements Domplatz 1" aria-label="Google Maps Standortkarte FiveElements">
-          </iframe>
+          </aside>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Site Footer -->
-  <footer class="site-footer" role="contentinfo">
+  <!-- === FOOTER === -->
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <h4>FiveElements</h4>
-          <p style="margin:0 0 1rem; color:var(--sc-ink-muted); font-size:0.875rem; line-height:1.5;">
-            Das 5-Stimmen Vokalensemble ausgebildet bei den Regensburger Domspatzen. Meisterlicher Gänsehaut-Klang für kirchliche und freie Trauzeremonien in ganz Bayern.
-          </p>
-          <div style="font-size:0.8125rem; color:var(--sc-accent);">
-            Domplatz 1 &middot; 93047 Regensburg &middot; <a href="tel:+4917651270378" style="color:inherit; text-decoration:none;">+49 176 51270378</a>
-          </div>
-        </div>
-
         <div>
-          <strong style="color:var(--sc-ink); display:block; margin-bottom:0.75rem;">Navigation</strong>
+          <strong class="brand-name" style="font-size:1.35rem;">five elements</strong>
+          <p style="margin:0.65rem 0 0; font-size:0.9rem; color:var(--fe-ink-muted-dark); max-width:36ch;">
+            Fünf Stimmen. Ein Klang. Unvergessliche Momente. Eigenständiges A-cappella-Vokalensemble aus Regensburg.
+          </p>
+        </div>
+        <div>
+          <strong style="color:#ffffff;">Direktklicks</strong>
           <ul class="footer-links">
-            <li><a href="#hero">Startseite</a></li>
-            <li><a href="#stimmen">Polyphonie-Pult</a></li>
-            <li><a href="#pakete">Pakete &amp; Preise</a></li>
-            <li><a href="#repertoire">Repertoire &amp; Hörproben</a></li>
-            <li><a href="#kontakt">Trauungstermin anfragen</a></li>
+            <li><a href="#schnellsuche">Schnellfinder</a></li>
+            <li><a href="#klangpult">Klangpult &amp; Stücke</a></li>
+            <li><a href="#ensemble">Wir 5 &amp; Kompass</a></li>
+            <li><a href="#pakete">Preise &amp; Budget</a></li>
           </ul>
         </div>
-
         <div>
-          <strong style="color:var(--sc-ink); display:block; margin-bottom:0.75rem;">Rechtliches</strong>
+          <strong style="color:#ffffff;">Für Veranstalter</strong>
           <ul class="footer-links">
-            <li><button type="button" class="footer-legal-btn" data-modal-open="impressumModal">Impressum (&sect;&nbsp;5&nbsp;DDG)</button></li>
-            <li><button type="button" class="footer-legal-btn" data-modal-open="datenschutzModal">Datenschutzerklärung (DSGVO)</button></li>
-            <li><a href="#" id="cookieSettingsLink">Cookie-Einstellungen</a></li>
+            <li><a href="#anlaesse">Eigene Konzerte &amp; Feste</a></li>
+            <li><a href="#pflichten">Checkliste &amp; GEMA</a></li>
+            <li><a href="#spenden">Spenden / IBAN</a></li>
+            <li><a href="#kontakt">3-Schritte Anfrage</a></li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color:#ffffff;">Rechtliches</strong>
+          <ul class="footer-links">
+            <li><button type="button" class="footer-link-btn open-modal-btn" data-modal="impressumModal">Impressum (§ 5 DDG)</button></li>
+            <li><button type="button" class="footer-link-btn open-modal-btn" data-modal="privacyModal">Datenschutz (DSGVO)</button></li>
+            <li><button type="button" class="footer-link-btn" id="openCookieSettingsBtn">Cookie-Einstellungen</button></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
-          &copy; 2026 FiveElements. Alle Rechte vorbehalten. Handwerklich umgesetzt von <a href="https://nexbot.info" target="_blank" rel="noopener noreferrer" style="color:var(--sc-accent); text-decoration:none;">Nexbot Webdesign</a>.
-        </div>
-        <div style="color:var(--sc-ink-muted);">
-          100 % A-cappella Naturklang &middot; 5 Stimmen Polyphonie
-        </div>
+        <span>© 2026 five elements · Alle Angaben unverbindlich &amp; ohne Gewähr</span>
+        <span>Schüler der Regensburger Domspatzen bis Ende 2027 – unabhängiges Ensemble, kein Auftritt im Namen der Institution.</span>
       </div>
     </div>
   </footer>
 
-  <!-- WhatsApp Floating Widget (Pflicht außerhalb main) -->
-  <a href="https://wa.me/4917651270378?text=Hallo%20FiveElements%2C%20ich%20m%C3%B6chte%20gerne%20einen%20Trauungstermin%20anfragen"
-     class="whatsapp-widget" target="_blank" rel="noopener noreferrer"
-     data-track="whatsapp" aria-label="WhatsApp-Chat mit FiveElements öffnen">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.07c-.24.67-1.39 1.29-1.93 1.35-.5.06-1.14.09-1.84-.14-.42-.14-.97-.32-1.68-.63-2.98-1.29-4.94-4.32-5.09-4.52-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.17 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.19.01.44-.07.69.52.25.6 1.03 2.52 1.12 2.7.09.19.15.41.03.66-.12.25-.18.41-.36.62-.18.21-.38.47-.54.63-.18.18-.37.38-.16.74.21.36.93 1.54 2.01 2.5 1.38 1.23 2.55 1.62 2.91 1.8.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.81-.18.33.12 2.11 1 2.47 1.18.36.18.6.27.69.42.09.15.09.87-.15 1.54z"/>
-    </svg>
+  <!-- Floating WhatsApp Draft Button -->
+  <a href="#kontakt" class="floating-wa-btn" id="floatingQuickContactBtn" aria-label="Schnell anfragen oder WhatsApp starten">
+    ✦ <span>Schnell anfragen</span>
   </a>
 
-  <!-- ================================================================
-       BAUSTEIN A: SMART CHAT-ASSISTENT (v8.0)
-       Vollständig lokal – kein API-Call zur Laufzeit
-       ================================================================ -->
-  <div id="chatWidget" class="chat-widget" role="complementary" aria-label="FiveElements Trauungs-Assistent öffnen">
-    <button id="chatToggle" class="chat-toggle-btn" aria-expanded="false" aria-controls="chatPanel" aria-label="FiveElements Vokal-Assistent öffnen">
-      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      <span>Vokal-Assistent</span>
-      <span class="chat-puls" aria-hidden="true"></span>
-    </button>
+  <!-- Baustein A: Lokaler Chat-Assistent -->
+  <div id="feChatRoot" class="fe-chat-root"></div>
 
-    <div id="chatPanel" class="chat-panel" role="dialog" aria-modal="false" aria-label="FiveElements Trauungs-Assistent" hidden>
-      <div class="chat-header">
-        <div class="chat-header-info">
-          <div class="chat-avatar" aria-hidden="true"><span>5E</span></div>
-          <div>
-            <p class="chat-name">FiveElements Assistent</p>
-            <p class="chat-status">Antwortet sofort &middot; Aus Regensburg</p>
-          </div>
-        </div>
-        <button class="chat-close-btn" id="chatClose" aria-label="Chat schließen">
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-
-      <div id="chatMessages" class="chat-messages" aria-live="polite" aria-atomic="false"></div>
-
-      <div class="chat-quick-actions" role="group" aria-label="Häufige Fragen">
-        <button type="button" class="chat-quick-btn" data-intent="preis">Paket-Preise</button>
-        <button type="button" class="chat-quick-btn" data-intent="einsatzgebiet">Einsatzgebiet</button>
-        <button type="button" class="chat-quick-btn" data-intent="oeffnungszeiten">Erreichbarkeit</button>
-        <button type="button" class="chat-quick-btn" data-intent="kontakt">Rückruf anfordern</button>
-      </div>
-
-      <form class="chat-input-form" id="chatInputForm" autocomplete="off">
-        <label for="chatInput" class="sr-only">Ihre Frage eingeben</label>
-        <input type="text" id="chatInput" class="chat-input" placeholder="Frage zu Stimmen oder Liedern..." maxlength="250" autocomplete="off">
-        <button type="submit" class="chat-send-btn" aria-label="Nachricht senden">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </form>
-
-      <p class="chat-dsgvo-hint">
-        Lokal im Browser &middot; Kein Chatverlauf wird gespeichert.
-        <button type="button" class="chat-dsgvo-link" data-modal-open="datenschutzModal">Datenschutz</button>
-      </p>
+  <!-- TDDDG § 25 Cookie Banner (gleichwertige Buttons) -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieHeading" aria-modal="false" hidden>
+    <strong id="cookieHeading">Privatsphäre &amp; Cookies (§ 25 TDDDG)</strong>
+    <p style="margin:0.4rem 0 0; font-size:0.86rem; color:var(--fe-ink-muted-dark);">
+      Wir setzen keine versteckten Tracking-Cookies ohne eure Erlaubnis. Externe Dienste wie die Karte werden erst aktiv, wenn ihr zustimmt. Mehr in unserer <button type="button" class="footer-link-btn open-modal-btn" data-modal="privacyModal" style="color:#ffffff; text-decoration:underline;">Datenschutzerklärung</button>.
+    </p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-btn" id="cookieNecessaryBtn">Nur notwendige</button>
+      <button type="button" class="cookie-btn" id="cookieAcceptBtn">Alle akzeptieren</button>
     </div>
   </div>
 
-  <!-- ================================================================
-       MODAL: IMPRESSUM (§ 5 DDG)
-       ================================================================ -->
-  <div id="impressumModal" class="modal" role="dialog" aria-modal="true" aria-label="Impressum" hidden aria-hidden="true">
-    <div class="modal-backdrop" data-modal-close></div>
-    <div class="modal-content">
-      <button type="button" class="modal-close" data-modal-close aria-label="Schließen">&#x2715;</button>
-      <h2>Impressum</h2>
-      <p style="font-size:0.875rem; color:var(--sc-accent); font-weight:600;">Angaben gemäß &sect;&nbsp;5 Digitale-Dienste-Gesetz (DDG)</p>
-
-      <h3>Anbieter</h3>
+  <!-- Impressum Modal (§ 5 DDG) -->
+  <div class="legal-modal" id="impressumModal" role="dialog" aria-modal="true" aria-labelledby="impressumTitle" hidden>
+    <div class="legal-modal-dialog">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h2 class="display-title" id="impressumTitle" style="font-size:1.5rem;">Impressum nach § 5 DDG</h2>
+        <button type="button" class="btn btn-pastel btn-sm close-modal-btn" aria-label="Impressum schließen">&times;</button>
+      </div>
+      <p><strong>Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG):</strong></p>
       <p>
-        <strong>FiveElements &ndash; Das 5-Stimmen Vokalensemble</strong><br>
-        Vertreten durch die Ensembleleitung:<br>
-        Maria [MANUELL PRUEFEN: Vollständiger Nachname von Maria - Quelle: GbR-Vertrag]<br>
-        Raphael Neumeier (technische Vertretung &amp; Digitalkoordination)<br>
-        Domplatz 1<br>
-        93047 Regensburg<br>
+        <strong>five elements – Vokalensemble</strong><br />
+        Vertreten durch: Jakob Kessel &amp; Maria [MANUELL PRUEFEN: Nachname, Rechtsform z. B. GbR]<br />
+        Westheim 1<br />
+        93049 Regensburg<br />
         Deutschland
       </p>
-
-      <h3>Kontakt</h3>
       <p>
-        Telefon: <a href="tel:+4917651270378" style="color:var(--sc-accent);">+49 176 51270378</a><br>
-        E-Mail: <a href="mailto:kontakt@nexbot.info" style="color:var(--sc-accent);">kontakt@nexbot.info</a><br>
-        Web: <a href="https://fiveelements.vercel.app/" style="color:var(--sc-accent);">fiveelements.vercel.app</a>
+        <strong>Kontakt:</strong><br />
+        E-Mail: [MANUELL PRUEFEN: Ensemble-E-Mail-Adresse]<br />
+        Telefon: [MANUELL PRUEFEN: Telefonnummer für schnelle elektronische Kontaktaufnahme]
       </p>
-
-      <h3>Berufsrechtliche Angaben</h3>
       <p>
-        Berufsbezeichnung: Freiberufliches Vokalensemble &amp; Musiker (verliehen in der Bundesrepublik Deutschland)<br>
-        Kammerzugehörigkeit: [MANUELL PRUEFEN: Gesetzliche Berufsbezeichnung / Künstlersozialkasse]
+        <strong>Unabhängigkeitshinweis:</strong><br />
+        Die Mitglieder des Ensembles sind Schüler der Regensburger Domspatzen bis Ende 2027 und erhalten dort ihre vokale Ausbildung. <em>five elements</em> handelt als vollständig eigenständiges Ensemble und nicht im Namen oder Auftrag der Stiftung Regensburger Domspatzen.
       </p>
-
-      <h3>Umsatzsteuer-Identifikationsnummer</h3>
       <p>
-        [MANUELL PRUEFEN: USt-IdNr. gemäß § 27a UStG sofern vorhanden / Kleinunternehmerregelung § 19 UStG]
+        <strong>Haftungsausschluss / Unverbindlichkeit:</strong><br />
+        Alle Inhalte, Preisrichtwerte, Budgetvorschläge und Antworten unseres lokalen Chat-Assistenten dienen ausschließlich der unverbindlichen Vorabinformation und stellen kein rechtlich bindendes Angebot dar. Ein Vertrag kommt erst mit beidseitiger Unterzeichnung unseres Auftrittsvertrags zustande. Alle Angaben ohne Gewähr.
       </p>
-
-      <h3>Verbraucherstreitbeilegung (&sect;&nbsp;36 VSBG)</h3>
       <p>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
-        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" style="color:var(--sc-accent);">https://ec.europa.eu/consumers/odr/</a>.<br>
-        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        <strong>Verbraucherstreitbeilegung (§ 36 VSBG):</strong><br />
+        Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
       </p>
     </div>
   </div>
 
-  <!-- ================================================================
-       MODAL: DATENSCHUTZERKLÄRUNG (DSGVO Art. 13 & 14)
-       ================================================================ -->
-  <div id="datenschutzModal" class="modal" role="dialog" aria-modal="true" aria-label="Datenschutzerklärung" hidden aria-hidden="true">
-    <div class="modal-backdrop" data-modal-close></div>
-    <div class="modal-content">
-      <button type="button" class="modal-close" data-modal-close aria-label="Schließen">&#x2715;</button>
-      <h2>Datenschutzerklärung</h2>
-
-      <h3>1. Verantwortlicher für die Datenverarbeitung</h3>
-      <p>
-        Verantwortlich im Sinne der DSGVO:<br>
-        Maria [MANUELL PRUEFEN: Vollständiger Nachname] &amp; Raphael Neumeier<br>
-        FiveElements<br>
-        Domplatz 1, 93047 Regensburg<br>
-        Telefon: +49 176 51270378 &middot; E-Mail: kontakt@nexbot.info
-      </p>
-
-      <h3>2. Bereitstellung der Website &amp; Hosting (Vercel Inc.)</h3>
-      <p>
-        Diese Website wird gehostet bei Vercel Inc., 340 Pine St Suite 1501, San Francisco, CA 94104, USA.
-        Beim Aufruf werden von Vercel Server-Logfiles (IP-Adresse, Datum/Uhrzeit, abgerufene URL, User-Agent) zur technischen Auslieferung und IT-Sicherheit erfasst und nach maximal 14 Tagen gelöscht.
-        Rechtsgrundlage ist Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO (berechtigtes Interesse an einem sicheren und schnellen Webauftritt).
-        Vercel ist nach dem EU-US Data Privacy Framework (DPF) zertifiziert.
-      </p>
-
-      <h3>3. Externe Bibliotheken &amp; CDN (jsDelivr)</h3>
-      <p>
-        Zur Darstellung kinoreifer Animationen nutzen wir Programmbibliotheken (Lenis, GSAP, SplitType) über das Content Delivery Network jsDelivr (ProspectOne Sp. z o.o., Polen). Bei der Anforderung wird Ihre IP-Adresse an Server des CDN-Anbieters übertragen.
-        Rechtsgrundlage: Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO.
-      </p>
-
-      <h3>4. Kontaktformular &amp; Trauungs-Assistent (Formspree)</h3>
-      <p>
-        Wenn Sie unser Kontaktformular absenden, werden die von Ihnen eingegebenen Daten (Name, Telefon, E-Mail, Wunschtermin, Veranstaltungsort, Wunschlied, Notiz) zur Bearbeitung der musikalischen Anfrage über Formspree Inc. (USA) an uns übermittelt.
-        Rechtsgrundlage: Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b DSGVO (vorvertragliche Maßnahmen auf Anfrage der betroffenen Person).
-        Formspree ist nach dem EU-US Data Privacy Framework zertifiziert.
-      </p>
-
-      <h3>5. Google Maps (Two-Click-Lösung mit expliziter Einwilligung)</h3>
-      <p>
-        Auf unserer Website ist Google Maps zur Anzeige unseres Standorts am Domplatz 1 in Regensburg eingebunden. Die Karte ist standardmäßig blockiert und lädt erst nach Ihrem Klick auf &bdquo;Karte aktivieren&ldquo; oder der Zustimmung im Cookie-Banner. Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
-        Rechtsgrundlage: Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;a DSGVO (Einwilligung). Sie können Ihre Einwilligung jederzeit widerrufen.
-      </p>
-
-      <h3>6. Integrierter Assistenten-Chat (Baustein A)</h3>
-      <p>
-        Der integrierte Chat-Assistent arbeitet zu 100 % lokal im Browser auf Basis einer vorbereiteten Wissensbasis. Eingaben werden zu keinem Zeitpunkt dauerhaft auf Servern gespeichert und es wird zur Laufzeit kein externes KI-System kontaktiert.
-        Rechtsgrundlage: Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO (Berechtigtes Interesse an der effizienten Beantwortung von Brautpaaranfragen).
-      </p>
-
-      <h3>7. Bewertungs-Tool (Baustein B)</h3>
-      <p>
-        Das Bewertungs-Tool auf der Unterseite /bewertung.html generiert ausschließlich lokal im Browser des Nutzers einen personalisierten WhatsApp-Link. Kundendaten werden zu keinem Zeitpunkt auf Servern gespeichert.
-        Rechtsgrundlage: Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO.
-      </p>
-
-      <h3>8. Ihre Betroffenenrechte (Art. 15&ndash;21 DSGVO)</h3>
-      <p>
-        Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch.
-        Zuständige Aufsichtsbehörde: Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach.
-      </p>
-    </div>
-  </div>
-
-  <!-- ================================================================
-       DSGVO COOKIE CONSENT BANNER (TDDDG § 25)
-       ================================================================ -->
-  <div id="consentBanner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Datenschutz-Einstellungen" hidden>
-    <div class="consent-inner">
-      <p>
-        Wir nutzen <strong>Google Maps</strong> zur interaktiven Standortanzeige unseres Regensburger Domplatz-Standorts.
-        <a href="#" data-modal-open="datenschutzModal">Mehr in unserer Datenschutzerklärung</a>.
-      </p>
-      <div class="consent-actions">
-        <button type="button" id="consentAccept" class="btn-consent-accept">Alle akzeptieren</button>
-        <button type="button" id="consentReject" class="btn-consent-reject">Nur notwendige</button>
+  <!-- Datenschutz Modal (DSGVO Art. 13/14) -->
+  <div class="legal-modal" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
+    <div class="legal-modal-dialog">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h2 class="display-title" id="privacyTitle" style="font-size:1.5rem;">Datenschutzerklärung (DSGVO Art. 13/14)</h2>
+        <button type="button" class="btn btn-pastel btn-sm close-modal-btn" aria-label="Datenschutz schließen">&times;</button>
       </div>
+      <p><strong>1. Verantwortliche Stelle:</strong><br />
+      Jakob Kessel / five elements, Westheim 1, 93049 Regensburg, E-Mail: [MANUELL PRUEFEN: Ensemble-E-Mail].</p>
+      <p><strong>2. Hosting (Vercel):</strong><br />
+      Diese Website wird bei Vercel Inc. gehostet (EU-US Data Privacy Framework). Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO zur sicheren und schnellen Auslieferung der Website.</p>
+      <p><strong>3. Schriften &amp; Animationen (Google Fonts / jsDelivr):</strong><br />
+      Schriften und Skripte (GSAP/Lenis) werden über externe CDNs geladen, bis eine lokale Einbindung auf dem Produktiv-Server erfolgt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
+      <p><strong>4. Kontaktanfragen (Formspree &amp; WhatsApp):</strong><br />
+      Wenn ihr den 3-Schritte-Anfrage-Assistenten nutzt, werden eure Daten (Name, E-Mail, Datum, Ort, Wunschsongs, Budget) über Formspree (USA, EU-US DPF) zur Bearbeitung eurer Anfrage gemäß Art. 6 Abs. 1 lit. b DSGVO verarbeitet. Eine Übergabe an WhatsApp erfolgt erst nach eurem aktiven Klick.</p>
+      <p><strong>5. Two-Click Google Maps &amp; Cookie-Speicherung:</strong><br />
+      Die eingebettete Karte ist standardmäßig blockiert und lädt erst nach aktivem Klick gemäß Art. 6 Abs. 1 lit. a DSGVO / § 25 TDDDG. Euer Einwilligungsstatus wird lokal in `localStorage` gespeichert.</p>
+      <p><strong>6. Lokaler Info-Assistent &amp; Klangerzeugung:</strong><br />
+      Unser Chat-Assistent sowie das 5-Stimmen-Klangpult laufen vollständig lokal in eurem Browser ohne externe KI-Server oder Sprachaufzeichnung.</p>
+      <p><strong>7. Eure Betroffenenrechte &amp; Aufsichtsbehörde:</strong><br />
+      Ihr habt jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Widerspruch (Art. 15–21 DSGVO). Zuständige Aufsichtsbehörde: Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach.</p>
     </div>
   </div>
 
-  <!-- Scripts (Ende body - unblockiert) -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-  <script src="app.js"></script>
-  <!-- Baustein A: Smart Chat-Assistent (lokal) -->
-  <script src="assets/js/chat-widget.js" defer></script>
+  <!-- Vendor Scripts (GSAP 3 + ScrollTrigger + Lenis) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- App & Chat Scripts -->
+  <script defer src="/app.js"></script>
+  <script defer src="/assets/js/chat-widget.js"></script>
 </body>
 </html>

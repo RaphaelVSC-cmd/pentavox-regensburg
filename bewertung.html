@@ -1,65 +1,56 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bewertungs-Tool – FiveElements</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback einholen – five elements (Intern)</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,SOFT,wght@9..144,100,600..700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
-<body style="background: var(--sc-canvas); min-height: 100vh;">
-  <main class="bewertung-container">
-    <div class="bewertung-card">
-      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:var(--sp-4);">
-        <img src="favicon.svg" alt="FiveElements Signet" width="36" height="36" style="border-radius:8px;">
-        <span style="font-size:0.875rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--sc-accent); font-weight:600;">FiveElements</span>
+<body class="section-periwinkle" style="min-height:100dvh; display:flex; align-items:center; padding-block:2rem;">
+  <main class="container" style="max-width:680px;">
+    <section class="wizard-card">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+        <img src="/favicon.svg" alt="five elements Signet" width="40" height="40" style="border-radius:12px;" />
+        <div>
+          <span class="eyebrow">Internes Feedback-Werkzeug</span>
+          <h1 class="display-title" style="font-size:clamp(1.4rem, 3vw, 2rem); color:var(--fe-midnight); margin-top:0.35rem;">
+            Rückmeldung per WhatsApp anfragen
+          </h1>
+        </div>
       </div>
-      <h1>Brautpaar-Bewertung anfordern</h1>
-      <p class="bewertung-subtitle">Nach einer gelungenen Trauung oder Feier in Sekunden eine herzliche, personalisierte Bewertungsanfrage per WhatsApp an das Brautpaar senden.</p>
 
-      <form id="bewertungForm">
+      <p style="margin:0 0 1.25rem; color:var(--fe-ink-muted); font-size:0.93rem;">
+        Nach einer gelungenen Trauung, einem Empfang oder Konzert einfach Nummer &amp; Vornamen eingeben – der vorbereitete WhatsApp-Text startet sofort ohne App-Zwischenschritt.
+      </p>
+
+      <form id="reviewHelperForm" novalidate>
         <div class="form-field">
-          <label for="bKundenname">Name des Brautpaars / Ansprechpartners *</label>
-          <input type="text" id="bKundenname" name="kundenname" class="form-input"
-                 placeholder="z.B. Sophie & Michael" required autocomplete="name">
+          <label for="customerName">Vorname / Gastgeber *</label>
+          <input type="text" id="customerName" placeholder="z. B. Anna &amp; Lukas" required />
         </div>
-        <div class="form-field" style="margin-top:var(--sp-4)">
-          <label for="bTelefon">Handynummer (WhatsApp) *</label>
-          <input type="tel" id="bTelefon" name="telefon" class="form-input"
-                 placeholder="0176 12345678" required autocomplete="tel" inputmode="tel">
-          <small style="color:var(--sc-ink-muted);font-size:.8125rem;margin-top:.35rem;display:block">
-            Formate werden automatisch erkannt (z.B. 0176..., +49176..., 0176-123...)
-          </small>
+        <div class="form-field">
+          <label for="customerPhone">Handynummer / WhatsApp *</label>
+          <input type="tel" id="customerPhone" inputmode="tel" placeholder="z. B. 0176 12345678 oder +49…" required />
         </div>
-        <div style="margin-top:var(--sp-6)">
-          <button type="submit" class="btn-cta" style="width:100%; justify-content:center;">WhatsApp-Nachricht vorbereiten</button>
+        <div class="form-field">
+          <label for="reviewLinkInput">Google / Bewertungs-Link (optional)</label>
+          <input type="url" id="reviewLinkInput" placeholder="[MANUELL PRUEFEN: Euren Google-Bewertungslink einfügen]" />
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.65rem; margin-top:1rem;">
+          <button type="submit" class="btn btn-primary">WhatsApp-Nachricht öffnen</button>
+          <a href="/" class="btn btn-pastel">Zur Startseite</a>
         </div>
       </form>
 
-      <!-- Ergebnis -->
-      <div id="bewertungResult" class="bewertung-result">
-        <p style="font-weight:600;color:var(--sc-ink);margin:0 0 var(--sp-3)">Ihre persönliche Nachricht ist bereit:</p>
-        <div class="bewertung-actions">
-          <a id="bewertungWaLink" href="#" target="_blank" rel="noopener noreferrer"
-             class="btn-cta" style="flex:1; justify-content:center;">In WhatsApp öffnen</a>
-          <button type="button" id="bewertungCopyBtn" class="btn-secondary">Link kopieren</button>
-        </div>
-      </div>
-
-      <!-- DSGVO-Hinweis -->
-      <div class="bewertung-dsgvo">
-        🔒 Datenschutz: Name und Rufnummer werden ausschließlich lokal im Browser zur Link-Erstellung verarbeitet und zu keinem Zeitpunkt auf Servern gespeichert.
-      </div>
-
-      <div style="margin-top:var(--sp-6); text-align:center;">
-        <a href="/" style="color:var(--sc-ink-muted); font-size:0.875rem; text-decoration:none;">&larr; Zurück zur Hauptseite</a>
-      </div>
-    </div>
+      <div id="reviewStatusBox" class="form-feedback" hidden></div>
+    </section>
   </main>
-  <script src="assets/js/bewertung.js" defer></script>
+  <script defer src="/assets/js/bewertung.js"></script>
 </body>
 </html>

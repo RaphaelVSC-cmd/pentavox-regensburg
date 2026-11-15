@@ -1,1041 +1,806 @@
 'use strict';
 
 /**
- * ==========================================================================
- * PENTAVOX REGENSBURG - APP ENGINE (v8.0 Bespoke Unikat-Engine)
- * Polyphonie-Pult (Web Audio API), Emil Kowalski Motion Craft & Lenis
- * ==========================================================================
+ * five elements – A-cappella Quintett App Engine
+ * Matte Pastel-Blue & Silver Metallic Craft · GSAP + Lenis + Web Audio API
  */
 
-// === 1. LENIS SMOOTH SCROLL ===
-let lenis;
-if (typeof Lenis !== 'undefined') {
-  lenis = new Lenis({
-    duration: 0.9,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    wheelMultiplier: 1.0,
-    touchMultiplier: 1.5,
-    smoothTouch: false, /* WICHTIG: natives Smartphone-Scrollen */
-    autoResize: true,
+const ENSEMBLE_CONFIG = {
+  // [MANUELL PRUEFEN: Offizielle WhatsApp-Nummer im Format 4917... eintragen, sonst öffnet WhatsApp den Vorlagen-Text zum Selbst-Auswählen]
+  whatsappNumber: '',
+  formspreeEndpoint: 'https://formspree.io/f/xbjnqkyv',
+};
+
+let lenisInstance = null;
+
+function showToast(text) {
+  const el = document.getElementById('toastNotice');
+  if (!el) return;
+  el.textContent = text;
+  el.hidden = false;
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => {
+    el.hidden = true;
+  }, 3200);
+}
+
+// === 1. TAGESZEIT-BEGRÜSSUNG ===
+function initTimeGreeting() {
+  const pill = document.getElementById('timeGreeting');
+  if (!pill) return;
+  const span = pill.querySelector('span:last-child');
+  if (!span) return;
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 11) {
+    span.textContent = 'Guten Morgen! Lust auf fünf echte Stimmen?';
+  } else if (hour >= 11 && hour < 17) {
+    span.textContent = 'Hallo! Schön, dass ihr bei uns vorbeischaut';
+  } else if (hour >= 17 && hour < 22) {
+    span.textContent = 'Guten Abend! Perfekte Zeit für A-cappella-Klang';
+  } else {
+    span.textContent = 'Nachteulen willkommen – hört jederzeit rein!';
+  }
+}
+
+// === 2. STICKY HEADER & MOBILE DRAWER ===
+function initNavigation() {
+  const header = document.getElementById('siteHeader');
+  const drawer = document.getElementById('mobileDrawer');
+  const openBtn = document.getElementById('mobileMenuOpen');
+  const closeBtn = document.getElementById('mobileMenuClose');
+  if (!header || !drawer || !openBtn || !closeBtn) return;
+
+  const updateScrollState = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 36);
+    document.body.classList.toggle('has-scrolled', window.scrollY > 320);
+  };
+  window.addEventListener('scroll', updateScrollState, { passive: true });
+  updateScrollState();
+
+  const openDrawer = () => {
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (lenisInstance) lenisInstance.stop();
+  };
+
+  const closeDrawer = () => {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (lenisInstance) lenisInstance.start();
+  };
+
+  openBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+      closeDrawer();
+    }
   });
 
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
-
-  /* Lenis interne Anker-Links */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  // Smooth anchor scrolling (closes drawer first so body never stays locked)
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href');
-      if (id && id !== '#') {
-        const target = document.querySelector(id);
-        if (target) {
-          e.preventDefault();
-          lenis.scrollTo(target, { offset: -70, duration: 1.1 });
-        }
+      const targetId = anchor.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (!targetEl) return;
+      e.preventDefault();
+      if (drawer.classList.contains('is-open')) {
+        closeDrawer();
       }
-    });
-  });
-}
-
-// === 2. MOTION-PRIMITIVE 1: HERO KINETIC TYPOGRAPHY ===
-function initKineticTypography() {
-  if (typeof SplitType === 'undefined' || typeof gsap === 'undefined') return;
-
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) {
-    const split = new SplitType(heroTitle, { types: 'words,chars' });
-    gsap.from(split.chars, {
-      opacity: 0,
-      y: 70,
-      rotateX: -25,
-      stagger: 0.025,
-      duration: 0.95,
-      ease: 'power3.out',
-      delay: 0.15,
-      clearProps: 'transform,opacity'
-    });
-  }
-
-  document.querySelectorAll('.section-title').forEach(title => {
-    const split = new SplitType(title, { types: 'words' });
-    gsap.from(split.words, {
-      opacity: 0,
-      y: 35,
-      duration: 0.8,
-      stagger: 0.04,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: title,
-        start: 'top 88%',
-        toggleActions: 'play none none none'
-      },
-      clearProps: 'transform,opacity'
-    });
-  });
-}
-
-// === 3. MOTION-PRIMITIVE 6: NATIVE CSS-3D PERSPECTIVE TILT ===
-function init3DTilt() {
-  if (typeof gsap === 'undefined') return;
-  const isTouch = window.matchMedia('(hover: none)').matches;
-
-  document.querySelectorAll('.card-3d, [data-tilt-3d]').forEach(card => {
-    if (!isTouch) {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        const rotateX = -(y / (rect.height / 2)) * 6;
-        const rotateY = (x / (rect.width / 2)) * 6;
-        gsap.to(card, {
-          transform: `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      });
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-          transform: 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0px)',
-          duration: 0.6,
-          ease: 'elastic.out(1, 0.6)'
-        });
-      });
-    } else {
-      gsap.fromTo(card,
-        { transform: 'perspective(1000px) rotateX(5deg) translateY(20px)' },
-        {
-          transform: 'perspective(1000px) rotateX(0deg) translateY(0px)',
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
-    }
-  });
-}
-
-// === 4. MOTION-PRIMITIVE 7: TEXT SCRUBBING (DIM-TO-REVEAL) ===
-function initTextScrub() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  document.querySelectorAll('[data-text-scrub]').forEach(container => {
-    const raw = container.textContent.trim();
-    container.innerHTML = raw.split(' ').map(w => `<span class="quote-word">${w}</span> `).join('');
-    const words = container.querySelectorAll('.quote-word');
-
-    gsap.to(words, {
-      opacity: 1.0,
-      stagger: 0.05,
-      scrollTrigger: {
-        trigger: container,
-        start: 'top 80%',
-        end: 'bottom 45%',
-        scrub: 0.6
-      }
-    });
-  });
-}
-
-// === 5. MOTION-PRIMITIVE 4: DYNAMIC STAT COUNTERS ===
-function initCounters() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  document.querySelectorAll('.stat-counter').forEach(el => {
-    const target = parseFloat(el.dataset.target || '0');
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
-    const isDecimal = String(el.dataset.target || '').includes('.');
-    const duration = parseFloat(el.dataset.duration || '2.2');
-
-    gsap.fromTo({ val: 0 }, { val: target }, {
-      duration: duration,
-      ease: 'power2.out',
-      onUpdate: function() {
-        const current = this.targets()[0].val;
-        const formatted = isDecimal ? current.toFixed(1).replace('.', ',') : Math.round(current).toLocaleString('de-DE');
-        el.textContent = prefix + formatted + suffix;
-      },
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none none'
-      }
-    });
-  });
-}
-
-// === 6. MOTION-PRIMITIVE 5: MAGNETIC BUTTONS (DESKTOP) ===
-function initMagneticButtons() {
-  if (window.matchMedia('(hover: none)').matches || typeof gsap === 'undefined') return;
-
-  document.querySelectorAll('[data-magnetic]').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const r = btn.getBoundingClientRect();
-      gsap.to(btn, {
-        x: (e.clientX - r.left - r.width / 2) * 0.28,
-        y: (e.clientY - r.top - r.height / 2) * 0.28,
-        duration: 0.35,
-        ease: 'power2.out'
-      });
-    });
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
-    });
-  });
-}
-
-// === 7. MOTION-PRIMITIVE 12: CONTINUOUS ROTATING SEAL ===
-function initRotatingSeal() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  document.querySelectorAll('[data-rotating-seal]').forEach(seal => {
-    gsap.to(seal, {
-      rotation: 360,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 2.0
-      }
-    });
-  });
-}
-
-// === 8. SIGNATURE FEATURE: DAS PENTAVOX POLYPHONIE-PULT ===
-/**
- * 5-Kanal Vokal-Synthesizer mit Web Audio API & 60fps Canvas Wellenform.
- * Ermöglicht individuelles Stummschalten (Mute) und Solieren (Solo) von:
- * Sopran, Alt, Tenor, Bariton, Bass.
- */
-class PolyphonyAudioEngine {
-  constructor() {
-    this.ctx = null;
-    this.isPlaying = false;
-    this.currentSong = 'mendelssohn';
-    this.voices = ['sopran', 'alt', 'tenor', 'bariton', 'bass'];
-    this.voiceNodes = {};
-    this.voiceStates = {
-      sopran:  { muted: false, solo: false, gain: 0.2 },
-      alt:     { muted: false, solo: false, gain: 0.2 },
-      tenor:   { muted: false, solo: false, gain: 0.2 },
-      bariton: { muted: false, solo: false, gain: 0.2 },
-      bass:    { muted: false, solo: false, gain: 0.2 },
-    };
-    this.masterGain = null;
-    this.analyser = null;
-    this.stepIndex = 0;
-    this.timerId = null;
-
-    // Harmonische Chorsätze (Frequenzen in Hz für 4 Akkord-Stufen je Lied)
-    this.chordBooks = {
-      mendelssohn: [
-        // "Denn er hat seinen Engeln befohlen" (Sakrale Polyphonie)
-        { sopran: 587.33, alt: 440.00, tenor: 370.00, bariton: 293.66, bass: 146.83 }, // D-Dur
-        { sopran: 659.25, alt: 493.88, tenor: 392.00, bariton: 329.63, bass: 164.81 }, // e-Moll
-        { sopran: 554.37, alt: 440.00, tenor: 329.63, bariton: 277.18, bass: 146.83 }, // A-Dur/C#
-        { sopran: 587.33, alt: 440.00, tenor: 370.00, bariton: 293.66, bass: 146.83 }, // D-Dur Resolv
-      ],
-      hallelujah: [
-        // "Hallelujah" (Cohen / Pentatonix Satz)
-        { sopran: 523.25, alt: 392.00, tenor: 329.63, bariton: 261.63, bass: 130.81 }, // C-Dur
-        { sopran: 440.00, alt: 349.23, tenor: 261.63, bariton: 220.00, bass: 110.00 }, // a-Moll
-        { sopran: 523.25, alt: 392.00, tenor: 349.23, bariton: 261.63, bass: 130.81 }, // C-Dur
-        { sopran: 440.00, alt: 349.23, tenor: 261.63, bariton: 220.00, bass: 110.00 }, // a-Moll
-      ],
-      perfect: [
-        // "Perfect" (Ed Sheeran Pop-Chorsatz)
-        { sopran: 622.25, alt: 466.16, tenor: 392.00, bariton: 311.13, bass: 155.56 }, // Es-Dur
-        { sopran: 554.37, alt: 415.30, tenor: 349.23, bariton: 277.18, bass: 138.59 }, // c-Moll
-        { sopran: 622.25, alt: 466.16, tenor: 369.99, bariton: 311.13, bass: 155.56 }, // As-Dur
-        { sopran: 587.33, alt: 466.16, tenor: 349.23, bariton: 293.66, bass: 146.83 }, // B-Dur
-      ],
-      canthelp: [
-        // "Can't Help Falling in Love" (A-cappella Romantik)
-        { sopran: 523.25, alt: 392.00, tenor: 329.63, bariton: 261.63, bass: 130.81 }, // C-Dur
-        { sopran: 493.88, alt: 392.00, tenor: 329.63, bariton: 246.94, bass: 123.47 }, // e-Moll
-        { sopran: 440.00, alt: 349.23, tenor: 261.63, bariton: 220.00, bass: 110.00 }, // a-Moll
-        { sopran: 523.25, alt: 349.23, tenor: 261.63, bariton: 261.63, bass: 130.81 }, // F-Dur
-      ]
-    };
-  }
-
-  initContext() {
-    if (this.ctx) return;
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-
-    this.ctx = new AudioContextClass();
-    this.masterGain = this.ctx.createGain();
-    this.masterGain.gain.setValueAtTime(0.7, this.ctx.currentTime);
-
-    // Analyser für 60fps Canvas Visualizer
-    this.analyser = this.ctx.createAnalyser();
-    this.analyser.fftSize = 256;
-    this.analyser.smoothingTimeConstant = 0.85;
-
-    // Vokal-Formantfilter (simuliert Kathedralen-Resonanz)
-    const cathedralReverb = this.ctx.createBiquadFilter();
-    cathedralReverb.type = 'lowpass';
-    cathedralReverb.frequency.value = 3200;
-    cathedralReverb.Q.value = 1.2;
-
-    this.masterGain.connect(cathedralReverb);
-    cathedralReverb.connect(this.analyser);
-    this.analyser.connect(this.ctx.destination);
-
-    // Initialisiere die 5 Stimm-Kanäle mit subtilen Formanten
-    const formants = {
-      sopran:  { freq1: 850,  freq2: 1250 },
-      alt:     { freq1: 650,  freq2: 1050 },
-      tenor:   { freq1: 520,  freq2: 880 },
-      bariton: { freq1: 380,  freq2: 720 },
-      bass:    { freq1: 260,  freq2: 540 }
-    };
-
-    this.voices.forEach(v => {
-      const gainNode = this.ctx.createGain();
-      gainNode.gain.setValueAtTime(0.0001, this.ctx.currentTime);
-
-      const f1 = this.ctx.createBiquadFilter();
-      f1.type = 'peaking';
-      f1.frequency.value = formants[v].freq1;
-      f1.gain.value = 4.0;
-      f1.Q.value = 1.5;
-
-      const f2 = this.ctx.createBiquadFilter();
-      f2.type = 'peaking';
-      f2.frequency.value = formants[v].freq2;
-      f2.gain.value = 2.5;
-      f2.Q.value = 2.0;
-
-      gainNode.connect(f1);
-      f1.connect(f2);
-      f2.connect(this.masterGain);
-
-      this.voiceNodes[v] = {
-        gainNode: gainNode,
-        osc1: null,
-        osc2: null,
-        vibrato: null
-      };
-    });
-  }
-
-  start() {
-    this.initContext();
-    if (!this.ctx) return;
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-
-    this.isPlaying = true;
-    this.stepIndex = 0;
-    this.playNextChord();
-    this.timerId = setInterval(() => {
-      if (this.isPlaying) {
-        this.stepIndex = (this.stepIndex + 1) % 4;
-        this.playNextChord();
-      }
-    }, 2800);
-  }
-
-  stop() {
-    this.isPlaying = false;
-    if (this.timerId) clearInterval(this.timerId);
-    if (!this.ctx) return;
-
-    const now = this.ctx.currentTime;
-    this.voices.forEach(v => {
-      const vObj = this.voiceNodes[v];
-      if (vObj && vObj.gainNode) {
-        vObj.gainNode.gain.cancelScheduledValues(now);
-        vObj.gainNode.gain.setTargetAtTime(0.0001, now, 0.08);
-      }
-    });
-  }
-
-  playNextChord() {
-    if (!this.ctx || !this.isPlaying) return;
-    const now = this.ctx.currentTime;
-    const book = this.chordBooks[this.currentSong] || this.chordBooks.mendelssohn;
-    const chord = book[this.stepIndex];
-
-    const hasSolo = this.voices.some(v => this.voiceStates[v].solo);
-
-    this.voices.forEach(v => {
-      const vObj = this.voiceNodes[v];
-      if (!vObj) return;
-
-      const baseFreq = chord[v] || 440;
-
-      // Stoppe alte Oszillatoren weich
-      if (vObj.osc1) {
-        try { vObj.osc1.stop(now + 0.05); } catch (_) {}
-      }
-      if (vObj.osc2) {
-        try { vObj.osc2.stop(now + 0.05); } catch (_) {}
-      }
-
-      // Erzeuge warme Dual-Oszillatoren (Sinus + feine Sägezahn-Obertonschwingung)
-      const osc1 = this.ctx.createOscillator();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(baseFreq, now);
-
-      const osc2 = this.ctx.createOscillator();
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(baseFreq * 1.002, now); // Leichtes Detuning für natürlichen Chorklang
-
-      // Sanftes Vokal-Vibrato (5.5 Hz)
-      const vibrato = this.ctx.createOscillator();
-      const vibratoGain = this.ctx.createGain();
-      vibrato.frequency.value = 5.2;
-      vibratoGain.gain.value = baseFreq * 0.012; // ca. 1.2% Frequenzmodulation
-      vibrato.connect(vibratoGain);
-      vibratoGain.connect(osc1.frequency);
-      vibratoGain.connect(osc2.frequency);
-      vibrato.start(now);
-
-      osc1.connect(vObj.gainNode);
-      osc2.connect(vObj.gainNode);
-
-      osc1.start(now);
-      osc2.start(now);
-
-      vObj.osc1 = osc1;
-      vObj.osc2 = osc2;
-      vObj.vibrato = vibrato;
-
-      // Lautstärke-Target basierend auf Mute/Solo ermitteln
-      let targetGain = 0.22;
-      if (this.voiceStates[v].muted) {
-        targetGain = 0.0001;
-      } else if (hasSolo) {
-        targetGain = this.voiceStates[v].solo ? 0.32 : 0.0001;
-      }
-
-      vObj.gainNode.gain.cancelScheduledValues(now);
-      vObj.gainNode.gain.setTargetAtTime(targetGain, now, 0.12);
-    });
-  }
-
-  setMute(voice, isMuted) {
-    this.voiceStates[voice].muted = isMuted;
-    this.updateGains();
-  }
-
-  setSolo(voice, isSolo) {
-    this.voiceStates[voice].solo = isSolo;
-    this.updateGains();
-  }
-
-  updateGains() {
-    if (!this.ctx || !this.isPlaying) return;
-    const now = this.ctx.currentTime;
-    const hasSolo = this.voices.some(v => this.voiceStates[v].solo);
-
-    this.voices.forEach(v => {
-      const vObj = this.voiceNodes[v];
-      if (!vObj) return;
-
-      let target = 0.22;
-      if (this.voiceStates[v].muted) {
-        target = 0.0001;
-      } else if (hasSolo) {
-        target = this.voiceStates[v].solo ? 0.32 : 0.0001;
-      }
-
-      vObj.gainNode.gain.cancelScheduledValues(now);
-      vObj.gainNode.gain.setTargetAtTime(target, now, 0.08);
-    });
-  }
-
-  setSong(songKey) {
-    this.currentSong = songKey;
-    this.stepIndex = 0;
-    if (this.isPlaying) {
-      this.playNextChord();
-    }
-  }
-
-  reset() {
-    this.voices.forEach(v => {
-      this.voiceStates[v].muted = false;
-      this.voiceStates[v].solo = false;
-    });
-    this.updateGains();
-  }
-}
-
-let audioEngine = null;
-
-function initPolyphonyMixer() {
-  const playBtn = document.getElementById('btnMixerPlay');
-  const resetBtn = document.getElementById('btnMixerReset');
-  const songChips = document.querySelectorAll('.song-chip');
-  const voiceStelae = document.querySelectorAll('.voice-stele');
-  const canvas = document.getElementById('resonanceCanvas');
-  const heroPlayTrigger = document.getElementById('heroPlayTrigger');
-
-  if (!playBtn) return;
-  audioEngine = new PolyphonyAudioEngine();
-
-  // Play / Pause Toggle
-  function togglePlay() {
-    if (!audioEngine.isPlaying) {
-      audioEngine.start();
-      playBtn.innerHTML = `
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-        <span>Chor pausieren</span>
-      `;
-      playBtn.classList.add('is-active');
-    } else {
-      audioEngine.stop();
-      playBtn.innerHTML = `
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <span>5 Stimmen abspielen</span>
-      `;
-      playBtn.classList.remove('is-active');
-    }
-  }
-
-  playBtn.addEventListener('click', togglePlay);
-
-  if (heroPlayTrigger) {
-    heroPlayTrigger.addEventListener('click', () => {
-      const mixerSection = document.getElementById('stimmen');
-      if (mixerSection && lenis) {
-        lenis.scrollTo(mixerSection, { offset: -60, duration: 1.0 });
-      }
-      if (!audioEngine.isPlaying) {
-        setTimeout(togglePlay, 400);
-      }
-    });
-  }
-
-  // Song Selector
-  songChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      songChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      const song = chip.dataset.song;
-      audioEngine.setSong(song);
-    });
-  });
-
-  // Track Play Buttons im Repertoire
-  document.querySelectorAll('.btn-play-track').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const songKey = btn.dataset.songKey;
-      if (songKey) {
-        const matchingChip = document.querySelector(`.song-chip[data-song="${songKey}"]`);
-        if (matchingChip) matchingChip.click();
-
-        const mixerSection = document.getElementById('stimmen');
-        if (mixerSection && lenis) {
-          lenis.scrollTo(mixerSection, { offset: -60, duration: 1.0 });
-        }
-        if (!audioEngine.isPlaying) {
-          setTimeout(togglePlay, 350);
-        }
-      }
-    });
-  });
-
-  // Voice Controls (Mute / Solo)
-  voiceStelae.forEach(stele => {
-    const voice = stele.dataset.voice;
-    const muteBtn = stele.querySelector('.btn-mute');
-    const soloBtn = stele.querySelector('.btn-solo');
-
-    if (muteBtn) {
-      muteBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const willMute = !muteBtn.classList.contains('active');
-        muteBtn.classList.toggle('active', willMute);
-        stele.classList.toggle('is-muted', willMute);
-        audioEngine.setMute(voice, willMute);
-        refreshSteleDimming();
-      });
-    }
-
-    if (soloBtn) {
-      soloBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const willSolo = !soloBtn.classList.contains('active');
-        soloBtn.classList.toggle('active', willSolo);
-        stele.classList.toggle('is-soloed', willSolo);
-        audioEngine.setSolo(voice, willSolo);
-        refreshSteleDimming();
-      });
-    }
-  });
-
-  function refreshSteleDimming() {
-    const hasSolo = Array.from(voiceStelae).some(s => s.querySelector('.btn-solo.active'));
-    voiceStelae.forEach(s => {
-      const isSolo = s.querySelector('.btn-solo.active');
-      s.classList.toggle('is-dimmed', hasSolo && !isSolo);
-    });
-  }
-
-  // Reset
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      audioEngine.reset();
-      voiceStelae.forEach(s => {
-        s.classList.remove('is-soloed', 'is-dimmed', 'is-muted');
-        s.querySelector('.btn-solo')?.classList.remove('active');
-        s.querySelector('.btn-mute')?.classList.remove('active');
-      });
-    });
-  }
-
-  // 60fps HTML5 Canvas Resonance Visualizer
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-
-    function resizeCanvas() {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-    }
-    window.addEventListener('resize', resizeCanvas, { passive: true });
-    resizeCanvas();
-
-    function drawWave() {
-      animationFrameId = requestAnimationFrame(drawWave);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const w = canvas.width;
-      const h = canvas.height;
-      const mid = h / 2;
-
-      ctx.lineWidth = 2.5 * window.devicePixelRatio;
-      ctx.strokeStyle = '#d8c292';
-
-      if (audioEngine && audioEngine.isPlaying && audioEngine.analyser) {
-        const bufferLength = audioEngine.analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        audioEngine.analyser.getByteTimeDomainData(dataArray);
-
-        ctx.beginPath();
-        const sliceWidth = w / bufferLength;
-        let x = 0;
-
-        for (let i = 0; i < bufferLength; i++) {
-          const v = dataArray[i] / 128.0;
-          const y = (v * h) / 2;
-
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-
-          x += sliceWidth;
-        }
-        ctx.stroke();
-
-        // Zweite feine Obertonglanz-Welle
-        ctx.beginPath();
-        ctx.lineWidth = 1 * window.devicePixelRatio;
-        ctx.strokeStyle = 'rgba(216, 194, 146, 0.4)';
-        x = 0;
-        for (let i = 0; i < bufferLength; i++) {
-          const v = dataArray[i] / 128.0;
-          const y = (v * h * 0.8) / 2 + mid * 0.2;
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-          x += sliceWidth;
-        }
-        ctx.stroke();
-
-        // EQ Bars modulieren
-        document.querySelectorAll('.eq-bar').forEach((bar, idx) => {
-          const val = dataArray[(idx * 8) % bufferLength] || 128;
-          const normalized = Math.max(15, Math.min(100, Math.abs(val - 128) * 2.5 + 20));
-          bar.style.height = normalized + '%';
-        });
+      if (lenisInstance) {
+        lenisInstance.scrollTo(targetEl, { offset: -84, duration: 0.9 });
       } else {
-        // Ruhende Sinuslinie
-        const time = Date.now() * 0.002;
-        ctx.beginPath();
-        for (let x = 0; x < w; x += 4) {
-          const y = mid + Math.sin(x * 0.015 + time) * 6;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-
-        document.querySelectorAll('.eq-bar').forEach(bar => {
-          bar.style.height = '18%';
-        });
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    });
+  });
+}
+
+// === 3. IDIOTENSICHERE SCHNELLSUCHE (#schnellsuche) ===
+function initQuickFinder() {
+  const input = document.getElementById('siteFinderInput');
+  const chips = document.querySelectorAll('.finder-chip');
+  const items = document.querySelectorAll('.finder-result-item');
+  if (!input || !items.length) return;
+
+  let activeFilter = 'all';
+
+  const applyFilter = () => {
+    const query = input.value.trim().toLowerCase();
+    items.forEach((item) => {
+      const tags = (item.dataset.tags || '').toLowerCase();
+      const text = item.textContent.toLowerCase();
+      const matchesChip = activeFilter === 'all' || tags.includes(activeFilter);
+      const matchesText = !query || tags.includes(query) || text.includes(query);
+      item.hidden = !(matchesChip && matchesText);
+    });
+  };
+
+  input.addEventListener('input', applyFilter);
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      activeFilter = chip.dataset.filter || 'all';
+      applyFilter();
+    });
+  });
+}
+
+// === 4. DAS „FIVE ELEMENTS“ KLANGPULT (WEB AUDIO API + 60FPS CANVAS) ===
+function initKlangpult() {
+  const canvas = document.getElementById('resonanceCanvas');
+  const playAllBtn = document.getElementById('playAllBtn');
+  const playBtnText = document.getElementById('playBtnText');
+  const heroChordBtn = document.getElementById('heroQuickChordBtn');
+  const trackBtns = document.querySelectorAll('.track-btn');
+  const trackInfo = document.getElementById('currentTrackInfo');
+  const statusLabel = document.getElementById('canvasStatusLabel');
+  const steleToggles = document.querySelectorAll('.stele-toggle');
+  const steles = document.querySelectorAll('.voice-stele');
+  if (!canvas || !playAllBtn) return;
+
+  const ctx = canvas.getContext('2d');
+  const tracks = {
+    earth: {
+      title: 'Earth Song · Frank Ticheli (Zeitgenössisch)',
+      freqs: [523.25, 440.0, 349.23, 261.63, 174.61],
+    },
+    becker: {
+      title: 'Ich gedenke der alten Zeit · Albert Becker (Romantik)',
+      freqs: [587.33, 440.0, 329.63, 246.94, 146.83],
+    },
+    hassler: {
+      title: 'Nun fanget an · Hans Leo Hassler (Renaissance)',
+      freqs: [659.25, 493.88, 392.0, 293.66, 196.0],
+    },
+    holst: {
+      title: 'In the Bleak Midwinter · Gustav Holst (Chorklassik)',
+      freqs: [493.88, 392.0, 329.63, 246.94, 164.81],
+    },
+  };
+
+  let currentTrack = 'earth';
+  let isPlaying = false;
+  let audioCtx = null;
+  let voices = [];
+  const soloState = [false, false, false, false, false];
+  const muteState = [false, false, false, false, false];
+  let animPhase = 0;
+
+  const stopAudio = () => {
+    voices.forEach((v) => {
+      try {
+        v.gain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.06);
+        setTimeout(() => {
+          try {
+            v.osc.stop();
+            v.osc2.stop();
+          } catch (_) {}
+        }, 120);
+      } catch (_) {}
+    });
+    voices = [];
+    isPlaying = false;
+    playAllBtn.setAttribute('aria-pressed', 'false');
+    if (playBtnText) playBtnText.textContent = 'Klangpult starten';
+    if (statusLabel) statusLabel.textContent = 'Pausiert · Alle 5 Stimmen bereit';
+  };
+
+  const updateGains = () => {
+    const anySolo = soloState.some(Boolean);
+    steles.forEach((stele, idx) => {
+      const active = anySolo ? soloState[idx] : !muteState[idx];
+      stele.classList.toggle('is-muted', !active);
+      stele.classList.toggle('is-solo', soloState[idx]);
+      if (voices[idx] && audioCtx) {
+        voices[idx].gain.gain.setTargetAtTime(active ? 0.055 : 0.0001, audioCtx.currentTime, 0.08);
+      }
+    });
+  };
+
+  const startAudio = () => {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+      showToast('Euer Browser unterstützt leider kein Web Audio.');
+      return;
+    }
+    if (!audioCtx) {
+      audioCtx = new AudioContextClass();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    if (voices.length) stopAudio();
+
+    const freqs = tracks[currentTrack].freqs;
+    voices = freqs.map((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      osc.type = idx < 2 ? 'sine' : 'triangle';
+      osc2.type = 'sine';
+      osc.frequency.value = freq;
+      osc2.frequency.value = freq * 1.003; // leichte natürliche Chor-Schwebung
+
+      filter.type = 'lowpass';
+      filter.frequency.value = idx < 2 ? 1600 : 950;
+      gain.gain.value = 0.0001;
+
+      osc.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc2.start();
+      return { osc, osc2, gain };
+    });
+
+    isPlaying = true;
+    playAllBtn.setAttribute('aria-pressed', 'true');
+    if (playBtnText) playBtnText.textContent = 'Klangpult stoppen';
+    if (statusLabel) statusLabel.textContent = `Aktiv: ${tracks[currentTrack].title}`;
+    updateGains();
+  };
+
+  playAllBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      stopAudio();
+    } else {
+      startAudio();
+    }
+  });
+
+  if (heroChordBtn) {
+    heroChordBtn.addEventListener('click', () => {
+      const section = document.getElementById('klangpult');
+      if (lenisInstance && section) {
+        lenisInstance.scrollTo(section, { offset: -70, duration: 0.9 });
+      }
+      if (!isPlaying) startAudio();
+    });
+  }
+
+  trackBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.track;
+      if (!tracks[key]) return;
+      trackBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      currentTrack = key;
+      if (trackInfo) trackInfo.textContent = tracks[key].title;
+      if (isPlaying) startAudio();
+    });
+  });
+
+  steleToggles.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.voice);
+      const action = btn.dataset.action;
+      if (Number.isNaN(idx)) return;
+
+      if (action === 'solo') {
+        soloState[idx] = !soloState[idx];
+        btn.setAttribute('aria-pressed', String(soloState[idx]));
+      } else if (action === 'mute') {
+        muteState[idx] = !muteState[idx];
+        btn.setAttribute('aria-pressed', String(muteState[idx]));
+      }
+      updateGains();
+    });
+  });
+
+  // Quick Wunschsong transfer into Formular
+  const quickWishInput = document.getElementById('quickWishSongInput');
+  const applyWishBtn = document.getElementById('applyWishSongBtn');
+  if (quickWishInput && applyWishBtn) {
+    applyWishBtn.addEventListener('click', () => {
+      const val = quickWishInput.value.trim();
+      const targetField = document.getElementById('wishSongsInput');
+      if (targetField && val) {
+        targetField.value = targetField.value ? `${targetField.value}, ${val}` : val;
+        showToast(`Wunschsong „${val}“ für eure Anfrage gemerkt!`);
+      } else {
+        showToast('Tragt zuerst einen Wunschsong ein.');
+        quickWishInput.focus();
+        return;
+      }
+      const contactSec = document.getElementById('kontakt');
+      if (contactSec) {
+        if (lenisInstance) lenisInstance.scrollTo(contactSec, { offset: -80, duration: 0.8 });
+        else contactSec.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // 60fps Canvas Resonance Waves (Pastel Sky Blue + Brushed Silver)
+  const waveColors = [
+    'rgba(237, 244, 252, 0.92)',
+    'rgba(196, 218, 240, 0.85)',
+    'rgba(173, 200, 230, 0.78)',
+    'rgba(130, 167, 209, 0.72)',
+    'rgba(180, 196, 216, 0.65)',
+  ];
+
+  const renderWave = () => {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const anySolo = soloState.some(Boolean);
+    const baseAmp = isPlaying ? 26 : 9;
+    animPhase += isPlaying ? 0.045 : 0.015;
+
+    for (let v = 0; v < 5; v += 1) {
+      const active = anySolo ? soloState[v] : !muteState[v];
+      ctx.beginPath();
+      ctx.strokeStyle = active ? waveColors[v] : 'rgba(180, 196, 216, 0.16)';
+      ctx.lineWidth = active ? 2.6 : 1.2;
+
+      const freqScale = 0.008 + v * 0.0025;
+      const yOffset = h / 2 + (v - 2) * 14;
+      const amp = active ? baseAmp * (1 - v * 0.08) : 3;
+
+      for (let x = 0; x <= w; x += 10) {
+        const envelope = Math.sin((x / w) * Math.PI);
+        const y =
+          yOffset +
+          Math.sin(x * freqScale + animPhase + v * 0.9) * amp * envelope +
+          Math.cos(x * freqScale * 0.5 - animPhase * 0.6) * (amp * 0.35) * envelope;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
     }
 
-    drawWave();
+    requestAnimationFrame(renderWave);
+  };
+  renderWave();
+}
+
+// === 5. PERSÖNLICHKEITS- & STIMMUNGS-KOMPASS ===
+function initPersonalityCompass() {
+  const btns = document.querySelectorAll('.vibe-btn');
+  const output = document.getElementById('vibeOutput');
+  if (!btns.length || !output) return;
+
+  const answers = {
+    deep: '<strong>Unser Tipp bei Gänsehaut &amp; Tiefe:</strong> Wir starten am liebsten mit <em>„Earth Song“</em> (Frank Ticheli) oder <em>„In the Bleak Midwinter“</em>. In der Probe arbeiten wir da minutenlang an einem einzigen Schlussakkord, bis der ganze Raum schwingt. Passt perfekt zur <strong>Trauung (150&nbsp;€)</strong> oder zum <strong>Vokalkonzert</strong>.',
+    joy: '<strong>Unser Tipp für lockere Stimmung:</strong> Zwischen den Gesprächen auf dem <strong>Sektempfang (100&nbsp;€)</strong> tauchen wir plötzlich mitten unter den Gästen auf – keine Bühne, kein Kabel. Mit flotten Arrangements &amp; Volksmusik-Twists zaubern wir sofort Lächeln ins Gesicht.',
+    classic: '<strong>Unser Tipp für zeitlose Eleganz:</strong> Mit <em>„Nun fanget an“</em> (Hassler) und <em>„Ich gedenke der alten Zeit“</em> (Becker) bringen wir echte Polyphonie von früher Notenschrift bis in die Romantik – perfekt für Hochzeiten, Taufen &amp; feierliche Konzerte.',
+    wild: '<strong>Unser Tipp für verrückte Ideen:</strong> Ihr plant ein <strong>Richtfest</strong>, eine Scheunen-Überraschung oder eine unkonventionelle Location? Wir brauchen nur unsere Stimmen und freuen uns riesig über ungewöhnliche Anlässe!',
+  };
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const key = btn.dataset.vibe || 'deep';
+      output.innerHTML = answers[key] || answers.deep;
+    });
+  });
+}
+
+// === 6. MAXIMALBUDGET-RECHNER & GEMA-SYNC ===
+function initBudgetAndChecklist() {
+  const slider = document.getElementById('maxBudgetRange');
+  const display = document.getElementById('budgetDisplayValue');
+  const proposal = document.getElementById('budgetProposalText');
+  const applyBudgetBtn = document.getElementById('applyBudgetBtn');
+  const wizardBudget = document.getElementById('wizardBudgetInput');
+
+  if (slider && display && proposal) {
+    const updateProposal = () => {
+      const val = Number(slider.value);
+      display.textContent = String(val);
+
+      if (val < 100) {
+        proposal.innerHTML = `<strong>Passend zu ${val}&nbsp;€ (Verhandlungsbasis):</strong> Ein kurzes, persönliches <strong>1–2-Stücke-Ständchen</strong> in der Nähe oder eine flexible Lösung nach Absprache – fragt uns einfach an!`;
+      } else if (val < 150) {
+        proposal.innerHTML = `<strong>Passend zu ${val}&nbsp;€ (Verhandlungsbasis):</strong> Unser <strong>Sektempfang-Paket (100&nbsp;€, 3 Stücke / 30 Min.)</strong> passt direkt rein – mit kleinem Puffer Richtung Zusatzlied.`;
+      } else if (val < 375) {
+        proposal.innerHTML = `<strong>Passend zu ${val}&nbsp;€ (Verhandlungsbasis):</strong> Komplettes <strong>Trauungs-Paket (150&nbsp;€, 5 Lieder / 1 Std. Daseinszeit)</strong> oder ein individuell angepasstes Eventprogramm.`;
+      } else {
+        proposal.innerHTML = `<strong>Passend zu ${val}&nbsp;€ (Verhandlungsbasis):</strong> Genug Raum für unser <strong>Eigenes Vokalkonzert (~12 Stücke / 1 Std. reine Singzeit)</strong> oder Kombi-Begleitung!`;
+      }
+    };
+
+    slider.addEventListener('input', updateProposal);
+    updateProposal();
+
+    if (applyBudgetBtn && wizardBudget) {
+      applyBudgetBtn.addEventListener('click', () => {
+        wizardBudget.value = slider.value;
+        showToast(`Maximalbudget (${slider.value} €) in die Anfrage übernommen!`);
+        const contactSec = document.getElementById('kontakt');
+        if (lenisInstance && contactSec) {
+          lenisInstance.scrollTo(contactSec, { offset: -80, duration: 0.85 });
+        } else {
+          contactSec?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  }
+
+  // GEMA Switch sync with Step 2 Select
+  const gemaBtns = document.querySelectorAll('.gema-opt');
+  const gemaSelect = document.getElementById('gemaSelectInput');
+  if (gemaBtns.length && gemaSelect) {
+    gemaBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        gemaBtns.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        gemaSelect.value = btn.dataset.gema;
+        showToast('GEMA-Auswahl aktualisiert.');
+      });
+    });
+
+    gemaSelect.addEventListener('change', () => {
+      gemaBtns.forEach((b) => {
+        b.classList.toggle('is-active', b.dataset.gema === gemaSelect.value);
+      });
+    });
+  }
+
+  // Package quick select buttons -> jump to Step 1 / preselect
+  document.querySelectorAll('.select-package-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const pkg = btn.dataset.package;
+      const hiddenPkg = document.getElementById('selectedPackageInput');
+      if (hiddenPkg && pkg) hiddenPkg.value = pkg;
+      document.querySelectorAll('#packageChoices .option-choice').forEach((choice) => {
+        choice.classList.toggle('is-selected', choice.dataset.value === pkg);
+      });
+      const contactSec = document.getElementById('kontakt');
+      if (lenisInstance && contactSec) {
+        lenisInstance.scrollTo(contactSec, { offset: -80, duration: 0.85 });
+      } else {
+        contactSec?.scrollIntoView({ behavior: 'smooth' });
+      }
+      showToast('Paket vorausgewählt!');
+    });
+  });
+
+  // IBAN Copy-to-Clipboard
+  const copyIbanBtn = document.getElementById('copyIbanBtn');
+  const ibanValue = document.getElementById('ibanValue');
+  if (copyIbanBtn && ibanValue) {
+    copyIbanBtn.addEventListener('click', async () => {
+      const raw = ibanValue.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(raw);
+        showToast('IBAN-Feld in die Zwischenablage kopiert!');
+      } catch (_) {
+        showToast('IBAN markieren & kopieren: ' + raw);
+      }
+    });
   }
 }
 
-// === 9. ERLEBNIS-KONTAKTPUNKT: 3-SCHRITTE TRAUUNGS-ASSISTENT ===
-function initExperienceContact() {
-  const container = document.querySelector('[data-experience-contact]');
-  const form = document.getElementById('contactForm');
-  if (!container || !form) return;
+// === 7. 3-SCHRITTE ANFRAGE-ASSISTENT ===
+function initBookingWizard() {
+  const form = document.getElementById('bookingWizardForm');
+  if (!form) return;
 
-  const fallback = document.getElementById('formFallback');
-  const status = document.getElementById('formStatus');
-  const badges = container.querySelectorAll('.step-badge');
-  const panels = container.querySelectorAll('.step-panel');
+  const tabs = form.querySelectorAll('.wizard-step-tab');
+  const panels = form.querySelectorAll('.wizard-panel');
+  const choiceBtns = form.querySelectorAll('#packageChoices .option-choice');
+  const pkgInput = document.getElementById('selectedPackageInput');
+  const feedbackEl = document.getElementById('formFeedback');
+  const fallbackEl = document.getElementById('formFallback');
+  const waBtn = document.getElementById('whatsappSendBtn');
 
-  function goToStep(stepNum) {
-    panels.forEach(p => {
-      const isTarget = p.id === `stepPanel${stepNum}`;
-      p.hidden = !isTarget;
-      p.classList.toggle('active', isTarget);
-    });
-    badges.forEach(b => {
-      const isActive = parseInt(b.dataset.step) === stepNum;
-      b.classList.toggle('active', isActive);
-      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
+  const goStep = (stepNum) => {
+    tabs.forEach((t) => t.classList.toggle('is-active', Number(t.dataset.step) === stepNum));
+    panels.forEach((p) => p.classList.toggle('is-active', Number(p.dataset.panel) === stepNum));
+  };
 
-    const activePanel = container.querySelector(`.step-panel#stepPanel${stepNum}`);
-    if (activePanel) {
-      const firstInput = activePanel.querySelector('input:not([type="hidden"]), select, textarea, button');
-      if (firstInput) firstInput.focus();
-    }
-  }
+  tabs.forEach((t) => t.addEventListener('click', () => goStep(Number(t.dataset.step))));
+  form.querySelectorAll('[data-next-step]').forEach((btn) => {
+    btn.addEventListener('click', () => goStep(Number(btn.dataset.nextStep)));
+  });
+  form.querySelectorAll('[data-prev-step]').forEach((btn) => {
+    btn.addEventListener('click', () => goStep(Number(btn.dataset.prevStep)));
+  });
 
-  container.querySelectorAll('[data-goto-step]').forEach(btn => {
+  choiceBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const targetStep = parseInt(btn.dataset.gotoStep);
-      goToStep(targetStep);
+      choiceBtns.forEach((c) => c.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      if (pkgInput) pkgInput.value = btn.dataset.value || '';
     });
   });
 
-  badges.forEach(b => {
-    b.addEventListener('click', () => {
-      const step = parseInt(b.dataset.step);
-      goToStep(step);
+  const buildSummaryText = () => {
+    const pkg = pkgInput?.value || 'Individuell';
+    const budget = document.getElementById('wizardBudgetInput')?.value || 'Nach Absprache';
+    const date = document.getElementById('eventDateInput')?.value || 'Offen';
+    const place = document.getElementById('eventPlaceInput')?.value || 'Nicht angegeben';
+    const gema = document.getElementById('gemaSelectInput')?.value || 'Noch offen';
+    const songs = document.getElementById('wishSongsInput')?.value || 'Noch offen';
+    const name = document.getElementById('contactNameInput')?.value || '';
+    return `Hallo five elements! Unverbindliche Anfrage:\n• Anlass/Paket: ${pkg}\n• Maximalbudget: ${budget} €\n• Datum: ${date}\n• Ort: ${place}\n• GEMA: ${gema}\n• Wunschsongs: ${songs}\n• Name: ${name}`;
+  };
+
+  if (waBtn) {
+    waBtn.addEventListener('click', () => {
+      const text = encodeURIComponent(buildSummaryText());
+      const base = ENSEMBLE_CONFIG.whatsappNumber
+        ? `https://wa.me/${ENSEMBLE_CONFIG.whatsappNumber}?text=${text}`
+        : `https://wa.me/?text=${text}`;
+      window.open(base, '_blank', 'noopener,noreferrer');
     });
-  });
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = document.getElementById('btnSubmitContact');
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = 'Terminanfrage wird übermittelt…';
+    const email = document.getElementById('contactEmailInput')?.value.trim();
+    const name = document.getElementById('contactNameInput')?.value.trim();
+    const songs = document.getElementById('wishSongsInput')?.value.trim();
+    const privacyOk = document.getElementById('privacyAcceptCheckbox')?.checked;
+
+    if (!name || !email || !songs || !privacyOk) {
+      if (feedbackEl) {
+        feedbackEl.hidden = false;
+        feedbackEl.innerHTML = '<strong>Bitte kurz prüfen:</strong> Name, E-Mail, Wunschsongs und das Datenschutz-Häkchen werden für eure Anfrage benötigt.';
+      }
+      goStep(3);
+      return;
     }
 
     try {
-      const res = await fetch(form.action, {
+      const formData = new FormData(form);
+      const res = await fetch(ENSEMBLE_CONFIG.formspreeEndpoint, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        body: formData,
+        headers: { Accept: 'application/json' },
       });
       if (res.ok) {
-        if (status) {
-          status.textContent = 'Vielen Dank! Ihre Anfrage ist direkt bei Maria & Raphael eingegangen. Wir prüfen den Wunschtermin und melden uns binnen 24 Stunden.';
-          status.style.color = 'var(--sc-accent)';
+        if (feedbackEl) {
+          feedbackEl.hidden = false;
+          feedbackEl.innerHTML = '<strong>Danke für eure Anfrage!</strong> Wir haben eure Eckdaten erhalten und melden uns bald persönlich bei euch.';
         }
-        form.reset();
-        goToStep(1);
+        if (fallbackEl) fallbackEl.hidden = true;
       } else {
-        if (fallback) fallback.style.display = 'block';
-        if (btn) { btn.disabled = false; btn.textContent = 'Wunschtermin jetzt anfragen'; }
+        throw new Error('HTTP ' + res.status);
       }
-    } catch {
-      if (fallback) fallback.style.display = 'block';
-      if (btn) { btn.disabled = false; btn.textContent = 'Wunschtermin jetzt anfragen'; }
+    } catch (_) {
+      if (fallbackEl) fallbackEl.hidden = false;
+      if (feedbackEl) feedbackEl.hidden = true;
     }
   });
 }
 
-// === 10. TAGESZEIT-PERSONALISIERUNG ===
-function initTimeGreeting() {
-  const el = document.querySelector('[data-time-greeting]');
-  if (!el) return;
-  const h = new Date().getHours();
-  let msg;
-  if (h >= 6 && h < 12) {
-    msg = 'Guten Morgen — Willkommen bei FiveElements';
-  } else if (h >= 12 && h < 19) {
-    msg = 'Guten Tag — Wir schenken Ihrem Anlass einen unvergesslichen Domklang';
-  } else {
-    msg = 'Guten Abend — Planen Sie Ihre Traumhochzeit für die Saison 2026/2027?';
+// === 8. TWO-CLICK GOOGLE MAPS, COOKIE CONSENT & MODALS ===
+function initPrivacyAndModals() {
+  const banner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('cookieAcceptBtn');
+  const necessaryBtn = document.getElementById('cookieNecessaryBtn');
+  const reopenBtn = document.getElementById('openCookieSettingsBtn');
+
+  const stored = localStorage.getItem('fe_consent_v1');
+  if (banner && !stored) {
+    banner.hidden = false;
+    document.body.classList.add('fe-cookie-open');
   }
-  el.textContent = msg;
-}
 
-// === 11. MOBILE NAVIGATION & ANCHOR SCROLL ===
-function initMobileNav() {
-  const hamburger = document.getElementById('hamburger');
-  const menu = document.getElementById('mobileMenu');
-  const closeBtn = document.getElementById('mobileMenuClose');
-  if (!hamburger || !menu) return;
-
-  const open = () => {
-    menu.classList.add('is-open');
-    menu.setAttribute('aria-hidden', 'false');
-    menu.removeAttribute('hidden');
-    hamburger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    if (lenis) lenis.stop();
-  };
-
-  const close = () => {
-    menu.classList.remove('is-open');
-    menu.setAttribute('aria-hidden', 'true');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    if (lenis) lenis.start();
-  };
-
-  hamburger.addEventListener('click', () => {
-    hamburger.getAttribute('aria-expanded') === 'true' ? close() : open();
-  });
-
-  closeBtn && closeBtn.addEventListener('click', close);
-
-  menu.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      close();
-      if (targetId && targetId !== '#') {
-        const target = document.querySelector(targetId);
-        if (target) {
-          e.preventDefault();
-          setTimeout(() => {
-            if (lenis) {
-              lenis.scrollTo(target, { offset: -70, duration: 1.0 });
-            } else {
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }, 80);
-        }
-      }
-    });
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && menu.classList.contains('is-open')) close();
-  });
-}
-
-// === 12. HEADER SCROLL BEHAVIOR ===
-function initHeader() {
-  const header = document.getElementById('siteHeader');
-  if (!header) return;
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 25);
-  }, { passive: true });
-}
-
-// === 13. MODALS MANAGEMENT ===
-function initModals() {
-  document.querySelectorAll('[data-modal-open]').forEach(trigger => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      const modalId = trigger.dataset.modalOpen;
-      const modal = document.getElementById(modalId);
-      if (!modal) return;
-      modal.removeAttribute('hidden');
-      modal.setAttribute('aria-hidden', 'false');
-      if (lenis) lenis.stop();
-      const focusable = modal.querySelector('button, [href], input, select, textarea');
-      if (focusable) focusable.focus();
-    });
-  });
-
-  const closeAll = () => {
-    document.querySelectorAll('.modal').forEach(m => {
-      m.setAttribute('hidden', '');
-      m.setAttribute('aria-hidden', 'true');
-    });
-    if (lenis) lenis.start();
-  };
-
-  document.querySelectorAll('[data-modal-close]').forEach(el => {
-    el.addEventListener('click', closeAll);
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeAll();
-  });
-}
-
-// === 14. TWO-CLICK MAPS & DSGVO CONSENT ===
-function initConsent() {
-  const KEY = 'fiveelements_consent_v1';
-  const banner = document.getElementById('consentBanner');
-  const stored = localStorage.getItem(KEY);
-
-  function applyConsent(accepted) {
-    if (accepted) {
-      document.querySelectorAll('iframe[data-src]').forEach(f => {
-        f.src = f.dataset.src;
-      });
-      const mapPlaceholder = document.getElementById('mapPlaceholder');
-      if (mapPlaceholder) mapPlaceholder.style.display = 'none';
-    }
+  const saveConsent = (mode) => {
+    localStorage.setItem('fe_consent_v1', mode);
     if (banner) banner.hidden = true;
+    document.body.classList.remove('fe-cookie-open');
+    if (mode === 'all') loadMapFrame();
+  };
+
+  acceptBtn?.addEventListener('click', () => saveConsent('all'));
+  necessaryBtn?.addEventListener('click', () => saveConsent('necessary'));
+  reopenBtn?.addEventListener('click', () => {
+    if (banner) {
+      banner.hidden = false;
+      document.body.classList.add('fe-cookie-open');
+    }
+  });
+
+  // Two-Click Map
+  const mapBtn = document.getElementById('loadMapBtn');
+  const mapPlaceholder = document.getElementById('mapPlaceholder');
+  const mapIframe = document.getElementById('googleMapIframe');
+
+  function loadMapFrame() {
+    if (!mapIframe || !mapIframe.dataset.src) return;
+    mapIframe.src = mapIframe.dataset.src;
+    mapIframe.hidden = false;
+    if (mapPlaceholder) mapPlaceholder.hidden = true;
   }
 
-  if (stored === 'accepted') applyConsent(true);
-  else if (stored === 'rejected') applyConsent(false);
-  else if (banner) banner.hidden = false;
+  if (stored === 'all') {
+    loadMapFrame();
+  }
+  mapBtn?.addEventListener('click', loadMapFrame);
 
-  document.getElementById('consentAccept')?.addEventListener('click', () => {
-    localStorage.setItem(KEY, 'accepted');
-    applyConsent(true);
+  // Legal Modals
+  const closeAllModals = () => {
+    document.querySelectorAll('.legal-modal').forEach((m) => {
+      m.hidden = true;
+    });
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll('.open-modal-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.modal;
+      const modal = id ? document.getElementById(id) : null;
+      if (!modal) return;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
   });
-  document.getElementById('consentReject')?.addEventListener('click', () => {
-    localStorage.setItem(KEY, 'rejected');
-    applyConsent(false);
+
+  document.querySelectorAll('.close-modal-btn').forEach((btn) => {
+    btn.addEventListener('click', closeAllModals);
   });
-  document.getElementById('btnLoadMapDirect')?.addEventListener('click', () => {
-    localStorage.setItem(KEY, 'accepted');
-    applyConsent(true);
+
+  document.querySelectorAll('.legal-modal').forEach((modal) => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeAllModals();
+    });
   });
-  document.getElementById('cookieSettingsLink')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    localStorage.removeItem(KEY);
-    if (banner) banner.hidden = false;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAllModals();
   });
 }
 
-// === 15. LIVE-ALARM DEMO-TRACKER (NEU v6.2) ===
+// === 9. MOTION SYSTEM (LENIS + GSAP PRIMITIVES) ===
+function initMotionSystem() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none)').matches;
+
+  if (typeof Lenis !== 'undefined' && !reduced) {
+    lenisInstance = new Lenis({
+      duration: 0.85,
+      smoothWheel: true,
+      smoothTouch: false,
+      autoResize: true,
+    });
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      lenisInstance.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+    }
+  }
+
+  if (reduced || typeof gsap === 'undefined') return;
+
+  // Primitive 1: Subtle Hero Entrance
+  gsap.from('.hero-h1, .hero-sub, .hero-cta-row', {
+    y: 22,
+    opacity: 0,
+    duration: 0.65,
+    stagger: 0.08,
+    ease: 'power3.out',
+    clearProps: 'transform,opacity',
+  });
+
+  // Primitive 2: Staggered Bento / Card Reveals
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    ['.members-grid .member-card', '.occasions-grid .occasion-card', '.pricing-grid .price-card', '.checklist-grid .duty-card'].forEach(
+      (selector) => {
+        const els = document.querySelectorAll(selector);
+        if (!els.length) return;
+        gsap.from(els, {
+          y: 24,
+          opacity: 0,
+          duration: 0.55,
+          stagger: 0.07,
+          ease: 'power2.out',
+          clearProps: 'transform,opacity',
+          scrollTrigger: {
+            trigger: els[0],
+            start: 'top 90%',
+            once: true,
+          },
+        });
+      }
+    );
+  }
+
+  // Primitive 3: Dynamic Stat Counters
+  document.querySelectorAll('.counter').forEach((el) => {
+    const target = Number(el.dataset.target || el.textContent);
+    if (!target || Number.isNaN(target)) return;
+    const obj = { val: 1 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.1,
+      ease: 'power2.out',
+      onUpdate: () => {
+        el.textContent = String(Math.round(obj.val));
+      },
+    });
+  });
+
+  // Primitive 4 & 5: Subtle Desktop 3D Tilt & Magnetic CTA
+  if (!isTouch) {
+    document.querySelectorAll('.card-3d').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const rx = -((e.clientY - r.top - r.height / 2) / (r.height / 2)) * 3.5;
+        const ry = ((e.clientX - r.left - r.width / 2) / (r.width / 2)) * 3.5;
+        gsap.to(card, { transform: `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg)`, duration: 0.25, ease: 'power2.out' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { transform: 'perspective(1100px) rotateX(0deg) rotateY(0deg)', duration: 0.4, ease: 'power3.out', clearProps: 'transform' });
+      });
+    });
+
+    document.querySelectorAll('[data-magnetic]').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width / 2) * 0.14;
+        const dy = (e.clientY - r.top - r.height / 2) * 0.14;
+        gsap.to(btn, { x: dx, y: dy, duration: 0.2, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.35, ease: 'power3.out', clearProps: 'transform' });
+      });
+    });
+  }
+}
+
+// === 10. NEXBOT LIVE-ALARM DEMO RADAR (SKIP LOCALHOST TEST RUNS) ===
 function initDemoTracker() {
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.search.includes('preview=true')) return;
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || window.location.protocol === 'file:') return;
 
   const startTime = Date.now();
-  const company = 'FiveElements';
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const deviceType = isMobile ? 'Smartphone (Mobil)' : 'Desktop-Computer';
-  const referrer = document.referrer ? (document.referrer.includes('whatsapp') ? 'WhatsApp Direktlink' : document.referrer) : 'Direktaufruf';
-
-  let pingSent = false;
-  let exitSent = false;
-  const clickedActions = new Set();
-
-  document.querySelectorAll('[data-track]').forEach(el => {
-    el.addEventListener('click', () => {
-      const type = el.getAttribute('data-track');
-      if (type === 'whatsapp') clickedActions.add('WhatsApp-Direktchat');
-      else if (type === 'telefon') clickedActions.add('Telefonanruf');
-      else if (type === 'hoerprobe') clickedActions.add('Hörprobe/Mixer');
-      else if (type === 'anfrage') clickedActions.add('Trauungs-Assistent');
-    });
-  });
-
-  async function sendAlert(stage) {
-    const elapsedSeconds = Math.round((Date.now() - startTime) / 1000);
-    const durationText = elapsedSeconds < 60 ? `${elapsedSeconds}s` : `${Math.floor(elapsedSeconds / 60)}m ${elapsedSeconds % 60}s`;
-
-    let statusText = '⚡ Reingeschaut';
-    if (elapsedSeconds >= 45 || clickedActions.size > 0) {
-      statusText = '🔥 HEISS! Hohes Interesse & Klicks!';
-    } else if (elapsedSeconds >= 20) {
-      statusText = '👍 WARM! Hat die Seite aufmerksam betrachtet.';
-    }
-
-    const clickedList = clickedActions.size > 0 ? Array.from(clickedActions).join(', ') : 'Nur gescrollt';
-    const message = `🔔 [NEXBOT LIVE-ALARM] Brautpaar / Musiker prüft FiveElements!\n\n` +
-      `🏢 Firma: ${company}\n` +
-      `📱 Gerät: ${deviceType}\n` +
-      `🔗 Quelle: ${referrer}\n` +
-      `⏱️ Verweildauer: ${durationText}\n` +
-      `🎯 Klicks: ${clickedList}\n` +
-      `📊 Status: ${statusText}`;
-
-    try {
-      fetch('https://api.telegram.org/bot8932370815:AAEfF_FRLC12FTFwoa9uRrizlARluM8KYxE/sendMessage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: '5942652345', text: message }),
-        keepalive: true
-      }).catch(() => {});
-    } catch (_) {}
-
-    try {
-      fetch('https://formspree.io/f/xbjnqkyv', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ subject: `🔥 [LIVE-ALARM] ${company} (${durationText})`, message: message }),
-        keepalive: true
-      }).catch(() => {});
-    } catch (_) {}
-  }
-
-  setTimeout(() => {
-    if (!pingSent) {
-      pingSent = true;
-      sendAlert('initial');
-    }
-  }, 5000);
-
-  window.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden' && !exitSent) {
-      exitSent = true;
-      sendAlert('exit');
+  const clicks = new Set();
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('button, a');
+    if (t && clicks.size < 8) {
+      clicks.add((t.innerText || t.getAttribute('aria-label') || 'Aktion').trim().slice(0, 32));
     }
   });
-}
 
-// === 16. HINWEIS- & HAFTUNGSAUSSCHLUSS-MODAL (BEI JEDEM AUFRUF) ===
-function initWipWarningModal() {
-  const modal = document.getElementById('wipWarningModal');
-  const acceptBtn = document.getElementById('wipWarningAccept');
-  const closeBtn = document.getElementById('wipWarningClose');
-  if (!modal) return;
-
-  // Bei jedem Seitenaufruf aktiv anzeigen (keine Speicherung in localStorage)
-  modal.hidden = false;
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-
-  const closeWipModal = () => {
-    modal.hidden = true;
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+  let sentInitial = false;
+  const sendPing = () => {
+    const secs = Math.round((Date.now() - startTime) / 1000);
+    const msg = `🔔 [NEXBOT RADAR] five elements besucht (${secs}s) · Klicks: ${Array.from(clicks).join(', ') || 'Scroll'}`;
+    fetch('https://api.telegram.org/bot8932370815:AAEfF_FRLC12FTFwoa9uRrizlARluM8KYxE/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: '5942652345', text: msg }),
+      keepalive: true,
+    }).catch(() => {});
   };
 
-  acceptBtn?.addEventListener('click', closeWipModal);
-  closeBtn?.addEventListener('click', closeWipModal);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.hidden) {
-      closeWipModal();
+  setTimeout(() => {
+    if (!sentInitial) {
+      sentInitial = true;
+      sendPing();
     }
-  });
+  }, 8000);
 }
 
-// === 17. INIT DOMContentLoaded ===
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 document.addEventListener('DOMContentLoaded', () => {
-  initWipWarningModal();
-  initDemoTracker();
   initTimeGreeting();
-  initConsent();
-  initMobileNav();
-  initHeader();
-  initModals();
-  initExperienceContact();
-  initPolyphonyMixer();
-
-  if (!prefersReducedMotion) {
-    initKineticTypography();
-    init3DTilt();
-    initTextScrub();
-    initCounters();
-    initMagneticButtons();
-    initRotatingSeal();
-  }
+  initNavigation();
+  initQuickFinder();
+  initKlangpult();
+  initPersonalityCompass();
+  initBudgetAndChecklist();
+  initBookingWizard();
+  initPrivacyAndModals();
+  initMotionSystem();
+  initDemoTracker();
 });

@@ -1,50 +1,61 @@
-# Lead-Daten - Pentavox Regensburg
-Tier: TIER 1 - GOLD | Slug: pentavox-regensburg | Datum: 2026-10-26
+# Lead- & Konzeptplan-Analyse – five elements
 
-## Stammdaten (verifizierte Fakten - KEIN Erfinden)
-- Firmenname: Pentavox Regensburg - Das 5-Stimmen Vokalensemble
-- Inhaber: Maria [Nachname] & Raphael Neumeier (techn. Vertretung) | [MANUELL PRUEFEN: Vollständiger Nachname von Maria - Quelle: Impressum / GbR-Vertrag]
-- Strasse: Domplatz 1
-- PLZ + Ort: 93047 Regensburg
-- Telefon: +49 176 51270378
-- WhatsApp-URL: 4917651270378
-- E-Mail: kontakt@nexbot.info
-- Berufsbezeichnung: Vokalensemble, Hochzeitssänger, Live-Chormusik & A-cappella-Quintett
-- Heritage: Ausgebildet bei den weltberühmten Regensburger Domspatzen (1.050 Jahre Chortradition)
-- Besetzung: 5 Stimmen (Sopran, Alt, Tenor, Bariton, Bass / A-cappella & Begleitung)
-- Einsatzgebiet: Regensburg, Oberpfalz, Niederbayern, München, Nürnberg & ganz Bayern
-- Erreichbarkeit: Mo–Sa 09:00–19:00 Uhr | Anfragen jederzeit via Online-Assistent & WhatsApp
+**Stand:** 2026-11-15 | **Quelle:** `Konzeptplan_Vokalensemble_Nexbot_Webdesign.docx.md` & `.pdf` (ausgefüllt vom Kunden/Kollegen)
 
-## Google-Profil & Social Proof
-- Rating: 5.0 Sterne (Ausgezeichnete Bewertungen von Brautpaaren & Konzertveranstaltern)
-- Rezension 1: „Gänsehaut, als alle 5 Stimmen einstimmten. Unsere Gäste sprechen heute noch vom Einzug zur Trauung!“ - Sophie & Michael (Regensburg)
-- Rezension 2: „Ein reiner Klang, der die Kathedrale erfüllt hat – unvergesslich und meisterlich arrangiert.“ - Florian & Anna (München)
-- Rezension 3: „Die A-cappella-Version von Cohens Hallelujah hat ausnahmslos jeden im Kirchenschiff zu Tränen gerührt.“ - Katharina & Tobias (Nürnberg)
+---
 
-## Smart-Assistenten Intake (v8.0)
-- Recruiting aktiv (Mitarbeiter/Azubis gesucht)? **NEIN**
-  -> team.html (Baustein C) wird NICHT erstellt.
-- Google-Bewertungs-Direktlink: [MANUELL PRUEFEN: Google-Bewertungslink — maps.google.com -> Teilen -> Rezension schreiben]
-- Preisrahmen / Richtwerte (für Chat-Wissensbasis):
-  - Paket S (Trauung Pur): 3–4 Wunschlieder während der Zeremonie inkl. 1 individuellem 5-Stimmen-Arrangement.
-  - Paket M (Trauung & Empfang): Feierliche Zeremonie + 1,5 Stunden beschwingtes A-cappella-Set beim Sektempfang (Beliebtester Bestseller).
-  - Paket L (Der Exklusivtag): Ganztägige Rundum-Begleitung (Zeremonie, Empfang & stilvoller Akustik-Klangteppich beim Festdinner).
-- Einsatzgebiet: Regensburg, Oberpfalz, Niederbayern, München, Nürnberg & ganz Bayern
+## 1. Unternehmens- & Ensemble-DNA
+- **Ensemble-Name:** five elements
+- **Slogan:** „Fünf Stimmen. Ein Klang. Unvergessliche Momente“
+- **Gründungsgeschichte:** Durch gemeinsame Bekanntschaft bei den Regensburger Domspatzen im Rahmen eines Projektsingens zusammengekommen; einmal gemeinsam gesungen, direkt das musikalische Potenzial erkannt und beschlossen, als unabhängiges Quintett weiterzumachen.
+- **Rechtliche Abgrenzung (Punkt 7.2 – SEHR WICHTIG):** Es darf **nur** erwähnt werden, dass die Mitglieder aktuell bis **Ende 2027** Schüler der Regensburger Domspatzen sind und dort vokalisch ausgebildet werden. Es darf **niemals** der Eindruck entstehen, das Ensemble trete im Auftrag oder im Namen der Regensburger Domspatzen auf.
+- **Perspektive & Tonalität (Punkt 7.1):** 1. Person Plural (**„Wir“**) – jung, proaktiv, freundlich, erklärend, auf den Punkt ohne langes Geschwafel („nicht um den Brei reden“).
 
-## Hinterfrage-Loop (Tier 1)
-1. **Hochmargen-Angebot:** Paket L („Der Exklusivtag“) – Ganztägige musikalische Begleitung vom Einzug bis zum Dinnerexzellenz-Set.
-2. **3 Kundeneinwände & meisterliche Auflösung:**
-   - Einwand 1: „Klingt A-cappella in einer großen Kirche nicht zu dünn?“ → Auflösung: Die Regensburger Domspatzen-Ausbildung lehrt die perfekte Nutzung der Raumakustik. 5 Stimmen füllen selbst gotische Kathedralen mit mächtigem, reinem Satzgesang.
-   - Einwand 2: „Können wir moderne Popsongs haben?“ → Auflösung: Jedes Paket enthält 1 exklusiv auf 5 Stimmen maßgeschneidertes Wunscharrangement (z.B. Ed Sheeran, Elvis, Coldplay oder Pentatonix-Stil).
-   - Einwand 3: „Was ist bei Ausfall eines Sängers?“ → Auflösung: Professionelle Ausfallsicherheit über das Domspatzen-Alumni-Netzwerk gewährleistet zu 100% ein vollzähliges Quintett.
-3. **3 WOW-Animationen:**
-   - (a) Hero Kinetic Typography Reveal („Fünf Stimmen. Ein reiner Domklang.“) mit SplitType und Champagner-Gold-Akzent.
-   - (b) Interaktives „Pentavox Polyphonie-Pult“ mit Mute/Solo-Fadern, Vokalspur-Simulation via Web Audio API und 60fps Canvas-Resonanzkurve.
-   - (c) Dramaturgischer Kontrast-Parallax-Bruch beim Wechsel vom Kathedral-Nachtblau in den hellen Elfenbein-Sandstein.
-4. **Signature Feature:** „Das Pentavox Polyphonie-Pult“ (5-Kanal-Vokal-Mixer für Sopran, Alt, Tenor, Bariton, Bass).
+## 2. Mitglieder-Steckbriefe (Punkt 2.1, 8.1, 9.1)
+- **Vorhanden:** Maria (`1. Maria`), sowie vier weitere Ensemble-Plätze (`Sänger/in 2` bis `Sänger/in 5`).
+- **Status laut Konzeptplan:** Einzelne Steckbriefe unter 2.1 erstmal übersprungen, jedoch unter **8.1 & 9.1 explizit gewünscht**: Jeder bekommt ein eigenes Profil mit Beschreibung („warum, wie, Persönlichkeit“), plus ein **Persönlichkeitstool**, damit Besucher wissen, mit wem sie es zu tun haben.
+- **Zero-Hallucination-Regel:** Keine erfundenen Nachnamen, Stimmlagen oder Hobbys! Maria wird namentlich geführt; alle offenen Steckbrief-Felder (`Nachname`, `Stimme`, `Zusatz-Instrument`, `Persönlicher Satz`) erhalten saubere `[MANUELL PRUEFEN: ...]`-Platzhalter zur einfachen Befüllung.
 
-## Offene Posten fuer TODOS.md:
-- [MANUELL PRUEFEN: Vollständiger Nachname von Maria - Quelle: Impressum / GbR-Vertrag]
-- [MANUELL PRUEFEN: Gesetzliche Berufsbezeichnung / Vertretungsberechtigung]
-- [MANUELL PRUEFEN: Umsatzsteuer-Identifikationsnummer (USt-IdNr.) sofern vorhanden]
-- [MANUELL PRUEFEN: Google-Bewertungs-Direktlink in assets/js/bewertung.js eintragen]
+## 3. Repertoire & Audio (Punkt 4.1–4.3 & 6.1)
+- **Bandbreite:** Von den Anfängen der Notenschrift über Renaissance, Romantik und klassische Chormusik bis hin zu zeitgenössischer Musik und Volksmusik – alles, was zum Wunsch der Gastgeber passt.
+- **Konkrete Lieblingsstücke laut Konzeptplan:**
+  1. **Earth Song** (Frank Ticheli)
+  2. **Ich gedenke der alten Zeit** (Albert Becker)
+  3. **Nun fanget an** (Hans Leo Hassler)
+  4. **In the Bleak Midwinter** (Gustav Holst)
+- **Begleitung:** Rein **A-cappella** (kein Klavier, kein Playback, komplett stromlos).
+- **Wunschsongs:** Besucher sollen Wunschsongs auf jeden Fall äußern können.
+- **Audio & Fotos (Punkt 6.1–6.2):** Fertige Studio-Aufnahmen und echte Teamfotos werden aktuell noch aufgeschoben. Daher interaktive Web-Audio-Harmonie-Vorschau im Klangpult (transparent gekennzeichnet) und stilvolle Visuals.
+
+## 4. Anlässe, Einsatzradius & USP (Punkt 3.1–3.3)
+- **Kernanlässe:**
+  - **!Eigene Vokalkonzerte!** (hervorgehoben!)
+  - **Hochzeitsveranstaltungen** (kirchlich & frei)
+  - **Sektempfang & Get-together**
+  - **Taufe & Namensfeiern**
+  - **Richtfest** (persönliche Events & besondere Feste)
+  - **Offen für jegliche (auch kuriose/ungewöhnliche) Anlässe & Locations**
+- **Einsatzradius:** **Überall** (Hinweis: Fahrtkostenpauschale / Kilometerpauschale fällt immer an).
+- **USP:** Mehrstimmiger A-cappella-Gesang, ausdrücklich **kein Chor, sondern ein intimes 5-Stimmen-Ensemble**, maximale Ortsflexibilität (komplett stromlos), junge motivierte Gruppe mit fundierter Erfahrung & Ausbildung.
+
+## 5. Pakete, Preise & Verhandlungs-Budget (Punkt 5.1–5.2)
+- **Paket 1 – Trauung / Zeremonie:** `150 €` pauschal (+ Fahrtkosten) · `1 Std. Daseinszeit` · `5 Lieder`.
+- **Paket 2 – Eigenkonzept / Eigenes Vokalkonzert:** `375 € oder Spendenbasis` · `ca. 1 Std. reine Singzeit (~12 Stücke)` · Daseinszeit flexibel rund ums Konzert.
+- **Paket 3 – Sektempfang:** `100 €` (+ Fahrtkosten) · `30 Min. Daseinszeit` · `3 Stücke`.
+- **Wichtige Unterscheidung:** **Daseinszeit != reine Singzeit**; Preisbegründung (Probenzeit, intensive Einzel-Übungszeit, Vorbereitung, Fahrzeit).
+- **Individuelle Lösungen & Maximalpreis:** Interessenten können ihr **Maximalbudget** angeben; auf Verhandlungsbasis unterbreiten wir realistische Programmvorschläge.
+
+## 6. Pflichten, GEMA, Spenden & Rechtliches (Punkt 5.2, 9.1, 10.1)
+- **5 Gastgeber-Pflichten:**
+  1. **GEMA** ist immer verpflichtend (Auswahl: Veranstalter übernimmt GEMA selbst ODER five elements kalkuliert GEMA mit ein).
+  2. **Kauf-/Auftrittsvertrag** unterschrieben + **Fahrtkostenpauschale** (Kilometerpauschale).
+  3. **Separater Raum** vor Ort zum Umziehen und Herrichten (sonst keinerlei Technik erforderlich).
+  4. **Verpflegung** vor Ort: mindestens Wasser/Getränke für jede Person (bei längerer Auftrittszeit ggf. Essen).
+  5. **Zahlung:** Bar vor Ort oder per Überweisung (am Auftrittstag bzw. davor).
+- **Spenden (Punkt 9.1):** Eigene prominente Spenden-Sektion mit IBAN/Bankverbindung (`[MANUELL PRUEFEN: IBAN & Kontoinhaber]`).
+- **Impressum (§ 5 DDG, Punkt 10.1):** `Jakob Kessel, Westheim 1, 93049 Regensburg`. Offene Felder: Ensemble-Telefon, Ensemble-E-Mail, Nachname Maria -> `[MANUELL PRUEFEN]`.
+- **Rechtliche Sicherheit:** Klarer Haftungsausschluss („Alle Angaben ohne Gewähr – keine rechtliche Bindung vor Vertragsschluss“), besonders auch am lokalen Chat-Assistenten und bei Preis-/Budget-Angaben.
+
+## 7. Konkurrenz-Analyse: `pentavocalis.com` (live geprüft via Playwright)
+- **Was `pentavocalis.com` zeigt:** Dunkel-weinrote Klassik-Optik, Lato-Schrift, schreibt distanziert in der **3. Person Singular/Plural** (*„Das Ensemble steht gerne zur Verfügung“*), hat nur 4 schlichte Sektionen, kein Audio-/Interaktionserlebnis, keine Preistransparenz, keine Pakete, kein Suchfilter und ein lückenhaftes Impressum ohne Postanschrift.
+- **Wie wir `five elements` klar darüber positionieren:** Aktive „Wir“-Ansprache, sofort verständliche Schnellsuche, matte Pastell-Blautöne + Silber-Metallic (frisch & jung statt konservativ-alt), echtes 5-Stimmen Klangpult mit Repertoire-Vorschau, 5 Persönlichkeitsprofile + Matching-Tool, transparente Pakete mit Maximalbudget-Rechner, GEMA-Umschalter und lückenlose deutsche Rechtssicherheit.

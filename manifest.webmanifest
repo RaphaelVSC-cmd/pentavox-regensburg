@@ -1,14 +1,14 @@
 {
-  "name": "FiveElements - Das 5-Stimmen Vokalensemble",
-  "short_name": "FiveElements",
-  "description": "Ausgebildet bei den Regensburger Domspatzen. 5-stimmiger A-cappella-Klang für kirchliche und freie Trauungen in Bayern.",
+  "name": "five elements – Das 5-Stimmen A-cappella-Ensemble",
+  "short_name": "five elements",
+  "description": "Fünf Stimmen. Ein Klang. Unvergessliche Momente – für Trauungen, eigene Vokalkonzerte, Sektempfänge und besondere Orte.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a1420",
-  "theme_color": "#d8c292",
+  "background_color": "#dce8f5",
+  "theme_color": "#162438",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

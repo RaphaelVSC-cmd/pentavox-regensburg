@@ -1,202 +1,132 @@
 'use strict';
 
 /**
- * === BAUSTEIN A: SMART CHAT-ASSISTENT (v8.0) ===
- * FiveElements Vokal-Berater: Vollständig lokal – kein externer API-Call zur Laufzeit.
- * CHAT_KB befüllt aus der Signature-DNA von FiveElements.
+ * Baustein A: Lokaler Info- & Vokal-Assistent für „five elements“
+ * 100 % lokal im Browser (null externe API-Calls) mit ausdrücklichem rechtlichem Haftungsausschluss.
  */
+(function initFiveElementsChat() {
+  const root = document.getElementById('feChatRoot');
+  if (!root) return;
 
-const CHAT_KB = {
-  firma: 'FiveElements',
-  tel: '+49 176 51270378',
-  wa: '4917651270378',
-  leistungen: [
-    'Paket S: Trauung Pur (3–4 Lieder + 1 Wunscharrangement)',
-    'Paket M: Trauung & Sektempfang (1,5h Live-A-cappella)',
-    'Paket L: Der Exklusivtag (Trauung, Empfang & Festdinner)'
-  ],
-  preisrahmen: 'Paket S (Trauung Pur), Paket M (Trauung & Sektempfang – unser Bestseller) und Paket L (Exklusivtag). Der Preis richtet sich nach Veranstaltungsort in Bayern und individuellem Wunschsong.',
-  oeffnungszeiten: 'Mo–Sa von 09:00 bis 19:00 Uhr. Anfragen per WhatsApp oder über das Formular beantworten wir in der Regel binnen weniger Stunden.',
-  einsatzgebiet: 'Regensburg, Oberpfalz, Niederbayern, München, Nürnberg und ganz Bayern (auf Anfrage auch österreichischer Grenzraum).',
-  spezialitaet: '5-stimmige Polyphonie der Regensburger Domspatzen-Schule – 100 % A-cappella Naturklang ohne Synthesizer inklusive 1 individuellem Wunscharrangement.',
-
-  intents: [
+  const CHAT_KB = [
     {
-      keywords: ['preis', 'kosten', 'kostet', 'angebot', 'gage', 'honorar', 'budget', 'paket'],
-      antwort: 'Unsere Begleitung ist in drei transparente Meister-Pakete aufgeteilt: Paket S (Trauung Pur), Paket M (Trauung & Sektempfang) und Paket L (Der Exklusivtag). Jedes Paket beinhaltet 1 eigens für 5 Stimmen neu arrangiertes Wunschlied! Gerne erstellen wir Ihnen innerhalb von 24 Stunden eine verbindliche Vorab-Einschätzung für Ihren Wunschort.',
-      wa_text: 'Hallo FiveElements, ich interessiere mich für eine Terminanfrage und hätte gerne ein unverbindliches Angebot für unsere Hochzeit.',
-      wa_label: 'Paket-Preise via WhatsApp anfragen'
+      keywords: ['preis', 'kosten', 'budget', 'teuer', 'euro', '€', 'verhand'],
+      answer:
+        'Unsere unverbindlichen Richtwerte: Sektempfang 100 € (+ Fahrtkosten, 30 Min. Daseinszeit, 3 Stücke), Trauung 150 € (+ Fahrtkosten, 1 Std. Daseinszeit, 5 Lieder) und Eigenkonzept / Vokalkonzert 375 € oder Spendenbasis (ca. 1 Std. reine Singzeit, ~12 Stücke). Über unseren Maximalbudget-Rechner könnt ihr auch ein eigenes Budget angeben.',
     },
     {
-      keywords: ['lied', 'lieder', 'repertoire', 'song', 'wunschlied', 'hallelujah', 'mendelssohn', 'ed sheeran', 'elvis', 'programm'],
-      antwort: 'Unser Repertoire reicht von sakraler Polyphonie (Mendelssohn, Bach, Rheinberger) über Pop-Balladen (Ed Sheeran, Elvis Presley) bis hin zu modernen Chorsätzen (Cohens Hallelujah im Pentatonix-Arrangement). Das Besondere: Wir studieren für jedes Brautpaar 1 persönlichen Wunschsong 5-stimmig ein!',
-      wa_text: 'Hallo FiveElements, wir haben ein bestimmtes Wunschlied für unsere Trauung und möchten fragen, ob ihr dieses 5-stimmig für uns singen könnt.',
-      wa_label: 'Wunschlied per WhatsApp anfragen'
+      keywords: ['gema', 'recht', 'lizenz'],
+      answer:
+        'GEMA fällt bei Auftritten grundsätzlich immer an. Im Anfrage-Assistenten und in der Checkliste wählt ihr einfach aus, ob ihr die GEMA selbst meldet/zahlt oder ob wir sie in euer Angebot mit einkalkulieren sollen.',
     },
     {
-      keywords: ['besetzung', 'stimmen', 'domspatzen', 'sanger', 'sänger', 'a cappella', 'begleitung', 'wer seid ihr'],
-      antwort: 'FiveElements besteht aus 5 ausgebildeten Stimmen: Sopran, Alt, Tenor, Bariton und Bass. Wir alle wurden bei den weltberühmten Regensburger Domspatzen ausgebildet. Wir singen überwiegend reines A-cappella (Naturklang), auf Wunsch auch mit feiner Klavier- oder Orgelbegleitung.',
-      wa_text: 'Hallo FiveElements, ich möchte gerne mehr über eure Besetzung und Hörproben erfahren.',
-      wa_label: 'Frage zur Besetzung'
+      keywords: ['domspatz', 'regensburg', 'unabhängig', 'wer'],
+      answer:
+        'Wir sind five elements – fünf junge Stimmen, die sich bei einem Projektsingen kennengelernt haben. Wir sind Schüler der Regensburger Domspatzen bis Ende 2027 und werden dort ausgebildet, treten aber zu 100 % eigenständig auf.',
     },
     {
-      keywords: ['oeffnung', 'öffnung', 'erreichbar', 'wann', 'zeiten', 'kontakt', 'telefon'],
-      antwort: 'Sie erreichen uns telefonisch oder per WhatsApp unter +49 176 51270378 von Mo–Sa 09:00–19:00 Uhr. Für schriftliche Anfragen steht Ihnen rund um die Uhr unser Trauungs-Assistent zur Verfügung.',
-      wa_text: null
+      keywords: ['spende', 'iban', 'konto', 'bank', 'unterstütz'],
+      answer:
+        'Danke für euer Interesse! In unserer Spenden-Sektion findet ihr die Bankverbindung / IBAN (aktuell mit Prüfmarker zum Bestätigen) inkl. Kopier-Button für eigene Vokalkonzerte & Notenarbeit.',
     },
     {
-      keywords: ['einsatzgebiet', 'gebiet', 'wo', 'fahrt ihr', 'region', 'munchen', 'münchen', 'nurnberg', 'nürnberg', 'bayern', 'oberpfalz', 'kelheim', 'straubing', 'landshut'],
-      antwort: 'Unser Heimatort ist Regensburg (Domplatz 1), wir begleiten Brautpaare aber in ganz Bayern – von Regensburg und der Oberpfalz über München und Nürnberg bis ins Voralpenland.',
-      wa_text: 'Hallo FiveElements, wir heiraten in [Ort eintragen] und möchten fragen, ob ihr dort noch verfügbar seid.',
-      wa_label: 'Einsatzgebiet & Termin prüfen'
+      keywords: ['song', 'lied', 'repertoire', 'wunsch', 'earth', 'volksmusik', 'technik', 'strom'],
+      answer:
+        'Wir singen rein a-cappella und komplett stromlos – von frühen Notenschriften über Renaissance/Romantik (z. B. Becker, Hassler) bis zu „Earth Song“ (Ticheli), Holst & Volksmusik. Euren Wunschsong könnt ihr direkt im Klangpult vormerken!',
     },
     {
-      keywords: ['rückruf', 'anrufen', 'ruckruf', 'telefonieren', 'termin', 'sprechen'],
-      antwort: 'Sehr gerne vereinbaren wir ein persönliches Telefongespräch, um den musikalischen Ablauf Ihrer Trauung in Ruhe zu besprechen. Senden Sie uns einfach kurz Ihren Namen und Ihre Rufnummer.',
-      wa_text: 'Hallo FiveElements, ich hätte gerne einen kurzen Rückruf bezüglich unserer Hochzeit. Meine Nummer: ',
-      wa_label: 'Rückruf anfordern'
+      keywords: ['pflicht', 'raum', 'essen', 'trinken', 'verpfleg', 'vertrag', 'zahlung', 'fahrt'],
+      answer:
+        'Vor Ort brauchen wir: (1) geklärte GEMA, (2) unterschriebenen Vertrag + Kilometerpauschale, (3) einen separaten Raum zum Umziehen/Herrichten, (4) Verpflegung (mind. Wasser für 5 Personen) und (5) Bar- oder Überweisungszahlung.',
     },
-    {
-      keywords: ['leistung', 'service', 'was macht ihr', 'anlass', 'anlaesse', 'kirche', 'standesamt', 'freie trauung'],
-      antwort: 'Wir gestalten kirchliche und freie Trauungen mit Gänsehaut-Satzgesang, begleiten standesamtliche Zeremonien, sorgen beim Sektempfang für ein beschwingtes A-cappella-Set und schaffen beim Festdinner einen edlen Akustik-Klangteppich.',
-      wa_text: null
-    }
-  ]
-};
+  ];
 
-function findIntent(input) {
-  const text = input.toLowerCase().normalize('NFC');
-  const normalized = text
-    .replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u')
-    .replace(/ß/g, 'ss');
+  root.innerHTML = `
+    <div class="chat-panel" id="feChatPanel" role="dialog" aria-label="five elements Info-Assistent" hidden>
+      <div class="chat-panel-head">
+        <div>
+          <strong style="display:block; font-size:0.92rem;">five elements · Frage-Hilfe</strong>
+          <span style="font-size:0.74rem; color:var(--fe-ink-muted-dark);">Lokal · Direkte „Wir“-Antworten</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="feChatClose" aria-label="Chat schließen" style="width:32px; height:32px; font-size:1.1rem;">&times;</button>
+      </div>
+      <div class="chat-disclaimer-strip">
+        <strong>Rechtlicher Hinweis:</strong> Lokaler Info-Bot. Alle Antworten sind unverbindlich &amp; ohne Gewähr (keine Rechts-/Vertragsbindung).
+      </div>
+      <div class="chat-messages" id="feChatMessages">
+        <div class="chat-bubble is-bot">
+          Hey! Wir sind <strong>five elements</strong>. Was möchtet ihr wissen – Preise, Maximalbudget, GEMA, Wunschsongs oder unsere Checkliste?
+        </div>
+      </div>
+      <div class="chat-quick-row">
+        <button type="button" class="chat-quick-chip" data-q="Was kostet ein Auftritt?">Preise?</button>
+        <button type="button" class="chat-quick-chip" data-q="Wie läuft die GEMA?">GEMA?</button>
+        <button type="button" class="chat-quick-chip" data-q="Was braucht ihr vor Ort?">Pflichten?</button>
+        <button type="button" class="chat-quick-chip" data-q="Spenden & IBAN?">Spenden?</button>
+      </div>
+      <form class="chat-input-form" id="feChatForm">
+        <label for="feChatInput" class="sr-only">Frage eintippen</label>
+        <input type="text" id="feChatInput" placeholder="Frage stellen…" autocomplete="off" />
+        <button type="submit" class="btn btn-primary btn-sm">OK</button>
+      </form>
+    </div>
+    <button type="button" class="fe-chat-toggle" id="feChatToggle" aria-expanded="false" aria-controls="feChatPanel">
+      Fragen? Wir helfen!
+    </button>
+  `;
 
-  for (const intent of CHAT_KB.intents) {
-    for (const kw of intent.keywords) {
-      const kwNorm = kw.replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ß/g, 'ss');
-      if (normalized.includes(kwNorm)) return intent;
-    }
-  }
-  return null;
-}
+  const panel = document.getElementById('feChatPanel');
+  const toggleBtn = document.getElementById('feChatToggle');
+  const closeBtn = document.getElementById('feChatClose');
+  const form = document.getElementById('feChatForm');
+  const input = document.getElementById('feChatInput');
+  const messagesEl = document.getElementById('feChatMessages');
 
-function buildWaUrl(waText) {
-  const base = 'https://wa.me/' + CHAT_KB.wa + '?text=';
-  return base + encodeURIComponent(waText);
-}
+  const togglePanel = (force) => {
+    const open = typeof force === 'boolean' ? force : panel.hidden;
+    panel.hidden = !open;
+    toggleBtn.setAttribute('aria-expanded', String(open));
+    if (open) input.focus();
+  };
 
-function addBubble(container, text, sender, waBtn) {
-  const div = document.createElement('div');
-  div.className = 'chat-bubble ' + sender;
-  div.textContent = text;
-  if (waBtn) {
-    const a = document.createElement('a');
-    a.href = buildWaUrl(waBtn.text);
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.className = 'chat-wa-btn';
-    a.setAttribute('aria-label', waBtn.label + ' via WhatsApp');
-    a.textContent = '💬 ' + waBtn.label;
-    div.appendChild(document.createElement('br'));
-    div.appendChild(a);
-  }
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-  return div;
-}
+  toggleBtn.addEventListener('click', () => togglePanel());
+  closeBtn.addEventListener('click', () => togglePanel(false));
 
-function handleMessage(input, messagesEl) {
-  const trimmed = input.trim();
-  if (!trimmed) return;
+  const appendMsg = (text, who) => {
+    const div = document.createElement('div');
+    div.className = `chat-bubble ${who === 'user' ? 'is-user' : 'is-bot'}`;
+    div.textContent = text;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  };
 
-  addBubble(messagesEl, trimmed, 'user');
-
-  setTimeout(() => {
-    const intent = findIntent(trimmed);
-    if (intent) {
-      const waBtn = intent.wa_text
-        ? { text: intent.wa_text, label: intent.wa_label || 'Via WhatsApp senden' }
-        : null;
-      addBubble(messagesEl, intent.antwort, 'bot', waBtn);
+  const replyTo = (q) => {
+    const low = q.toLowerCase();
+    const match = CHAT_KB.find((item) => item.keywords.some((k) => low.includes(k)));
+    if (match) {
+      appendMsg(match.answer, 'bot');
     } else {
-      addBubble(
-        messagesEl,
-        'Eine wunderbare Frage zu unserer Musik! Gerne klären wir die Details zu Ihrem Anlass ganz persönlich. Schreiben Sie uns direkt über WhatsApp oder nutzen Sie unseren 3-Schritte-Assistenten auf der Seite.',
-        'bot',
-        { text: 'Hallo ' + CHAT_KB.firma + ', ich habe eine Frage: ' + trimmed, label: 'Direkt via WhatsApp fragen' }
+      appendMsg(
+        'Dazu beraten wir euch am besten direkt im 3-Schritte-Anfrage-Assistenten weiter unten – nennt uns dort gerne euer Wunschdatum, den Ort und euer Maximalbudget (alles unverbindlich).',
+        'bot'
       );
     }
-  }, 220);
-}
-
-function handleQuickAction(intentKey, messagesEl) {
-  const mapping = {
-    preis: 'preis',
-    oeffnungszeiten: 'öffnung',
-    einsatzgebiet: 'einsatzgebiet',
-    kontakt: 'rückruf'
   };
-  const kw = mapping[intentKey] || intentKey;
-  const intent = CHAT_KB.intents.find(i => i.keywords.includes(kw));
-  if (intent) {
-    const waBtn = intent.wa_text
-      ? { text: intent.wa_text, label: intent.wa_label || 'Via WhatsApp' }
-      : null;
-    addBubble(messagesEl, intent.antwort, 'bot', waBtn);
-  }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('chatToggle');
-  const closeBtn = document.getElementById('chatClose');
-  const panel = document.getElementById('chatPanel');
-  const messagesEl = document.getElementById('chatMessages');
-  const form = document.getElementById('chatInputForm');
-  const input = document.getElementById('chatInput');
-  const quickBtns = document.querySelectorAll('.chat-quick-btn');
-
-  if (!toggle || !panel || !messagesEl) return;
-
-  setTimeout(() => {
-    addBubble(
-      messagesEl,
-      'Grüß Gott! Ich bin der digitale Assistent von FiveElements. Haben Sie Fragen zu unseren 5 Gesangsstimmen, Preisen oder Wunschliedern?',
-      'bot'
-    );
-  }, 600);
-
-  toggle.addEventListener('click', () => {
-    const isOpen = !panel.hidden;
-    panel.hidden = isOpen;
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-    if (!isOpen) {
-      setTimeout(() => input && input.focus(), 80);
-    }
-  });
-
-  closeBtn && closeBtn.addEventListener('click', () => {
-    panel.hidden = true;
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.focus();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !panel.hidden) {
-      panel.hidden = true;
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  form && form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (!input) return;
-    handleMessage(input.value, messagesEl);
-    input.value = '';
-  });
-
-  quickBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const intent = btn.dataset.intent;
-      handleQuickAction(intent, messagesEl);
+  root.querySelectorAll('.chat-quick-chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const q = chip.dataset.q || chip.textContent;
+      appendMsg(q, 'user');
+      replyTo(q);
     });
   });
-});
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    appendMsg(q, 'user');
+    replyTo(q);
+  });
+})();
