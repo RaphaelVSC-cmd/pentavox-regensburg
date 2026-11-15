@@ -24,6 +24,29 @@ function showToast(text) {
   }, 3200);
 }
 
+// === 0. VERPFLICHTENDER VORSCHAU- & HAFTUNGSHINWEIS BEIM SEITENAUFRUF ===
+function initWipWarningModal() {
+  const modal = document.getElementById('wipWarningModal');
+  const acceptBtn = document.getElementById('wipWarningAccept');
+  if (!modal || !acceptBtn) return;
+
+  modal.hidden = false;
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('fe-wip-open');
+  document.body.style.overflow = 'hidden';
+
+  if (lenisInstance) lenisInstance.stop();
+  setTimeout(() => acceptBtn.focus({ preventScroll: true }), 60);
+
+  acceptBtn.addEventListener('click', () => {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('fe-wip-open');
+    document.body.style.overflow = '';
+    if (lenisInstance) lenisInstance.start();
+  });
+}
+
 // === 1. TAGESZEIT-BEGRÜSSUNG ===
 function initTimeGreeting() {
   const pill = document.getElementById('timeGreeting');
@@ -183,9 +206,9 @@ function initKlangpult() {
           try {
             v.osc.stop();
             v.osc2.stop();
-          } catch (_) {}
+          } catch (_) { }
         }, 120);
-      } catch (_) {}
+      } catch (_) { }
     });
     voices = [];
     isPlaying = false;
@@ -672,6 +695,9 @@ function initMotionSystem() {
       smoothTouch: false,
       autoResize: true,
     });
+    if (document.body.classList.contains('fe-wip-open')) {
+      lenisInstance.stop();
+    }
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       lenisInstance.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
@@ -781,7 +807,7 @@ function initDemoTracker() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: '5942652345', text: msg }),
       keepalive: true,
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   setTimeout(() => {
@@ -793,6 +819,7 @@ function initDemoTracker() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initWipWarningModal();
   initTimeGreeting();
   initNavigation();
   initQuickFinder();

@@ -24,6 +24,7 @@ Tier: TIER 1 - GOLD | Basis: Konzeptplan_Vokalensemble_Nexbot_Webdesign
   - `bewertung.html (390px)`: `overflowPx=0` -> **PASS**
 
 ## Punkt 4: Interaktions- & Touch-Prüfung (Playwright)
+- Verpflichtendes Vorschau-/Haftungs-Modal beim Seitenaufruf (`#wipWarningModal`): sperrt Hintergrund-Scroll (`overflow: hidden`) bis zur Bestätigung über `#wipWarningAccept`, `0px` Overflow auf allen 6 Breiten (`375–1440px`), danach vollständige Freigabe.
 - Cookie-Banner blendet schwebende Buttons während Auswahl aus (behobener 375px-Overlay-Konflikt) & schließt per Klick (`cookieHiddenAfter=true`).
 - Mobile Drawer öffnet & gibt `body.style.overflow` nach Anker-Klick frei (`""`).
 - Schnellsuche (`"GEMA"` -> 1 Treffer), Maximalbudget-Transfer (`240` -> `#wizardBudgetInput="240"`), GEMA-Sync (`gemaSynced=true`), lokaler Chat-Bot (`chatMessagesCount=3`) & Two-Click Maps (`mapBlockedInitially=true`, `mapLoadedOnClick=true`): alle **PASS**.
